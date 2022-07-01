@@ -31,7 +31,7 @@
         </blockquote>
 
         <p>
-          {{$t('data.gouv.fr allows you to validate your files based on a schema and correct the possible errors.')}}
+          {{$t('data.public.lu allows you to validate your files based on a schema and correct the possible errors.')}}
         </p>
 
         <div>
@@ -64,7 +64,7 @@
 
       <h3>{{$t('About schemas')}}</h3>
       <p>
-        {{$t('Data schemas allow to describe data models : what are the fields, how is data represented, what are the possible values. Discover how schemas improve data quality and use cases on ')}} <a href="https://schema.data.gouv.fr" rel="noopener noreferrer" target="_blank" title="Site web schema.data.gouv.fr">schema.data.gouv.fr</a>.
+        {{$t('Data schemas allow to describe data models : what are the fields, how is data represented, what are the possible values. Discover how schemas improve data quality and use cases on ')}} <a href="https://schema.data.public.lu" rel="noopener noreferrer" target="_blank" title="Site web schema.data.public.lu">schema.data.public.lu</a>.
       </p>
     </div>
 

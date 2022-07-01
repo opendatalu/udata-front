@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: udata-front\n"
-"Report-Msgid-Bugs-To: data.gouv@data.gouv.fr\n"
+"Report-Msgid-Bugs-To: data.gouv@data.public.lu\n"
 "POT-Creation-Date: 2022-06-13 16:18+0200\n"
 "PO-Revision-Date: 2022-06-13 15:32\n"
-"Last-Translator: Data.gouv.fr Team <data.gouv@data.gouv.fr>\n"
+"Last-Translator: Data.public.lu Team <data.gouv@data.public.lu>\n"
 "Language: fr\n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -94,12 +94,12 @@ msgid "News"
 msgstr "Actualités"
 
 #: udata_front/theme/gouvfr/__init__.py:50
-msgid "Getting started on data.gouv.fr"
-msgstr "Commencer sur data.gouv.fr"
+msgid "Getting started on data.public.lu"
+msgstr "Commencer sur data.public.lu"
 
 #: udata_front/theme/gouvfr/__init__.py:52
-msgid "What is data.gouv.fr?"
-msgstr "Qu'est-ce que data.gouv.fr ?"
+msgid "What is data.public.lu?"
+msgstr "Qu'est-ce que data.public.lu ?"
 
 #: udata_front/theme/gouvfr/__init__.py:57
 msgid "How to publish data ?"
@@ -268,8 +268,8 @@ msgid "Deployed version"
 msgstr "Version déployée"
 
 #: udata_front/theme/gouvfr/templates/footer.html:109
-msgid "Data.gouv.fr extension"
-msgstr "Extension pour Data.gouv.fr"
+msgid "Data.public.lu extension"
+msgstr "Extension pour Data.public.lu"
 
 #: udata_front/theme/gouvfr/templates/footer.html:147
 msgid "Language selector"
@@ -303,7 +303,7 @@ msgstr "Ouvrir le menu"
 
 #: udata_front/theme/gouvfr/templates/header.html:59
 msgid "Go back to home page"
-msgstr "Retourner à l'accueil de data.gouv.fr"
+msgstr "Retourner à l'accueil de data.public.lu"
 
 #: udata_front/theme/gouvfr/templates/header.html:89
 msgid "Administration"
@@ -646,12 +646,12 @@ msgid "Archived"
 msgstr "Archivé"
 
 #: udata_front/theme/gouvfr/templates/dataset/display.html:71
-msgid "This dataset is handled by the <a href='{geo_link}'>geo.data.gouv.fr</a> platform.\n"
+msgid "This dataset is handled by the <a href='{geo_link}'>geo.data.public.lu</a> platform.\n"
 "        This platform is not actively maintained and as a result, you may find some bogus data or metadata.\n"
-"        More information about <a href='{blog_link}'>the shutdown of geo.data.gouv.fr is available here.</a>"
-msgstr "Ce jeu de données provient de la plateforme  <a href='{geo_link}'>geo.data.gouv.fr</a>.\n"
+"        More information about <a href='{blog_link}'>the shutdown of geo.data.public.lu is available here.</a>"
+msgstr "Ce jeu de données provient de la plateforme  <a href='{geo_link}'>geo.data.public.lu</a>.\n"
 "        Cette plateforme n'est plus activement maintenue, et des incohérences sur les données ou les métadonnées peuvent apparaitre sur cette fiche.\n"
-"        Plus d'informations à propos <a href='{blog_link}'>de l'extinction de geo.data.gouv.fr sont disponibles ici.</a>"
+"        Plus d'informations à propos <a href='{blog_link}'>de l'extinction de geo.data.public.lu sont disponibles ici.</a>"
 
 #: udata_front/theme/gouvfr/templates/dataset/display.html:87
 #: udata_front/theme/gouvfr/templates/dataset/resource/card.html:28
@@ -1482,7 +1482,7 @@ msgstr "articles"
 
 #: udata_front/theme/gouvfr/templates/post/list.html:29
 msgid "To stay up-to-date, you can subscribe to"
-msgstr "Pour ne rien manquer, de l’actualité de data.gouv.fr et de l’open data, inscrivez-vous à"
+msgstr "Pour ne rien manquer, de l’actualité de data.public.lu et de l’open data, inscrivez-vous à"
 
 #: udata_front/theme/gouvfr/templates/post/list.html:30
 msgid "Subscribe"
@@ -2027,4 +2027,3 @@ msgstr "Transférer"
 #: udata_front/views/site.py:214
 msgid "Community"
 msgstr "Communauté"
-

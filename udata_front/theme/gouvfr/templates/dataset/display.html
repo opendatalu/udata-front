@@ -6,7 +6,7 @@
 {% from theme('macros/banner_info.html') import banner_info %}
 {% from theme('macros/banner_warning.html') import banner_warning %}
 
-## FIXME: remove inspire:indentifier robots condition when geo.data.gouv.fr is shutdown
+## FIXME: remove inspire:indentifier robots condition when geo.data.public.lu is shutdown
 {% set meta = {
     'title': dataset.full_title,
     'description': dataset.description|mdstrip(60)|forceescape,
@@ -65,14 +65,14 @@
         {{ _('Archived') }}
     </span>
     {% endif %}
-    {# FIXME: remove when geo.data.gouv.fr is shutdown #}
+    {# FIXME: remove when geo.data.public.lu is shutdown #}
     {% if 'geop:dataset_id' in dataset.extras %}
     <div class="well well-warning fr-py-3v fr-my-3w">
-        ⚠️ {{ _("This dataset is handled by the <a href='{geo_link}'>geo.data.gouv.fr</a> platform.
+        ⚠️ {{ _("This dataset is handled by the <a href='{geo_link}'>geo.data.public.lu</a> platform.
         This platform is not actively maintained and as a result, you may find some bogus data or metadata.
-        More information about <a href='{blog_link}'>the shutdown of geo.data.gouv.fr is available here.</a>").format(
-            geo_link='https://geo.data.gouv.fr',
-            blog_link='https://www.data.gouv.fr/fr/posts/extinction-de-geo-data-gouv-fr/'
+        More information about <a href='{blog_link}'>the shutdown of geo.data.public.lu is available here.</a>").format(
+            geo_link='https://geo.data.public.lu',
+            blog_link='https://www.data.public.lu/fr/posts/extinction-de-geo-data-gouv-fr/'
         )}}
     </div>
     {% endif %}
@@ -295,7 +295,7 @@
                                 href="{{ url_for('admin.index', path='reuse/new/', **{'dataset_id': dataset.id}) }}">
                                 {{ _('Add a reuse') }}
                             </a>
-                            <a 
+                            <a
                                 class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-icon-arrow-right-s-line fr-btn--icon-right fr-mt-3v"
                                 href="#"
                                 @click.prevent="$bus.emit('discussions.startThread')"

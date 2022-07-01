@@ -51,7 +51,7 @@
                 <div class="fr-col-12">
                   <MultiSelect
                     :placeholder="$t('Licenses')"
-                    :explanation="$t('Licenses define reuse rules for published datasets. See page data.gouv.fr/licences')"
+                    :explanation="$t('Licenses define reuse rules for published datasets. See page data.public.lu/licences')"
                     :searchPlaceholder="$t('Search a license...')"
                     :allOption="$t('All licenses')"
                     listUrl="/datasets/licenses/"
@@ -211,7 +211,7 @@ export default defineComponent({
      */
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    
+
     /**
      * Search query
      */
@@ -313,9 +313,9 @@ export default defineComponent({
       currentPage.value = 1;
       search();
     };
-    
+
     /**
-     * Called on every facet selector change, updates the `facets.xxx` object then searches with new values 
+     * Called on every facet selector change, updates the `facets.xxx` object then searches with new values
      */
     const handleFacetChange = (facet) => {
       return (values) => {
@@ -354,7 +354,7 @@ export default defineComponent({
       search();
       scrollToTop();
     };
-    
+
     const scrollToTop = () => {
       if (searchRef.value) {
         searchRef.value.scrollIntoView({ behavior: "smooth" });
@@ -374,7 +374,7 @@ export default defineComponent({
 
     /**
      * Is any filter active ?
-     */ 
+     */
     const isFiltered = computed(() => {
       return Object.keys(facets.value).some(
         (key) => facets.value[key]?.length > 0

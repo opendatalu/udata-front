@@ -51,7 +51,7 @@ jobs:
             if [[ $CIRCLE_TAG ]]; then
               echo "This a tag build, do not push changes"
             else
-              git config --global user.email "robot@data.gouv.fr"
+              git config --global user.email "robot@data.public.lu"
               git config --global user.name "Circle CI"
               ( \
                 git ls-files -m|grep -E "(install|test|develop|udata).pip" \

@@ -1,10 +1,10 @@
 {
   "application": "udata",
   "identifier": "gouvfr",
-  "name": "Data.gouv.fr",
+  "name": "Data.public.lu",
   "author": "Etalab",
-  "description": "Data.gouv.fr theme",
-  "website": "http://data.gouv.fr",
+  "description": "Data.public.lu theme",
+  "website": "http://data.public.lu",
   "license": "AGPL",
   "version": "0.1.0",
   "doctype": "html5",
