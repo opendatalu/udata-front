@@ -33,7 +33,7 @@ def _load_views(app, module):
 
 
 VIEWS = ['gouvfr', 'dataset', 'organization', 'follower', 'post',
-         'reuse', 'site', 'territories', 'topic', 'user']
+         'reuse', 'site', 'territories', 'topic', 'user', 'gouvlu']
 
 
 def init_app(app):
