@@ -351,7 +351,7 @@ msgid "home"
 msgstr "accueil"
 
 #: udata_front/theme/gouvfr/templates/home.html:18
-msgid "Open platform for French public data"
+msgid "Open platform for Luxembourgish public data"
 msgstr "Plateforme ouverte des données publiques françaises"
 
 #: udata_front/theme/gouvfr/templates/home.html:41

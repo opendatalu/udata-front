@@ -22,6 +22,8 @@ def display(topic):
 
 @blueprint.route('/<topic:topic>/datasets')
 def datasets(topic):
+    # https://www.data.gouv.fr/fr/topics/elections-legislatives-des-12-et-19-juin-2022-resultats-definitifs-du-second-tour/datasets -> 301 instead of not found (not code)
+    # https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-12-et-19-juin-2022-resultats-definitifs-du-second-tour/ 
     kwargs = multi_to_dict(request.args)
     kwargs.pop('topic', None)
 
