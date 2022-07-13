@@ -1,4 +1,4 @@
-{% extends theme("layouts/1-column.html") %}
+{% extends theme("base.html") %}
 
 {% set meta = {
     'title': _('Luxembourg\'s Open Data Roadmap'),
@@ -10,9 +10,9 @@
 
 {% block content %}
 <section class="content">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 markdown">
+  <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row--gutters">
+          <div class="fr-col-12">
         <h1>Luxembourg&rsquo;s Open Data 5 year roadmap</h1>
         <h2>Introduction</h2>
         <p>In the scope of Luxembourg’s Open Data Strategy this operational road map highlights the scheduled work targets for
