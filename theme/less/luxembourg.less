@@ -57,6 +57,39 @@ h2 {
 }
 
 
+
+.thumbnail {
+
+    background-image: none;
+
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border .2s ease-in-out;
+
+    > img,
+    a > img {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    a&:hover,
+    a&:focus,
+    a&.active {
+        border-color: #b92a23;
+    }
+
+    .caption {
+        padding: 9px;
+        color: #337ab7;
+    }
+}
+
+
 .faq-home .faq-sections{
     display:flex;
     justify-content:space-between;
@@ -102,33 +135,4 @@ h2 {
 }
 .faq-content .edit-link{
     margin:1em 0
-}
-
-.thumbnail {
-
-    display: block;
-    padding: 4px;
-    margin-bottom: 20px;
-    line-height: 1.42857143;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border .2s ease-in-out;
-
-    > img,
-    a > img {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    a&:hover,
-    a&:focus,
-    a&.active {
-        border-color: #b92a23;
-    }
-
-    .caption {
-        padding: 9px;
-        color: #337ab7;
-    }
 }
