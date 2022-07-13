@@ -18,7 +18,7 @@ blueprint = I18nBlueprint(
 
 # PAGE_CACHE_DURATION = 60 * 5  # in seconds
 
-FAQ_URL_PATTERN = "https://https://github.com/freesoul/udata4-front/tree/master/udata_front/theme/gouvfr/templates/luxembourg/faq/{page_name}.html"
+FAQ_URL_PATTERN = "https://github.com/freesoul/udata4-front/tree/master/udata_front/theme/gouvfr/templates/luxembourg/faq/{page_name}.html"
 
 
 @blueprint.route("/faq/", defaults={"section": "home"})
