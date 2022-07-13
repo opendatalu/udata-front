@@ -25,7 +25,7 @@ FAQ_URL_PATTERN = "https://github.com/freesoul/udata4-front/tree/master/udata_fr
 @blueprint.route("/faq/<string:section>/")
 def faq(section):
     return theme.render(
-        "luxembourg/faq/{0}.html".format(section),
+        "luxembourg-faq/{0}.html".format(section),
         page_name=section,
         url_pattern=FAQ_URL_PATTERN,
     )
