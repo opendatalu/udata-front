@@ -88,7 +88,7 @@ msgid "Organizations"
 msgstr "Organizacije"
 
 #: udata_front/theme/gouvfr/__init__.py:49
-msgid "Getting started on data.gouv.fr"
+msgid "Getting started on data.public.lu"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:51
