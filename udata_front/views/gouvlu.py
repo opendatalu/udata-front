@@ -51,6 +51,15 @@ def fiveyearplan():
     return theme.render("luxembourg/5yearplan.html")
 
 
+@blueprint.route("/docapi/")
+def docapi():
+    return theme.render("luxembourg/api.html")
+
+@blueprint.route("/requesting/")
+def requesting():
+    return theme.render("luxembourg/requesting.html")
+
+
 @sitemap.register_generator
 def site_sitemap_urls():
     yield "gouvlu.faq_redirect", {}, None, "weekly", 1

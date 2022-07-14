@@ -68,7 +68,7 @@ opendata_links = [
     nav.Item(_("FAQ"), "gouvlu.faq"),
     nav.Item(_("Guide for the usage of open data"), "gouvlu.usage"),
     nav.Item(_("Guide for publishing open data"), "gouvlu.publishing"),
-    # nav.Item(_("Request data for its reuse"), "gouvlu.requesting"),
+    nav.Item(_("Request data for its reuse"), "gouvlu.requesting"),
     nav.Item(_("Strategy of open data"), "gouvlu.strategy"),
     nav.Item(_("Railroad sheet of open data"), "gouvlu.fiveyearplan"),
     nav.Item(_("Terms of use"), "site.terms"),
@@ -93,7 +93,7 @@ nav.Bar("gouvfr_opendata", opendata_links)
 
 support_links = [
     nav.Item(_("Platform's documentation"), None, url="https://doc.data.public.lu"),
-    nav.Item(_("Portal's API"), None, url=current_app.config.get("API_DOC_EXTERNAL_LINK", "#")),
+    nav.Item(_("FAQ"), "gouvlu.docapi"),
     nav.Item(_("Open data guides"), None, url=current_app.config.get("ETALAB_GUIDES_URL", "#")),
     nav.Item(_("Contact us"), None, url="https://support.data.public.lu"),
 ]
@@ -111,7 +111,7 @@ nav.Bar("gouvfr_footer", footer_links)
 
 NETWORK_LINKS = [
     ("Luxembourg.lu", "http://www.luxembourg.lu"),
-    ("Gichet.lu", "http://www.gichet.lu"),
+    ("Guichet.lu", "http://www.guichet.lu"),
     ("Gouvernement.lu", "http://www.gouvernement.lu"),
     ("Crossgov.lu", "http://www.crossgov.lu"),
     ("Autres sites", "http://www.etat.lu"),
