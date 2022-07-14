@@ -2003,26 +2003,25 @@ msgid "API"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:69
-msgid "Frequently Asked Questions (FAQ)"
+msgid "FAQ"
 msgstr "Questions fréquentes (FAQ)"
 
-
-#: udata_front/theme/gouvfr/__init__.py:69
+#: udata_front/theme/gouvfr/__init__.py:70
 msgid "Guide for the usage of open data"
 msgstr "Guide d'utilisation des données ouvertes"
 
-#: udata_front/theme/gouvfr/__init__.py:69
+#: udata_front/theme/gouvfr/__init__.py:71
 msgid "Guide for publishing open data"
 msgstr "Guide de publication des données ouvertes"
 
-#: udata_front/theme/gouvfr/__init__.py:69
+#: udata_front/theme/gouvfr/__init__.py:72
 msgid "Request data for its reuse"
 msgstr "Demande de données aux fins de réutilisation"
 
-#: udata_front/theme/gouvfr/__init__.py:69
+#: udata_front/theme/gouvfr/__init__.py:73
 msgid "Strategy of open data"
 msgstr "Stratégie des données ouvertes"
 
-#: udata_front/theme/gouvfr/__init__.py:69
+#: udata_front/theme/gouvfr/__init__.py:74
 msgid "Railroad sheet of open data"
 msgstr "Feuille de route de données ouvertes"

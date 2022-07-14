@@ -93,7 +93,7 @@ nav.Bar("gouvfr_opendata", opendata_links)
 
 support_links = [
     nav.Item(_("Platform's documentation"), None, url="https://doc.data.public.lu"),
-    nav.Item(_("FAQ"), "gouvlu.docapi"),
+    nav.Item(_("API"), "gouvlu.docapi"),
     nav.Item(_("Open data guides"), None, url=current_app.config.get("ETALAB_GUIDES_URL", "#")),
     nav.Item(_("Contact us"), None, url="https://support.data.public.lu"),
 ]
