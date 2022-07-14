@@ -70,7 +70,7 @@ opendata_links = [
     nav.Item(_("Guide for publishing open data"), "gouvlu.publishing"),
     # nav.Item(_("Request data for its reuse"), "gouvlu.requesting"),
     nav.Item(_("Strategy of open data"), "gouvlu.strategy"),
-    nav.Item(_("Railroad sheet of open data"), "gouvlu.5yearplan"),
+    nav.Item(_("Railroad sheet of open data"), "gouvlu.fiveyearplan"),
     nav.Item(_("Terms of use"), "site.terms"),
     # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
     # nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
