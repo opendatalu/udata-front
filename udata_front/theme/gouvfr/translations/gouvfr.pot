@@ -2035,3 +2035,31 @@ msgstr ""
 #: udata_front/views/site.py:209
 msgid "Community"
 msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:68
+msgid "API"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:69
+msgid "Frequently Asked Questions (FAQ)"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:69
+msgid "Guide for the usage of open data"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:69
+msgid "Guide for publishing open data"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:69
+msgid "Request data for its reuse"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:69
+msgid "Strategy of open data"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:69
+msgid "Railroad sheet of open data"
+msgstr ""

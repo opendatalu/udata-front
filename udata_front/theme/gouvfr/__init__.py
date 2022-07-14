@@ -65,9 +65,16 @@ gouvfr_menu = nav.Bar(
 theme.menu(gouvfr_menu)
 
 opendata_links = [
-    nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
-    nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
-    nav.Item(_("Portal for European data"), None, url="https://data.europa.eu"),
+    nav.Item(_("FAQ"), "gouvlu.faq"),
+    nav.Item(_("Guide for the usage of open data"), "gouvlu.usage"),
+    nav.Item(_("Guide for publishing open data"), "gouvlu.publishing"),
+    nav.Item(_("Request data for its reuse"), "gouvlu.requesting"),
+    nav.Item(_("Strategy of open data"), "gouvlu.strategy"),
+    nav.Item(_("Railroad sheet of open data"), "gouvlu.5yearplan"),
+    nav.Item(_("Terms of use"), "site.terms"),
+    # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
+    # nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
+    # nav.Item(_("Portal for European data"), None, url="https://data.europa.eu"),
 ]
 
 export_dataset_id = current_app.config.get("EXPORT_CSV_DATASET_ID")
@@ -103,13 +110,11 @@ footer_links = [
 nav.Bar("gouvfr_footer", footer_links)
 
 NETWORK_LINKS = [
-    ("Gouvernement.fr", "http://www.gouvernement.fr"),
-    ("France.fr", "http://www.france.fr"),
-    ("Legifrance.gouv.fr", "http://www.legifrance.gouv.fr"),
-    ("Service-public.fr", "http://www.service-public.fr"),
-    ("Opendata France", "http://opendatafrance.net"),
-    ("CADA.fr", "http://www.cada.fr"),
-    ("Etalab.gouv.fr", "https://www.etalab.gouv.fr"),
+    ("Luxembourg.lu", "http://www.luxembourg.lu"),
+    ("Gichet.lu", "http://www.gichet.lu"),
+    ("Gouvernement.lu", "http://www.gouvernement.lu"),
+    ("Crossgov.lu", "http://www.crossgov.lu"),
+    ("Autres sites", "http://www.etat.lu"),
 ]
 
 nav.Bar("gouvfr_network", [nav.Item(label, label, url=url) for label, url in NETWORK_LINKS])
