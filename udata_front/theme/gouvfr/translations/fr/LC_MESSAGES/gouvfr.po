@@ -352,7 +352,7 @@ msgstr "accueil"
 
 #: udata_front/theme/gouvfr/templates/home.html:18
 msgid "Open platform for Luxembourgish public data"
-msgstr "Plateforme ouverte des données publiques françaises"
+msgstr "Plateforme ouverte des données publiques luxembourgeois"
 
 #: udata_front/theme/gouvfr/templates/home.html:41
 msgid "All featured topics"
@@ -1771,8 +1771,8 @@ msgstr "Principales communes :"
 
 #: udata_front/theme/gouvfr/templates/territories/home.html:5
 #: udata_front/theme/gouvfr/templates/territories/home.html:6
-msgid "French regions"
-msgstr "Régions françaises"
+msgid "Luxembourgish regions"
+msgstr "Régions luxembourgeois"
 
 #: udata_front/theme/gouvfr/templates/territories/home.html:14
 #: udata_front/theme/gouvfr/templates/territories/territory.html:17
