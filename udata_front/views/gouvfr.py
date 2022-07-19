@@ -129,16 +129,22 @@ def show_page(slug):
     reuses = []
     datasets = []
 
-    for r in page.get("reuses"):
-        if r[0] == "#":
+    for r in page.get("reuses", []):
+        log.info(r)
+        if r is None:
+            continue
+        elif r[0] == "#":
             reuses += list(get_objects_from_tag(Reuse, r))
         else:
             res = get_object(Reuse, r)
             if res:
                 reuses.append(res)
 
-    for d in page.get("datasets"):
-        if d[0] == "#":
+    for d in page.get("datasets", []):
+        log.info(d)
+        if d is None:
+            continue
+        elif d[0] == "#":
             datasets += list(get_objects_from_tag(Dataset, d))
         else:
             res = get_object(Dataset, d)
