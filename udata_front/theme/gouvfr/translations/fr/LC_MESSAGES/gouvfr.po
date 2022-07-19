@@ -354,6 +354,26 @@ msgstr "accueil"
 msgid "Open platform for Luxembourgish public data"
 msgstr "Plateforme ouverte des données publiques luxembourgeois"
 
+#: udata_front/theme/gouvfr/templates/home.html:22
+msgid "Geospatial data"
+msgstr "Données géospatiales"
+
+#: udata_front/theme/gouvfr/templates/home.html:26
+msgid "Earth observation and environment"
+msgstr "Observation de la terre et environnement"
+
+#: udata_front/theme/gouvfr/templates/home.html:30
+msgid "Meteorological data"
+msgstr "Données météorologiques"
+
+#: udata_front/theme/gouvfr/templates/home.html:34
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: udata_front/theme/gouvfr/templates/home.html:38
+msgid "Mobility"
+msgstr "Mobilité"
+
 #: udata_front/theme/gouvfr/templates/home.html:41
 msgid "All featured topics"
 msgstr "Toutes les thématiques"
