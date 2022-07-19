@@ -350,10 +350,6 @@ msgstr "%(site)s accueil"
 msgid "home"
 msgstr "accueil"
 
-#: udata_front/theme/gouvfr/templates/home.html:18
-msgid "Open platform for Luxembourgish public data"
-msgstr "Plateforme ouverte des données publiques luxembourgeois"
-
 #: udata_front/theme/gouvfr/templates/home.html:41
 msgid "All featured topics"
 msgstr "Toutes les thématiques"

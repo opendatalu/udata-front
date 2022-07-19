@@ -348,10 +348,6 @@ msgstr "%(site)s početna"
 msgid "home"
 msgstr "početna"
 
-#: udata_front/theme/gouvfr/templates/home.html:18
-msgid "Open platform for Luxembourgish public data"
-msgstr "Otvorena platforma za javne podatke"
-
 #: udata_front/theme/gouvfr/templates/home.html:41
 msgid "All featured topics"
 msgstr "Sve istaknute teme"
