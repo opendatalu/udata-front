@@ -128,7 +128,6 @@ def show_page(slug):
     datasets = []
 
     for r in page.get("reuses") or []:
-        log.warning(r)
         if r is None:
             continue
         r = r.strip()
@@ -140,7 +139,6 @@ def show_page(slug):
                 reuses.append(res)
 
     for d in page.get("datasets") or []:
-        log.warning(d)
         if d is None:
             continue
         d = d.strip()
