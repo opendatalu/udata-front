@@ -129,7 +129,7 @@ def show_page(slug):
     reuses = []
     datasets = []
 
-    for r in page.get("reuses", []):
+    for r in page.get("reuses") or []:
         log.info(r)
         if r is None:
             continue
@@ -140,7 +140,7 @@ def show_page(slug):
             if res:
                 reuses.append(res)
 
-    for d in page.get("datasets", []):
+    for d in page.get("datasets") or []:
         log.info(d)
         if d is None:
             continue
