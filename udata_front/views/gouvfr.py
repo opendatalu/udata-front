@@ -115,10 +115,8 @@ def get_object(model, id_or_slug):
 
 
 def get_objects_from_tag(model, tag):
-    if tag[0] == "#":
-        tag = tag[1:]
-    objects = getattr(model, "objects").filter(tags__contains=tag)
-    return objects
+    objects = getattr(model, "objects").filter(tags=tag)
+    return [r for r in objects]
 
 
 @blueprint.route("/pages/<path:slug>/")
@@ -130,22 +128,24 @@ def show_page(slug):
     datasets = []
 
     for r in page.get("reuses") or []:
-        log.info(r)
+        log.warning(r)
         if r is None:
             continue
-        elif r[0] == "#":
-            reuses += list(get_objects_from_tag(Reuse, r))
+        r = r.strip()
+        if r[:4] == "tag#":
+            reuses += get_objects_from_tag(Reuse, r[4:])
         else:
             res = get_object(Reuse, r)
             if res:
                 reuses.append(res)
 
     for d in page.get("datasets") or []:
-        log.info(d)
+        log.warning(d)
         if d is None:
             continue
-        elif d[0] == "#":
-            datasets += list(get_objects_from_tag(Dataset, d))
+        d = d.strip()
+        if d[:4] == "tag#":
+            datasets += get_objects_from_tag(Dataset, d[4:])
         else:
             res = get_object(Dataset, d)
             if res:
