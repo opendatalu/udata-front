@@ -354,6 +354,26 @@ msgid "home"
 msgstr ""
 
 
+#: udata_front/theme/gouvfr/templates/home.html:22
+msgid "Geospatial data"
+msgstr ""
+
+#: udata_front/theme/gouvfr/templates/home.html:26
+msgid "Earth observation and environment"
+msgstr ""
+
+#: udata_front/theme/gouvfr/templates/home.html:30
+msgid "Meteorological data"
+msgstr ""
+
+#: udata_front/theme/gouvfr/templates/home.html:34
+msgid "Statistics"
+msgstr ""
+
+#: udata_front/theme/gouvfr/templates/home.html:38
+msgid "Mobility"
+msgstr ""
+
 #: udata_front/theme/gouvfr/templates/home.html:41
 msgid "All featured topics"
 msgstr ""
