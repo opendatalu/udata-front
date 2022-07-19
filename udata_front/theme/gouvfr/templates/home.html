@@ -15,24 +15,28 @@
     <div class="fr-container">
         <div class="fr-grid-row fr-grid-row--gutters">
             <div class="fr-col-12 fr-col-lg-5">
-                <h1 class="fr-mt-0 fr-mb-2w">{{ _('Open platform for Luxembourgish public data') }}</h1>
-                <div>
-                    <h4>{{ _('Featured topics') }}</h4>
-                    <a href="{{ url_for('gouvfr.show_page', slug='donnees-des-elections') }}"
+                <div>                    
+                    <h4>{{ _('Featured topics') }}</h4>                  
+                    <a href="{{ url_for('gouvfr.show_page', slug='theme-geospatial') }}"
                         class="btn-venti fr-my-2w bg-blue-400">
-                        Données relatives aux
-                        <strong>Élections</strong>
+                        <strong>{{ _('Geospatial data') }}</strong>
                     </a>
-                    <a href="{{ url_for('gouvfr.show_page', slug='donnees-geographiques') }}"
-                        class="btn-venti fr-my-2w bg-blue-450">
-                        Données à composante
-                        <strong>Géographique</strong>
+                    <a href="{{ url_for('gouvfr.show_page', slug='theme-environment') }}"
+                        class="btn-venti fr-my-2w bg-blue-400">
+                        <strong>{{ _('Earth observation and environment') }}</strong>
                     </a>
-                    <a href="{{ url_for('gouvfr.show_page', slug='donnees-logement-urbanisme') }}"
-                        class="btn-venti bg-green-400">
-                        Données relatives au
-                        <strong>Logement et à l'Urbanisme</strong>
+                    <a href="{{ url_for('gouvfr.show_page', slug='theme-weather') }}"
+                        class="btn-venti fr-my-2w bg-blue-400">
+                        <strong>{{ _('Meteorological data') }}</strong>
                     </a>
+                    <a href="{{ url_for('gouvfr.show_page', slug='theme-statistics') }}"
+                        class="btn-venti fr-my-2w bg-blue-400">
+                        <strong>{{ _('Statistics') }}</strong>
+                    </a>
+                    <a href="{{ url_for('gouvfr.show_page', slug='theme-mobility') }}"
+                        class="btn-venti fr-my-2w bg-blue-400">
+                        <strong>{{ _('Mobility') }}</strong>
+                    </a>                                                                                         
                     <div class="fr-grid-row justify-center fr-mt-2w">
                         <a
                             href="{{ url_for('gouvfr.show_page', slug='thematiques-a-la-une') }}"
