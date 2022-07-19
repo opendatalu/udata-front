@@ -115,7 +115,7 @@ def get_object(model, id_or_slug):
 
 
 def get_objects_from_tag(model, tag):
-    if tag.startswith("#"):
+    if tag[0] == "#":
         tag = tag[1:]
     objects = getattr(model, "objects").filter(tags__contains=tag)
     return objects
@@ -130,7 +130,7 @@ def show_page(slug):
     datasets = []
 
     for r in page.get("reuses"):
-        if r.startswith('#'):
+        if r[0] == "#":
             reuses += list(get_objects_from_tag(Reuse, r))
         else:
             res = get_object(Reuse, r)
@@ -138,7 +138,7 @@ def show_page(slug):
                 reuses.append(res)
 
     for d in page.get("datasets"):
-        if d.startswith('#'):
+        if d[0] == "#":
             datasets += list(get_objects_from_tag(Dataset, d))
         else:
             res = get_object(Dataset, d)
