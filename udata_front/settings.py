@@ -20,7 +20,7 @@ BANNER_HTML_CONTENT_EN = ""
 BANNER_HTML_CONTENT_FR = ""
 
 # Static pages from github repo
-PAGES_GH_REPO_NAME = "etalab/datagouvfr-pages"
+PAGES_GH_REPO_NAME = "freesoul/datagouvfr-pages"
 PAGES_REPO_BRANCH = "master"
 
 # api.gouv.fr
