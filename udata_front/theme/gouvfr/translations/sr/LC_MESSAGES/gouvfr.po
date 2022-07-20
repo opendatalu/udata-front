@@ -247,7 +247,7 @@ msgid "Newsletter"
 msgstr "Bilten"
 
 #: udata_front/theme/gouvfr/templates/footer.html:71
-msgid "Go to Etalab’s blog"
+msgid "Gouvernement of Luxembourg - Service of Information and press"
 msgstr "Etalab blog"
 
 #: udata_front/theme/gouvfr/templates/footer.html:78
