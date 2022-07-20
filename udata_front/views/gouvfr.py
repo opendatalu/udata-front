@@ -106,8 +106,9 @@ def get_page_content_locale(slug, locale):
         response = requests.get(raw_url, timeout=5)
         # do not cache 404 and forward status code
         if response.status_code == 404:
-            abort(404)
-        response.raise_for_status()
+            return None
+        #     abort(404)
+        # response.raise_for_status()
     except requests.exceptions.RequestException as e:
         log.exception(f"Error while getting {slug} page from gh: {e}")
         content = cache.get(cache_key)
