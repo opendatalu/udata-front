@@ -276,7 +276,7 @@ msgid "Language selector"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/footer.html:176
-msgid "Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>Open Licence 2.0</a>"
+msgid "Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>licence Creative Commons CC-BY</a>"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/header.html:24

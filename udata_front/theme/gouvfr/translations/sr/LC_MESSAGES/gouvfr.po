@@ -276,8 +276,8 @@ msgid "Language selector"
 msgstr "Odabir jezika"
 
 #: udata_front/theme/gouvfr/templates/footer.html:176
-msgid "Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>Open Licence 2.0</a>"
-msgstr "Ukoliko nije drugačije navedeno, sav sadržaj sajta je dostupan pod <a href='{lo_url}'>Open Licence 2.0</a>"
+msgid "Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>licence Creative Commons CC-BY</a>"
+msgstr "Ukoliko nije drugačije navedeno, sav sadržaj sajta je dostupan pod <a href='{lo_url}'>licence Creative Commons CC-BY</a>"
 
 #: udata_front/theme/gouvfr/templates/header.html:24
 msgid "Internet Explorer 8 and below are not anymore supported.\n"
