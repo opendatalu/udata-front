@@ -65,7 +65,7 @@ def recent_feed():
             'uri': url_for('users.show',
                             user=post.owner.id, _external=True),
         }
-        feed.add(post.title,
+        feed.add(post.name,
                  render_template('post/feed_item.html', post=post),
                  content_type='html',
                  author=author,
