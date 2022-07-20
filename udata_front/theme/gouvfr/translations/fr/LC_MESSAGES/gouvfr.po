@@ -155,8 +155,8 @@ msgid "Tracking and privacy"
 msgstr "Politique de confidentialité"
 
 #: udata_front/theme/gouvfr/__init__.py:106
-msgid "Accessibility: partially compliant"
-msgstr "Accessibilité : partiellement conforme"
+msgid "Accesibility"
+msgstr "Accessibilité"
 
 #: udata_front/theme/gouvfr/templates/base.html:8
 msgid "You must be connected to do this action."

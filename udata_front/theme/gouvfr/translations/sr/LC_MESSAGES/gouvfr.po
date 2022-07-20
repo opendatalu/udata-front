@@ -155,7 +155,7 @@ msgid "Tracking and privacy"
 msgstr "Praćenje i privatnost"
 
 #: udata_front/theme/gouvfr/__init__.py:106
-msgid "Accessibility: partially compliant"
+msgid "Accesibility"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/base.html:8
