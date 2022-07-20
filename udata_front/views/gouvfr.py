@@ -72,43 +72,48 @@ def detect_pages_extension(raw_url):
     return "html"
 
 
-@cache.memoize(PAGE_CACHE_DURATION)
 def get_page_content(slug):
+    content = None
+    for locale in [g.lang_code, None]:
+        content, gh_url, extension = get_page_content_locale(slug, locale)
+        if content:
+            break
+    else:    # no cached version or no content from gh
+        log.error(f"No content found inc. from cache for page {slug}")
+        abort(503)
+    return content, gh_url, extension
+
+
+@cache.memoize(PAGE_CACHE_DURATION)
+def get_page_content_locale(slug, locale):
     """
     Get a page content from gh repo (md).
     This has a double layer of cache:
     - @cache.cached decorator w/ short lived cache for normal operations
     - a long terme cache w/o timeout to be able to always render some content
     """
+    cache_key = "pages-content-{slug}-{locale}".format(
+        slug=slug,
+        locale="default" if locale is None else locale
+    )
+    raw_url, gh_url = get_pages_gh_urls(slug, locale=locale)
+    try:
+        extension = detect_pages_extension(raw_url)
 
-    for locale in [g.lang_code, None]:
-        cache_key = "pages-content-{slug}-{locale}".format(
-            slug=slug,
-            locale="default" if locale is None else locale
-        )
-        raw_url, gh_url = get_pages_gh_urls(slug, locale=locale)
-        try:
-            extension = detect_pages_extension(raw_url)
+        raw_url = f"{raw_url}.{extension}"
+        gh_url = f"{gh_url}.{extension}"
 
-            raw_url = f"{raw_url}.{extension}"
-            gh_url = f"{gh_url}.{extension}"
-
-            response = requests.get(raw_url, timeout=5)
-            # do not cache 404 and forward status code
-            if response.status_code == 404:
-                abort(404)
-            response.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            log.exception(f"Error while getting {slug} page from gh: {e}")
-            content = cache.get(cache_key)
-        else:
-            content = response.text
-            cache.set(cache_key, content)
-            break
-    # no cached version or no content from gh
-    if not content:
-        log.error(f"No content found inc. from cache for page {slug}")
-        abort(503)
+        response = requests.get(raw_url, timeout=5)
+        # do not cache 404 and forward status code
+        if response.status_code == 404:
+            abort(404)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        log.exception(f"Error while getting {slug} page from gh: {e}")
+        content = cache.get(cache_key)
+    else:
+        content = response.text
+        cache.set(cache_key, content)
     return content, gh_url, extension
 
 
