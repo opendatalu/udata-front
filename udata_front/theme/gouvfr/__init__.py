@@ -110,11 +110,9 @@ footer_links = [
 nav.Bar("gouvfr_footer", footer_links)
 
 NETWORK_LINKS = [
-    ("Luxembourg.lu", "http://www.luxembourg.lu"),
-    ("Guichet.lu", "http://www.guichet.lu"),
+    ("Geoportail.lu", "http://www.geoportail.lu"),
+    ("Data.Europa.eu", "http://www.data.europa.eu"),
     ("Gouvernement.lu", "http://www.gouvernement.lu"),
-    ("Crossgov.lu", "http://www.crossgov.lu"),
-    ("Autres sites", "http://www.etat.lu"),
 ]
 
 nav.Bar("gouvfr_network", [nav.Item(label, label, url=url) for label, url in NETWORK_LINKS])
