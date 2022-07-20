@@ -2,7 +2,7 @@ import frontmatter
 import logging
 import requests
 
-from flask import url_for, redirect, abort, current_app
+from flask import url_for, redirect, abort, current_app, g
 from jinja2.exceptions import TemplateNotFound
 from mongoengine.errors import ValidationError
 
@@ -52,14 +52,17 @@ def redirect_topics(topic):
     return redirect(url_for("topics.display", topic=topic))
 
 
-def get_pages_gh_urls(slug):
+def get_pages_gh_urls(slug, locale:str = None):
     repo = current_app.config.get("PAGES_GH_REPO_NAME")
     if not repo:
         abort(404)
     branch = current_app.config.get("PAGES_REPO_BRANCH", "master")
-    raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{slug}"
-    gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{slug}"
-
+    if locale:
+        raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{locale}/{slug}"
+        gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{slug}"
+    else:
+        raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{slug}"
+        gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{slug}"
     return raw_url, gh_url
 
 
@@ -77,25 +80,31 @@ def get_page_content(slug):
     - @cache.cached decorator w/ short lived cache for normal operations
     - a long terme cache w/o timeout to be able to always render some content
     """
-    cache_key = f"pages-content-{slug}"
-    raw_url, gh_url = get_pages_gh_urls(slug)
-    try:
-        extension = detect_pages_extension(raw_url)
 
-        raw_url = f"{raw_url}.{extension}"
-        gh_url = f"{gh_url}.{extension}"
+    for locale in [g.lang_code, None]:
+        cache_key = "pages-content-{slug}-{locale}".format(
+            slug=slug,
+            locale="default" if locale is None else locale
+        )
+        raw_url, gh_url = get_pages_gh_urls(slug, locale=locale)
+        try:
+            extension = detect_pages_extension(raw_url)
 
-        response = requests.get(raw_url, timeout=5)
-        # do not cache 404 and forward status code
-        if response.status_code == 404:
-            abort(404)
-        response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        log.exception(f"Error while getting {slug} page from gh: {e}")
-        content = cache.get(cache_key)
-    else:
-        content = response.text
-        cache.set(cache_key, content)
+            raw_url = f"{raw_url}.{extension}"
+            gh_url = f"{gh_url}.{extension}"
+
+            response = requests.get(raw_url, timeout=5)
+            # do not cache 404 and forward status code
+            if response.status_code == 404:
+                abort(404)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            log.exception(f"Error while getting {slug} page from gh: {e}")
+            content = cache.get(cache_key)
+        else:
+            content = response.text
+            cache.set(cache_key, content)
+            break
     # no cached version or no content from gh
     if not content:
         log.error(f"No content found inc. from cache for page {slug}")
