@@ -80,7 +80,7 @@ def get_page_content(slug):
             break
     else:    # no cached version or no content from gh
         log.error(f"No content found inc. from cache for page {slug}")
-        abort(503)
+        abort(404)
     return content, gh_url, extension
 
 
@@ -107,8 +107,7 @@ def get_page_content_locale(slug, locale):
         # do not cache 404 and forward status code
         if response.status_code == 404:
             return None, gh_url, extension
-        #     abort(404)
-        # response.raise_for_status()
+        response.raise_for_status()
     except requests.exceptions.RequestException as e:
         log.exception(f"Error while getting {slug} page from gh: {e}")
         content = cache.get(cache_key)
