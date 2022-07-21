@@ -58,7 +58,7 @@ gouvfr_menu = nav.Bar(
             ],
         ),
         nav.Item(_("News"), "posts.list"),
-        nav.Item(_("Contact us"), None, url="https://support.data.public.lu/"),
+        nav.Item(_("Contact us"), None, url="mailto:info@data.public.lu"),
     ],
 )
 
@@ -95,7 +95,7 @@ support_links = [
     nav.Item(_("Platform's documentation"), None, url="https://doc.data.public.lu"),
     nav.Item(_("API"), "gouvlu.docapi"),
     nav.Item(_("Open data guides"), None, url=current_app.config.get("ETALAB_GUIDES_URL", "#")),
-    nav.Item(_("Contact us"), None, url="https://support.data.public.lu"),
+    nav.Item(_("Contact us"), None, url="mailto:info@data.public.lu"),
 ]
 
 nav.Bar("gouvfr_support", support_links)
