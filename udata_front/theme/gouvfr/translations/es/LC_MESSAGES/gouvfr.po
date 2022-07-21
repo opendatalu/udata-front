@@ -1455,15 +1455,11 @@ msgid "posts"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/post/list.html:29
-msgid "To stay up-to-date, you can subscribe to"
+msgid "To stay up to date with data.public.lu and open data,"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/post/list.html:30
 msgid "Subscribe"
-msgstr ""
-
-#: udata_front/theme/gouvfr/templates/post/list.html:32
-msgid "our newsletter."
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/post/subnav.html:39

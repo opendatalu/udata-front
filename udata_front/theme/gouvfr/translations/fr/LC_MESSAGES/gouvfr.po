@@ -1483,16 +1483,12 @@ msgid "posts"
 msgstr "articles"
 
 #: udata_front/theme/gouvfr/templates/post/list.html:29
-msgid "To stay up-to-date, you can subscribe to"
-msgstr "Pour ne rien manquer, de l’actualité de data.public.lu et de l’open data, inscrivez-vous à"
+msgid "To stay up to date with data.public.lu and open data,"
+msgstr "Pour ne rien manquer de l'actualité de data.public.lu et de l'open data,"
 
 #: udata_front/theme/gouvfr/templates/post/list.html:30
-msgid "Subscribe"
-msgstr "S'inscrire"
-
-#: udata_front/theme/gouvfr/templates/post/list.html:32
-msgid "our newsletter."
-msgstr "notre infolettre."
+msgid "follow us on Twitter"
+msgstr "suivez-nous sur twitter"
 
 #: udata_front/theme/gouvfr/templates/post/subnav.html:39
 msgid "Read more"
