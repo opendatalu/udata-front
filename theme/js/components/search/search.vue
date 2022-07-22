@@ -59,12 +59,12 @@
                     :onChange="handleFacetChange('license')"
                   />
                 </div>
-                <div class="fr-col-12">
+                <!-- <div class="fr-col-12">
                   <SchemaFilter
                     :values="facets.schema"
                     :onChange="handleFacetChange('schema')"
                   />
-                </div>
+                </div> -->
                 <div class="fr-col-12">
                   <MultiSelect
                     :placeholder="$t('Spatial coverage')"
@@ -175,7 +175,7 @@ import useSearchUrl from "../../composables/useSearchUrl";
 import SearchInput from "./search-input.vue";
 import Dataset from "../dataset/search-result.vue";
 import Loader from "../dataset/loader.vue";
-import SchemaFilter from "./schema-filter.vue";
+//import SchemaFilter from "./schema-filter.vue";
 import Empty from "./empty.vue";
 import Pagination from "../pagination/pagination.vue";
 import MultiSelect from "./multi-select.vue";
@@ -184,7 +184,7 @@ export default defineComponent({
   components: {
     MultiSelect,
     SearchInput,
-    SchemaFilter,
+//    SchemaFilter,
     Dataset,
     Empty,
     Loader,
