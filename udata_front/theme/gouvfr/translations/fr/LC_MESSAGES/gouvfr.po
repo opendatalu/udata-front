@@ -155,7 +155,7 @@ msgid "Tracking and privacy"
 msgstr "Politique de confidentialité"
 
 #: udata_front/theme/gouvfr/__init__.py:106
-msgid "Accesibility"
+msgid "Accessibility"
 msgstr "Accessibilité"
 
 #: udata_front/theme/gouvfr/templates/base.html:8
