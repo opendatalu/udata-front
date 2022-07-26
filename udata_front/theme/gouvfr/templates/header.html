@@ -28,8 +28,15 @@
             <div class="fr-header__body-row">
                 <div class="fr-header__brand fr-enlarge-link">
                     <div class="fr-header__brand-top">
-                        <div class="fr-header__logo">
-                            {% include theme('luxembourg/data_public_logo.svg') %}
+                        <div class ="lux-logo-wrapper">
+                            <div class="fr-header__logo">
+                                {% include theme('luxembourg/data_public_logo.svg') %}
+                            </div>
+                            <div class="fr-header__service">
+                                <a class="logo-slogan" href="{{ url_for('site.home') }}" title="{{ _('Go back to home page') }}">
+                                    La plate-forme de données luxembourgeoise
+                                </a>
+                            </div>
                         </div>
                         <div class="fr-header__navbar">
                             <button
@@ -51,11 +58,6 @@
                                 {{ _('Open menu') }}
                             </button>
                         </div>
-                    </div>
-                    <div class="fr-header__service">
-                        <a class="logo-slogan" href="{{ url_for('site.home') }}" title="{{ _('Go back to home page') }}">
-                            La plate-forme de données luxembourgeoise
-                        </a>
                     </div>
                 </div>
                 <div class="fr-header__tools">
