@@ -11,7 +11,7 @@ User.extras.register("datagouv_ckan_last_sync", db.DateTimeField)
 SPD = "spd"
 TRANSPORT = "transport"
 Dataset.__badges__[SPD] = _("Reference Data")
-Dataset.__badges__[TRANSPORT] = _("Transport")
+#Dataset.__badges__[TRANSPORT] = _("Transport")
 
 BASE_POPULATION_URL = "https://www.insee.fr/fr/statistiques/tableaux/2021173"
 POPULATION_FILENAME = "popleg2013_cc_popleg.xls"

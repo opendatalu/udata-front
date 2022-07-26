@@ -116,6 +116,17 @@
                                 </li>
                                 {% endif %}
                             {% endif %}
+                                                        
+                            {% for code, name in config['LANGUAGES'].items() %}
+                            <li>
+                                {% if g.lang_code == code %}
+                                <a href="#" class="current-lang">{{code}}</a>
+                                {% else %}
+                                <a href="#">{{code}}</a>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                            
                         </ul>
                     </div>
                     <div class="fr-header__search fr-modal" id="modal-search">
