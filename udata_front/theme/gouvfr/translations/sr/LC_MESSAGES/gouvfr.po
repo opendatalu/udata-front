@@ -1540,65 +1540,68 @@ msgstr "Otkrite još primera upotrebe."
 msgid "%(site)s reuse search"
 msgstr "%(site)s pretraga primera upotrebe"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:26
+msgid "International matters"
+msgstr ""
+
+msgid "Agriculture"
+msgstr ""
+
+msgid "Justice, Law and Public Order"
+msgstr ""
+
+msgid "Economy and Finance"
+msgstr ""
+
+msgid "Energy and natural resources"
+msgstr ""
+
+msgid "Environment and Climate"
+msgstr ""
+
+msgid "Government and public sector"
+msgstr ""
+
+msgid "Population and society"
+msgstr ""
+
+msgid "Regions and local development"
+msgstr ""
+
 msgid "Health"
-msgstr "Zdravlјe"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:27
-msgid "Transport and mobility"
-msgstr "Transport i mobilnost"
+msgid "Science and Technology"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:28
-msgid "Housing and development"
-msgstr "Stanovanje i razvoj"
+msgid "Transport - Charging points"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:29
-msgid "Food and agriculture"
-msgstr "Hrana i polјoprivreda"
+msgid "Transport - IDACS"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:30
-msgid "Culture and recreation"
-msgstr "Kultura i rekreacija"
+msgid "Transport"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:31
-msgid "Economy and business"
-msgstr "Ekonomija i biznis"
+msgid "Education, culture and sport"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:32
-msgid "Environment and energy"
-msgstr "Životna sredina i energija"
+msgid "Geospatial data"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:33
-msgid "Work and training"
-msgstr "Rad i trening"
+msgid "Earth observation and environment"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:34
-msgid "Politics and public life"
-msgstr "Politika i javni život"
+msgid "Meteorological data"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:35
-msgid "Safety and security"
-msgstr "Sigurnost i zaštita"
+msgid "Statistics"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:36
-msgid "Education and research"
-msgstr "Obrazovanje i istraživanje"
+msgid "Mobility"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:37
-msgid "Society and demography"
-msgstr "Društvo i demografija"
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:38
-msgid "Law and justice"
-msgstr "Zakon i pravo"
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:39
-msgid "Open data tools"
-msgstr "Alati otvorenih podataka"
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:40
 msgid "Others"
-msgstr "Ostali"
+msgstr ""
 
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format

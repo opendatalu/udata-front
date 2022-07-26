@@ -1533,66 +1533,69 @@ msgstr ""
 #, python-format
 msgid "%(site)s reuse search"
 msgstr ""
+msgid "International matters"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:26
+msgid "Agriculture"
+msgstr ""
+
+msgid "Justice, Law and Public Order"
+msgstr ""
+
+msgid "Economy and Finance"
+msgstr ""
+
+msgid "Energy and natural resources"
+msgstr ""
+
+msgid "Environment and Climate"
+msgstr ""
+
+msgid "Government and public sector"
+msgstr ""
+
+msgid "Population and society"
+msgstr ""
+
+msgid "Regions and local development"
+msgstr ""
+
 msgid "Health"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:27
-msgid "Transport and mobility"
+msgid "Science and Technology"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:28
-msgid "Housing and development"
+msgid "Transport - Charging points"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:29
-msgid "Food and agriculture"
+msgid "Transport - IDACS"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:30
-msgid "Culture and recreation"
+msgid "Transport"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:31
-msgid "Economy and business"
+msgid "Education, culture and sport"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:32
-msgid "Environment and energy"
+msgid "Geospatial data"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:33
-msgid "Work and training"
+msgid "Earth observation and environment"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:34
-msgid "Politics and public life"
+msgid "Meteorological data"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:35
-msgid "Safety and security"
+msgid "Statistics"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:36
-msgid "Education and research"
+msgid "Mobility"
 msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:37
-msgid "Society and demography"
-msgstr ""
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:38
-msgid "Law and justice"
-msgstr ""
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:39
-msgid "Open data tools"
-msgstr ""
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:40
 msgid "Others"
 msgstr ""
+
 
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format

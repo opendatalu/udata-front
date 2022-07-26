@@ -1561,66 +1561,69 @@ msgstr "Découvrez davantage de réutilisations."
 #, python-format
 msgid "%(site)s reuse search"
 msgstr "Recherche de réutilisations sur %(site)s"
+msgid "International matters"
+msgstr ""
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:26
+msgid "Agriculture"
+msgstr "Agriculture"
+
+msgid "Justice, Law and Public Order"
+msgstr "Justice, droit et sécurité publique"
+
+msgid "Economy and Finance"
+msgstr "Justice, droit et sécurité publique"
+
+msgid "Energy and natural resources"
+msgstr "Énergie et ressources naturelles"
+
+msgid "Environment and Climate"
+msgstr "Environnement et climat"
+
+msgid "Government and public sector"
+msgstr "Gouvernement et secteur public"
+
+msgid "Population and society"
+msgstr "Population et société"
+
+msgid "Regions and local development"
+msgstr "Régions et développement local"
+
 msgid "Health"
 msgstr "Santé"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:27
-msgid "Transport and mobility"
-msgstr "Transports et mobilité"
+msgid "Science and Technology"
+msgstr "Science et technologie"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:28
-msgid "Housing and development"
-msgstr "Aménagement du territoire et logement"
+msgid "Transport - Charging points"
+msgstr "Transport - Points de charge"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:29
-msgid "Food and agriculture"
-msgstr "Alimentation et agriculture"
+msgid "Transport - IDACS"
+msgstr "Transport - IDACS"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:30
-msgid "Culture and recreation"
-msgstr "Culture et loisirs"
+msgid "Transport"
+msgstr "Transport"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:31
-msgid "Economy and business"
-msgstr "Économie et entreprise"
+msgid "Education, culture and sport"
+msgstr "Éducation, culture et sport"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:32
-msgid "Environment and energy"
-msgstr "Environnement et énergie"
+msgid "Geospatial data"
+msgstr "Données géospatiales"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:33
-msgid "Work and training"
-msgstr "Emploi et formation"
+msgid "Earth observation and environment"
+msgstr "Observation de la terre et environnement"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:34
-msgid "Politics and public life"
-msgstr "Politique et vie publique"
+msgid "Meteorological data"
+msgstr "Données météorologiques"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:35
-msgid "Safety and security"
-msgstr "Sécurité"
+msgid "Statistics"
+msgstr "Statistiques"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:36
-msgid "Education and research"
-msgstr "Éducation et recherche"
+msgid "Mobility"
+msgstr "Mobilité"
 
-#: udata_front/theme/gouvfr/templates/reuse/list.html:37
-msgid "Society and demography"
-msgstr "Société et démographie"
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:38
-msgid "Law and justice"
-msgstr "Droit et justice"
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:39
-msgid "Open data tools"
-msgstr "Outils open data"
-
-#: udata_front/theme/gouvfr/templates/reuse/list.html:40
 msgid "Others"
 msgstr "Autres"
+
 
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format
