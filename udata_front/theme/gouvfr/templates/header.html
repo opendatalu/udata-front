@@ -119,10 +119,11 @@
                                                         
                             {% for code, name in config['LANGUAGES'].items() %}
                             <li>
+                                {% set onclick_attr = "location = location.href.replace(new RegExp('\/\\w{2}\/'), '/" ~ code ~ "/', regex=true)" %}
                                 {% if g.lang_code == code %}
-                                <a href="#" class="current-lang">{{code}}</a>
+                                <a href="#" class="current-lang fr-link">{{code}}</a>
                                 {% else %}
-                                <a href="#">{{code}}</a>
+                                <a href="#" class="fr-link" onclick="{{onclick_attr}}">{{code}}</a>
                                 {% endif %}
                             </li>
                             {% endfor %}
