@@ -1561,8 +1561,9 @@ msgstr "Découvrez davantage de réutilisations."
 #, python-format
 msgid "%(site)s reuse search"
 msgstr "Recherche de réutilisations sur %(site)s"
+
 msgid "International matters"
-msgstr ""
+msgstr "Affaires internationales"
 
 msgid "Agriculture"
 msgstr "Agriculture"
