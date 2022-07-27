@@ -218,8 +218,29 @@ h2 {
     }
 }
 
+@media screen and (max-width: 310px) {
+    .logo-slogan{
+        display:none;
+    }
+}
+
+.fr-header__brand-top{
+    overflow:hidden !important;
+}
+
 @media (max-width: 63em) {
+
+    .fr-header__service {
+        margin-left: 0;
+    }
+    .logo-slogan{
+        font-size: 12px;
+        max-width: 100%;
+        width: 172px;
+    }
+
     .fr-header__logo {
+        padding-right:0;
         svg {
             height: 62px;
             width: 130px;
