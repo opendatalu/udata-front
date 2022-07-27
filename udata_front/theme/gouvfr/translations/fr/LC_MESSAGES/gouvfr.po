@@ -1625,7 +1625,6 @@ msgstr "Mobilité"
 msgid "Others"
 msgstr "Autres"
 
-
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format
 msgid "Search among %(count)s reuses on %(site)s"
