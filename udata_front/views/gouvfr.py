@@ -129,7 +129,7 @@ def get_object(model, id_or_slug):
 
 
 def get_objects_from_tag(model, tag):
-    return list(getattr(model, "objects").filter(tags=tag).visible())
+    return list(getattr(model, "objects").visible().filter(tags=tag).order_by('-created_at').limit(50))
 
 
 @blueprint.route("/pages/<path:slug>/")
