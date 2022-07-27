@@ -124,25 +124,24 @@
                                                         
                             {% for code, name in config['LANGUAGES'].items() %}
                             <li class="desktop-lang">
-                                {% set onclick_attr = "location = location.href.replace(new RegExp('\/\\\\w{2}\/'), '/" ~ code ~ "/', regex=true)" %}
-                                    {% if code == "fr" %}
-                                        {% set lang_title = "FR - version française" %}
-                                    {% elif code == "en" %}
-                                        {% set lang_title = "EN - english version" %}
-                                    {% else %}
-                                        {% set lang_title = code ~ " version" %}
-                                    {% endif %}
+                                {% set lang_href = g.url_nolang|replace("##lang##", code) %}
+
+                                {% if code == "fr" %}
+                                    {% set lang_title = "FR - version française" %}
+                                {% elif code == "en" %}
+                                    {% set lang_title = "EN - english version" %}
+                                {% else %}
+                                    {% set lang_title = code ~ " version" %}
+                                {% endif %}
+
                                 {% if g.lang_code == code %}
                                 <a href="#" lang="{{code}}" hreflang="{{code}}" title="{{lang_title}}" class="current-lang fr-link" aria-current="true">{{code.upper()}}</a>
                                 {% else %}
-                                <a href="#" lang="{{code}}" hreflang="{{code}}" title="{{lang_title}}" class="fr-link" onclick="{{onclick_attr}}">{{code.upper()}}</a>
+                                <a href="{{lang_href}}" lang="{{code}}" hreflang="{{code}}" title="{{lang_title}}" class="fr-link">{{code.upper()}}</a>
                                 {% endif %}
                             </li>
                             {% endfor %}
-                            
-
-                            <!-- test base url injection {{base_url}} -->
-                             
+                                                 
                         </ul>
                     </div>
                     <div class="fr-header__search fr-modal" id="modal-search">

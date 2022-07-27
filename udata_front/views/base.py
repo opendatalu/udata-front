@@ -11,9 +11,7 @@ class Templated(object):
     template_name: Optional[str] = None
 
     def get_context(self):
-        return {
-            "current_url": request.url
-        }
+        return {}
 
     def get_template_name(self):
         return self.template_name
