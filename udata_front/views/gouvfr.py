@@ -128,8 +128,8 @@ def get_object(model, id_or_slug):
     return obj
 
 
-def get_objects_from_tag(model, tag):
-    return list(getattr(model, "objects").visible().filter(tags=tag).order_by('-created_at').limit(50))
+def get_objects_from_tags(model, tags:list):
+    return list(getattr(model, "objects").visible().filter(tags=tags).order_by('-created_at'))
 
 
 @blueprint.route("/pages/<path:slug>/")
@@ -137,41 +137,29 @@ def show_page(slug):
     content, gh_url, extension = get_page_content(slug)
     page = frontmatter.loads(content)
 
-    reuses = []
-    datasets = []
+    models = {"reuses": Reuse, "datasets": Dataset}
+    data = {"reuses": [], "datasets": []}
 
-    reuses_ids = set()
-    datasets_ids = set()
-
-    for r in page.get("reuses") or []:
-        if r is None:
-            continue
-        r = r.strip()
-        if r[:4] == "tag#":
-            reuses += get_objects_from_tag(Reuse, r[4:])
-        else:
-            res = get_object(Reuse, r)
-            if res and not str(res.id) in reuses_ids:
-                reuses.append(res)
-                reuses_ids.add(str(res.id))
-
-    for d in page.get("datasets") or []:
-        if d is None:
-            continue
-        d = d.strip()
-        if d[:4] == "tag#":
-            datasets += get_objects_from_tag(Dataset, d[4:])
-        else:
-            res = get_object(Dataset, d)
-            if res and not str(res.id) in datasets_ids:
-                datasets.append(res)
-                datasets_ids.add(str(res.id))
+    for model_key, model in models.items():
+        tags = []
+        for r in page.get(model_key) or []:
+            if r is None:
+                continue
+            r = r.strip()
+            if r[:4] == "tag#":
+                tags.append(r[:4])
+            else:
+                res = get_object(model, r)
+                if res:
+                    data[model_key].append(res)
+        if len(tags) > 0:
+            data[model_key] += get_objects_from_tags(model, tags)
 
     return theme.render(
         "page.html",
         page=page,
-        reuses=reuses,
-        datasets=datasets,
+        reuses=data["reuses"],
+        datasets=data["datasets"],
         gh_url=gh_url,
         extension=extension,
     )
