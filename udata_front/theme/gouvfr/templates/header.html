@@ -181,7 +181,7 @@
 
             <ul id="mobile-langs">
                 {% for code, name in config['LANGUAGES'].items() %}
-                <li class="langs-desktop">
+                <li>
                     {% set onclick_attr = "location = location.href.replace(new RegExp('\/\\\\w{2}\/'), '/" ~ code ~ "/', regex=true)" %}
                         {% if code == "fr" %}
                             {% set lang_title = "FR - version française" %}
