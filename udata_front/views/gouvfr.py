@@ -14,6 +14,7 @@ from udata.models import Reuse, Dataset
 from udata.i18n import I18nBlueprint
 
 from udata_front import APIGOUVFR_EXTRAS_KEY
+from udata_workspace.udata.build.lib.udata.core import dataset
 
 log = logging.getLogger(__name__)
 
@@ -141,6 +142,9 @@ def show_page(slug):
     reuses = []
     datasets = []
 
+    reuses_ids = set()
+    datasets_ids = set()
+
     for r in page.get("reuses") or []:
         if r is None:
             continue
@@ -149,8 +153,9 @@ def show_page(slug):
             reuses += get_objects_from_tag(Reuse, r[4:])
         else:
             res = get_object(Reuse, r)
-            if res:
+            if res and not str(res.id) in reuses_ids:
                 reuses.append(res)
+                reuses_ids.add(str(res.id))
 
     for d in page.get("datasets") or []:
         if d is None:
@@ -160,11 +165,10 @@ def show_page(slug):
             datasets += get_objects_from_tag(Dataset, d[4:])
         else:
             res = get_object(Dataset, d)
-            if res:
+            if res and not str(res.id) in datasets_ids:
                 datasets.append(res)
+                datasets_ids.add(str(res.id))
 
-    reuses = [r for r in reuses if r is not None]
-    datasets = [d for d in datasets if d is not None]
     return theme.render(
         "page.html",
         page=page,
