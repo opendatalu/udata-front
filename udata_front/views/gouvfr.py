@@ -14,7 +14,6 @@ from udata.models import Reuse, Dataset
 from udata.i18n import I18nBlueprint
 
 from udata_front import APIGOUVFR_EXTRAS_KEY
-from udata_workspace.udata.build.lib.udata.core import dataset
 
 log = logging.getLogger(__name__)
 
