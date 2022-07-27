@@ -67,10 +67,10 @@ theme.menu(gouvfr_menu)
 opendata_links = [
     nav.Item(_("FAQ"), "gouvlu.faq"),
     nav.Item(_("Guide for the usage of open data"), "gouvlu.usage"),
-    nav.Item(_("Guide for publishing open data"), "gouvlu.publishing"),
+    nav.Item(_("Guide for publishing open data"), , args={"slug": "topics/publishing"}),
     nav.Item(_("Request data for its reuse"), "gouvlu.requesting"),
-    nav.Item(_("Strategy of open data"), "gouvlu.strategy"),
-    nav.Item(_("Railroad sheet of open data"), "gouvlu.fiveyearplan"),
+    nav.Item(_("Strategy of open data"), "gouvfr.show_page", args={"slug": "topics/strategy"}),
+    nav.Item(_("Railroad sheet of open data"), , args={"slug": "topics/5yearplan"}),
     nav.Item(_("Terms of use"), "site.terms"),
     # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
     # nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
@@ -104,7 +104,7 @@ footer_links = [
     nav.Item(_("Licences"), "gouvfr.show_page", args={"slug": "legal/licences"}),
     nav.Item(_("Terms of use"), "site.terms"),
     nav.Item(_("Tracking and privacy"), "gouvfr.suivi"),
-    nav.Item(_("Accessibility"), "gouvfr.show_page", args={"slug": "declaration"}),
+    nav.Item(_("Accessibility"), "gouvfr.show_page", args={"slug": "topics/declaration"}),
 ]
 
 nav.Bar("gouvfr_footer", footer_links)
