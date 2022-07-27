@@ -62,6 +62,9 @@
                 </div>
                 <div class="fr-header__tools">
                     <div class="fr-header__tools-links">
+
+
+
                         <ul class="fr-links-group">
                             {% if current_user.is_authenticated %}
                                 <li>
@@ -120,7 +123,7 @@
                             {% endif %}
                                                         
                             {% for code, name in config['LANGUAGES'].items() %}
-                            <li>
+                            <li id="desktop-langs">
                                 {% set onclick_attr = "location = location.href.replace(new RegExp('\/\\\\w{2}\/'), '/" ~ code ~ "/', regex=true)" %}
                                     {% if code == "fr" %}
                                         {% set lang_title = "FR - version française" %}
@@ -175,6 +178,27 @@
     <div class="fr-header__menu fr-modal" id="modal-mobile-menu" aria-labelledby="fr-btn-menu-mobile">
         <div class="fr-container">
             <button class="fr-btn--close fr-btn" aria-controls="modal-mobile-menu">{{ _('Close') }}</button>
+
+            <ul id="mobile-langs">
+                {% for code, name in config['LANGUAGES'].items() %}
+                <li class="langs-desktop">
+                    {% set onclick_attr = "location = location.href.replace(new RegExp('\/\\\\w{2}\/'), '/" ~ code ~ "/', regex=true)" %}
+                        {% if code == "fr" %}
+                            {% set lang_title = "FR - version française" %}
+                        {% elif code == "en" %}
+                            {% set lang_title = "EN - english version" %}
+                        {% else %}
+                            {% set lang_title = code ~ " version" %}
+                        {% endif %}
+                    {% if g.lang_code == code %}
+                    <a href="#" lang="{{code}}" hreflang="{{code}}" title="{{lang_title}}" class="current-lang fr-link" aria-current="true">{{code.upper()}}</a>
+                    {% else %}
+                    <a href="#" lang="{{code}}" hreflang="{{code}}" title="{{lang_title}}" class="fr-link" onclick="{{onclick_attr}}">{{code.upper()}}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
             <div class="fr-header__menu-links"></div>
             <nav class="fr-nav" id="navigation" role="navigation" aria-label="{{ _('Main Menu') }}">
                 <ul class="fr-nav__list">
