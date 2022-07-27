@@ -129,8 +129,7 @@ def get_object(model, id_or_slug):
 
 
 def get_objects_from_tag(model, tag):
-    objects = getattr(model, "objects").filter(tags=tag)
-    return [r for r in objects]
+    return getattr(model, "objects").filter(tags=tag).visible()
 
 
 @blueprint.route("/pages/<path:slug>/")
