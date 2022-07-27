@@ -179,18 +179,21 @@ h2 {
     display:none;
 
     > li {
+        > a.current-lang{
+            display:inline-block;
+            padding: 0 5px;
+            background-color: #eee !important;
+        }
+
         &:not(:first-child) {
-            margin-left: 10px;
-            padding-left: 10px;
-            border-left: 1px solid #acacac;
+            a {
+                margin-left: 10px;
+                border-left: 1px solid #acacac;    
+            }
         }
 
         :hover{
             background-color: #f6f6f6;
-        }
-
-        &.current-lang{
-            background-color: #eee !important;
         }
     }
 
