@@ -177,8 +177,19 @@ h2 {
 
 #mobile-langs {
     display:none;
+
+    @media screen and (max-width: 63em) {
+        display:flex !important;
+    }
 }
 
+
+.desktop-lang {
+    
+    @media screen and (max-width: 63em) {
+        display:none !important;
+    }
+}
 
 @media (max-width: 63em) {
     .fr-header__logo {
@@ -203,12 +214,5 @@ h2 {
         right: calc(1.5rem - 22px);
     }
 
-    .desktop-lang {
-        display:none !important;
-    }
     
-    #mobile-langs {
-        display:flex !important;
-    }
-
 }
