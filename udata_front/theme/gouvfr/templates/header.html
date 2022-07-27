@@ -123,11 +123,11 @@
                             <li>
                                 {% set onclick_attr = "location = location.href.replace(new RegExp('\/\\\\w{2}\/'), '/" ~ code ~ "/', regex=true)" %}
                                     {% if g.lang_code == "fr" %}
-                                        {% set lang_title = "FR - version française"}
+                                        {% set lang_title = "FR - version française" %}
                                     {% elif g.lang_code == "en" %}
-                                        {% set lang_title = "EN - english version"}
+                                        {% set lang_title = "EN - english version" %}
                                     {% else %}
-                                        {% set lang_title = g.lang_code ~ " version"}
+                                        {% set lang_title = g.lang_code ~ " version" %}
                                     {% endif %}
                                 {% if g.lang_code == code %}
                                 <a href="#" lang="{{code}}" hreflang="{{code}}" title="{{lang_title}}" class="current-lang fr-link" aria-current="true">{{code.upper()}}</a>
