@@ -178,6 +178,22 @@ h2 {
 #mobile-langs {
     display:none;
 
+    > li {
+        &:not(:first-child) {
+            margin-left: 10px;
+            padding-left: 10px;
+            border-left: 1px solid #acacac;
+        }
+
+        :hover{
+            background-color: #f6f6f6;
+        }
+
+        &.current-lang{
+            background-color: #eee !important;
+        }
+    }
+
     @media screen and (max-width: 63em) {
         display:flex !important;
     }
