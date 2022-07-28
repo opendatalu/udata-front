@@ -133,7 +133,7 @@ def get_objects_for_page(
     results = (
         getattr(model, "objects").visible().filter(filters).order_by("-created_at")
     )
-    return len(results), results.paginate(page, 10)
+    return results.count(), results.paginate(page, 10)
 
 
 @blueprint.route("/pages/<path:slug>/")
