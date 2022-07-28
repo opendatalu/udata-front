@@ -65,7 +65,7 @@ def get_pages_gh_urls(slug, locale: str = None):
         raw_url = (
             f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{locale}/{slug}"
         )
-        gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{slug}"
+        gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{locale}/{slug}"
     else:
         raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{slug}"
         gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{slug}"
