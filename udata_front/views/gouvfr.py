@@ -4,7 +4,7 @@ import requests
 
 from flask import url_for, redirect, abort, current_app, g
 from jinja2.exceptions import TemplateNotFound
-from mongoengine.errors import ValidationError
+# from mongoengine.errors import ValidationError
 
 from udata_front import theme
 from udata_front.theme import theme_static_with_version
@@ -12,6 +12,7 @@ from udata.app import cache
 from udata.frontend import template_hook
 from udata.models import Reuse, Dataset
 from udata.i18n import I18nBlueprint
+
 from mongoengine.queryset.visitor import Q
 
 
@@ -119,22 +120,6 @@ def get_page_content_locale(slug, locale):
         cache.set(cache_key, content)
     return content, gh_url, extension
 
-
-# def get_object(model, id_or_slug):
-#     objects = getattr(model, "objects")
-#     obj = objects.filter(slug=id_or_slug).first()
-#     if not obj:
-#         try:
-#             obj = objects.filter(id=id_or_slug).first()
-#         except ValidationError:
-#             pass
-#     return obj
-
-
-# def get_objects_from_tags(model, tags:list):
-#     return list(getattr(model, "objects").visible().filter(tags=tags).order_by('-created_at'))
-
-
 def get_objects_for_page(model, tags: list, ids_or_slugs: list):
     filters = Q(tags=tags)
     if len(ids_or_slugs) > 0:
@@ -145,7 +130,6 @@ def get_objects_for_page(model, tags: list, ids_or_slugs: list):
         .visible()
         .order_by("-created_at")
     )
-
 
 @blueprint.route("/pages/<path:slug>/")
 def show_page(slug):
@@ -169,20 +153,13 @@ def show_page(slug):
         data[model_key] = get_objects_for_page(
             model, tags=tags, ids_or_slugs=ids_or_slugs
         )
-        #     else:
-        #         res = get_object(model, r)
-        #         if res:
-        #             data[model_key].append(res)
-        # if len(tags) > 0:
-        #     data[model_key] += get_objects_from_tags(model, tags)
 
     return theme.render(
         "page.html",
         page=page,
-        reuses=data["reuses"],
-        datasets=data["datasets"],
         gh_url=gh_url,
         extension=extension,
+        **data
     )
 
 
