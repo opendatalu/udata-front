@@ -1,0 +1,115 @@
+{% macro paginator_standalone(current_page, num_pages, nb=3, url=None, arg_name='page') %}
+
+{% if num_pages > 1 %}
+{% set start = 1 if current_page <= nb else current_page - nb %}
+{% set end = num_pages if current_page + nb > num_pages else current_page + nb %}
+{% set first_page_out_of_range = start > 1 %}
+{% set more_pages_out_of_start_range = start > 2 %}
+{% set last_page_out_of_range = end < num_pages %}
+{% set more_pages_out_of_end_range = end + 1 < num_pages %}
+<nav role="navigation" class="fr-pagination fr-pagination--centered" aria-label="Pagination">
+    <ul class="fr-pagination__list">
+        <li>
+            <a
+                {% if current_page > 1 %}
+                    href="{{ url_rewrite(url, **{arg_name: 1}) }}"
+                {% endif %}
+                class="fr-pagination__link fr-pagination__link--first"
+                rel="nofollow"
+            >
+                {{ _('First page') }}
+            </a>
+        </li>
+        <li>
+            <a
+                {% if current_page > 1 %}
+                    href="{{ url_rewrite(url, **{arg_name: current_page - 1}) }}"
+                {% endif %}
+                class="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
+                rel="nofollow"
+            >
+                {{ _('Previous page') }}
+            </a>
+        </li>
+        {% if first_page_out_of_range %}
+        <li>
+            <a
+                href="{{ url_rewrite(url, **{arg_name: 1}) }}"
+                class="fr-pagination__link fr-hidden fr-unhidden-sm"
+                rel="nofollow"
+                title="{% trans %}Page 1{% endtrans %}"
+            >
+                1
+            </a>
+        </li>
+            {% if more_pages_out_of_start_range %}
+            <li>
+                <a class="fr-pagination__link fr-hidden fr-unhidden-lg">
+                    …
+                </a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% for num_page in range(start, end + 1) %}
+        <li>
+            <a
+                href="{{ url_rewrite(url, **{arg_name: num_page}) }}"
+                class="fr-pagination__link {{ 'fr-hidden fr-unhidden-sm' if not num_page == current_page and
+                    (loop.first or
+                        loop.last or
+                        (first_page_out_of_range and loop.index == 2) or
+                        (last_page_out_of_range and loop.revindex == 2)
+                    ) }}"
+                {% if num_page == current_page %} aria-current="page" {% endif %}
+                title="{% trans num=num_page %}Page {{num}}{% endtrans %}"
+                rel="nofollow"
+            >
+                {{ num_page }}
+            </a>
+        </li>
+        {% endfor %}
+        {% if last_page_out_of_range %}
+            {% if more_pages_out_of_end_range %}
+            <li>
+                <a class="fr-pagination__link fr-hidden fr-unhidden-lg">
+                    …
+                </a>
+            </li>
+            {% endif %}
+        <li>
+            <a
+                href="{{ url_rewrite(url, **{arg_name: num_pages}) }}"
+                class="fr-pagination__link"
+                rel="nofollow"
+                title="{% trans num=num_pages %}Page {{num}}{% endtrans %}"
+            >
+                {{ num_pages }}
+            </a>
+        </li>
+        {% endif %}
+        <li>
+            <a
+                {% if current_page < num_pages %}
+                    href="{{ url_rewrite(url, **{arg_name: current_page + 1}) }}"
+                {% endif %}
+                class="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
+                rel="nofollow"
+            >
+                {{ _('Next page') }}
+            </a>
+        </li>
+        <li>
+            <a
+                {% if current_page < num_pages %}
+                    href="{{ url_rewrite(url, **{arg_name: num_pages}) }}"
+                {% endif %}
+                class="fr-pagination__link fr-pagination__link--last"
+                rel="nofollow"
+            >
+                {{ _('Last page') }}
+            </a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+{% endmacro %}

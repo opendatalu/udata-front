@@ -2,8 +2,9 @@ import frontmatter
 import logging
 import requests
 
-from flask import url_for, redirect, abort, current_app, g
+from flask import url_for, redirect, abort, current_app, g, request
 from jinja2.exceptions import TemplateNotFound
+
 # from mongoengine.errors import ValidationError
 
 from udata_front import theme
@@ -120,18 +121,20 @@ def get_page_content_locale(slug, locale):
         cache.set(cache_key, content)
     return content, gh_url, extension
 
-def get_objects_for_page(model, tags: list = [], ids_or_slugs: list = [], topics: list = []):
+
+def get_objects_for_page(
+    model, tags: list = [], ids_or_slugs: list = [], topics: list = [], page: int = 1
+):
     filters = Q(tags__in=tags)
     if len(ids_or_slugs) > 0:
-        filters = filters  | Q(slug__in=ids_or_slugs) | Q(id__in=ids_or_slugs)
+        filters = filters | Q(slug__in=ids_or_slugs) | Q(id__in=ids_or_slugs)
     if len(topics) > 0:
-        filters = filters  | Q(topic__in=topics)
-    return list(
-        getattr(model, "objects")
-        .visible()
-        .filter(filters)
-        .order_by("-created_at")
+        filters = filters | Q(topic__in=topics)
+    results = (
+        getattr(model, "objects").visible().filter(filters).order_by("-created_at")
     )
+    return len(results), results.paginate(page, 10)
+
 
 @blueprint.route("/pages/<path:slug>/")
 def show_page(slug):
@@ -142,6 +145,7 @@ def show_page(slug):
     data = {"reuses": [], "datasets": []}
 
     for model_key, model in models.items():
+        page_num = request.args.get("%s_page" % model_key, 1, type=int)
         tags = []
         topics = []
         ids_or_slugs = []
@@ -155,16 +159,13 @@ def show_page(slug):
                 topics.append(r[6:])
             else:
                 ids_or_slugs.append(r)
-        data[model_key] = get_objects_for_page(
-            model, tags=tags, ids_or_slugs=ids_or_slugs
-        )
 
+        data["total_%s" % model_key], data[model_key]= get_objects_for_page(
+            model, tags=tags, ids_or_slugs=ids_or_slugs, page=page_num
+        )
+        
     return theme.render(
-        "page.html",
-        page=page,
-        gh_url=gh_url,
-        extension=extension,
-        **data
+        "page.html", page=page, gh_url=gh_url, extension=extension, **data
     )
 
 
