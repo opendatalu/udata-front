@@ -136,9 +136,12 @@ def get_page_content_locale(slug, locale):
 
 
 def get_objects_for_page(model, tags: list, ids_or_slugs: list):
-    return (
+    filters = Q(tags=tags)
+    if len(ids_or_slugs) > 0:
+        filters = filters  | Q(slug=ids_or_slugs) | Q(id=ids_or_slugs)
+    return list(
         getattr(model, "objects")
-        .filter(Q(tags=tags) | Q(slug=ids_or_slugs) | Q(id=ids_or_slugs))
+        .filter(filters)
         .visible()
         .order_by("-created_at")
     )
@@ -160,7 +163,7 @@ def show_page(slug):
                 continue
             r = r.strip()
             if r[:4] == "tag#":
-                tags.append(r[:4])
+                tags.append(r[4:])
             else:
                 ids_or_slugs.append(r)
         data[model_key] = get_objects_for_page(
