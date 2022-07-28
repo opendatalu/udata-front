@@ -120,10 +120,12 @@ def get_page_content_locale(slug, locale):
         cache.set(cache_key, content)
     return content, gh_url, extension
 
-def get_objects_for_page(model, tags: list, ids_or_slugs: list):
+def get_objects_for_page(model, tags: list = [], ids_or_slugs: list = [], topics: list = []):
     filters = Q(tags__in=tags)
     if len(ids_or_slugs) > 0:
         filters = filters  | Q(slug__in=ids_or_slugs) | Q(id__in=ids_or_slugs)
+    if len(topics) > 0:
+        filters = filters  | Q(topic__in=topics)
     return list(
         getattr(model, "objects")
         .visible()
@@ -141,6 +143,7 @@ def show_page(slug):
 
     for model_key, model in models.items():
         tags = []
+        topics = []
         ids_or_slugs = []
         for r in page.get(model_key) or []:
             if r is None:
@@ -148,6 +151,8 @@ def show_page(slug):
             r = r.strip()
             if r[:4] == "tag#":
                 tags.append(r[4:])
+            elif r[:6] == "topic#":
+                topics.append(r[6:])
             else:
                 ids_or_slugs.append(r)
         data[model_key] = get_objects_for_page(
