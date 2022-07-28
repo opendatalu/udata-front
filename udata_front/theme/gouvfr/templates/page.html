@@ -1,4 +1,7 @@
+
 {% extends theme('layouts/1-column.html') %}
+
+{% from theme('macros/paginator.html') import paginator with context %}
 
 {% set meta = {
     'title': page.title or '',
@@ -30,6 +33,7 @@
         </div>
     </div>
 </div>
+<!-- {{ paginator(datasets) }} -->
 {% endif %}
 
 {% if reuses %}

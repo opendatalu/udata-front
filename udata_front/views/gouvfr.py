@@ -12,6 +12,8 @@ from udata.app import cache
 from udata.frontend import template_hook
 from udata.models import Reuse, Dataset
 from udata.i18n import I18nBlueprint
+from mongoengine.queryset.visitor import Q
+
 
 from udata_front import APIGOUVFR_EXTRAS_KEY
 
@@ -52,13 +54,15 @@ def redirect_topics(topic):
     return redirect(url_for("topics.display", topic=topic))
 
 
-def get_pages_gh_urls(slug, locale:str = None):
+def get_pages_gh_urls(slug, locale: str = None):
     repo = current_app.config.get("PAGES_GH_REPO_NAME")
     if not repo:
         abort(404)
     branch = current_app.config.get("PAGES_REPO_BRANCH", "master")
     if locale:
-        raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{locale}/{slug}"
+        raw_url = (
+            f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{locale}/{slug}"
+        )
         gh_url = f"https://github.com/{repo}/blob/{branch}/pages/{slug}"
     else:
         raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}/pages/{slug}"
@@ -78,7 +82,7 @@ def get_page_content(slug):
         content, gh_url, extension = get_page_content_locale(slug, locale)
         if content:
             break
-    else:    # no cached version or no content from gh
+    else:  # no cached version or no content from gh
         log.error(f"No content found inc. from cache for page {slug}")
         abort(404)
     return content, gh_url, extension
@@ -93,8 +97,7 @@ def get_page_content_locale(slug, locale):
     - a long terme cache w/o timeout to be able to always render some content
     """
     cache_key = "pages-content-{slug}-{locale}".format(
-        slug=slug,
-        locale="default" if locale is None else locale
+        slug=slug, locale="default" if locale is None else locale
     )
     raw_url, gh_url = get_pages_gh_urls(slug, locale=locale)
     try:
@@ -117,19 +120,28 @@ def get_page_content_locale(slug, locale):
     return content, gh_url, extension
 
 
-def get_object(model, id_or_slug):
-    objects = getattr(model, "objects")
-    obj = objects.filter(slug=id_or_slug).first()
-    if not obj:
-        try:
-            obj = objects.filter(id=id_or_slug).first()
-        except ValidationError:
-            pass
-    return obj
+# def get_object(model, id_or_slug):
+#     objects = getattr(model, "objects")
+#     obj = objects.filter(slug=id_or_slug).first()
+#     if not obj:
+#         try:
+#             obj = objects.filter(id=id_or_slug).first()
+#         except ValidationError:
+#             pass
+#     return obj
 
 
-def get_objects_from_tags(model, tags:list):
-    return list(getattr(model, "objects").visible().filter(tags=tags).order_by('-created_at'))
+# def get_objects_from_tags(model, tags:list):
+#     return list(getattr(model, "objects").visible().filter(tags=tags).order_by('-created_at'))
+
+
+def get_objects_for_page(model, tags: list, ids_or_slugs: list):
+    return (
+        getattr(model, "objects")
+        .filter(Q(tags=tags) | Q(slug=ids_or_slugs) | Q(id=ids_or_slugs))
+        .visible()
+        .order_by("-created_at")
+    )
 
 
 @blueprint.route("/pages/<path:slug>/")
@@ -142,6 +154,7 @@ def show_page(slug):
 
     for model_key, model in models.items():
         tags = []
+        ids_or_slugs = []
         for r in page.get(model_key) or []:
             if r is None:
                 continue
@@ -149,11 +162,16 @@ def show_page(slug):
             if r[:4] == "tag#":
                 tags.append(r[:4])
             else:
-                res = get_object(model, r)
-                if res:
-                    data[model_key].append(res)
-        if len(tags) > 0:
-            data[model_key] += get_objects_from_tags(model, tags)
+                ids_or_slugs.append(r)
+        data[model_key] = get_objects_for_page(
+            model, tags=tags, ids_or_slugs=ids_or_slugs
+        )
+        #     else:
+        #         res = get_object(model, r)
+        #         if res:
+        #             data[model_key].append(res)
+        # if len(tags) > 0:
+        #     data[model_key] += get_objects_from_tags(model, tags)
 
     return theme.render(
         "page.html",
