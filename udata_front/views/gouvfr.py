@@ -161,6 +161,8 @@ def show_page(slug):
             model, tags=tags, ids_or_slugs=ids_or_slugs, page=page_num
         )
 
+    data["total_datasets"] = len(data["datasets"])
+
     return theme.render(
         "page.html",
         page=page,
