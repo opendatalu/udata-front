@@ -121,13 +121,13 @@ def get_page_content_locale(slug, locale):
     return content, gh_url, extension
 
 def get_objects_for_page(model, tags: list, ids_or_slugs: list):
-    filters = Q(tags=tags)
+    filters = Q(tags__in=tags)
     if len(ids_or_slugs) > 0:
-        filters = filters  | Q(slug=ids_or_slugs) | Q(id=ids_or_slugs)
+        filters = filters  | Q(slug__in=ids_or_slugs) | Q(id__in=ids_or_slugs)
     return list(
         getattr(model, "objects")
-        .filter(filters)
         .visible()
+        .filter(filters)
         .order_by("-created_at")
     )
 
