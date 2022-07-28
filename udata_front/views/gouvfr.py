@@ -143,7 +143,7 @@ def show_page(slug):
     data = {"reuses": [], "datasets": []}
 
     for model_key, model in models.items():
-        page = request.args.get("%s_page" % model_key, 1, type=int)
+        page_num = request.args.get("%s_page" % model_key, 1, type=int)
         tags = []
         topics = []
         ids_or_slugs = []
@@ -158,7 +158,7 @@ def show_page(slug):
             else:
                 ids_or_slugs.append(r)
         data[model_key] = get_objects_for_page(
-            model, tags=tags, ids_or_slugs=ids_or_slugs, page=page
+            model, tags=tags, ids_or_slugs=ids_or_slugs, page=page_num
         )
 
     return theme.render(
