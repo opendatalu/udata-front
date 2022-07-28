@@ -131,7 +131,7 @@ def get_objects_for_page(model, tags: list = [], ids_or_slugs: list = [], topics
         .visible()
         .filter(filters)
         .order_by("-created_at")
-        .paginate(1, 10)
+        .paginate(page, 10)
     )
 
 @blueprint.route("/pages/<path:slug>/")
