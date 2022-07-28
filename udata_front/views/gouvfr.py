@@ -161,7 +161,7 @@ def show_page(slug):
                 ids_or_slugs.append(r)
 
         data["total_%s" % model_key], data[model_key]= get_objects_for_page(
-            model, tags=tags, ids_or_slugs=ids_or_slugs, page=page_num
+            model, tags=tags, ids_or_slugs=ids_or_slugs, topics=topics, page=page_num
         )
         
     return theme.render(
