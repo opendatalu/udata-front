@@ -96,8 +96,8 @@ class OrganizationDetailView(OrgView, DetailView):
         context.update({
             'reuses': reuses.paginate(params_reuses_page, self.page_size),
             'datasets': datasets.paginate(params_datasets_page, self.page_size),
-            'total_datasets': len(datasets),
-            'total_reuses': len(reuses),
+            'total_datasets': datasets.count(),
+            'total_reuses': reuses.count(),
             'followers': followers,
             'can_edit': can_edit,
             'can_view': can_view,
