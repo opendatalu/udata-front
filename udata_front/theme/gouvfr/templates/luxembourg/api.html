@@ -356,10 +356,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-bundle.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-standalone-preset.js"> </script>
 <script>
+var swagger_api_domain = '{{swagger_api_domain}}';
+if(swagger_api_domain === '') {
+    swagger_api_domain = document.location.host;
+}
 window.onload = function() {
   // Begin Swagger UI call region
   const ui = SwaggerUIBundle({
-    url: "https://data.public.lu/api/1/swagger.json",
+    url: "https://" + swagger_api_domain + "/api/1/swagger.json",
     dom_id: '#swagger-ui',
     deepLinking: false,
     presets: [

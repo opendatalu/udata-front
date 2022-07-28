@@ -1,5 +1,6 @@
 import logging
 
+from flask import current_app
 
 from udata_front import theme
 from udata.i18n import I18nBlueprint
@@ -53,7 +54,11 @@ def fiveyearplan():
 
 @blueprint.route("/docapi/")
 def docapi():
-    return theme.render("luxembourg/api.html")
+    return theme.render(
+        "luxembourg/api.html",
+        swagger_api_domain=current_app.config.get("SERVER_NAME", ""),
+    )
+
 
 @blueprint.route("/requesting/")
 def requesting():
