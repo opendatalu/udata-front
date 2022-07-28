@@ -2012,9 +2012,9 @@ msgid "Request data for its reuse"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:73
-msgid "Strategy of open data"
+msgid "Open data strategy"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:74
-msgid "Railroad sheet of open data"
+msgid "Open data roadmap"
 msgstr ""

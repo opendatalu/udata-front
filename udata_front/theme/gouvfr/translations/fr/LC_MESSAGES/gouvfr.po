@@ -87,21 +87,17 @@ msgstr "Réutilisations"
 msgid "Organizations"
 msgstr "Organisations"
 
-#: udata_front/theme/gouvfr/__init__.py:49
-msgid "Getting started on data.public.lu"
-msgstr "Commencer sur data.public.lu"
+#: udata_front/theme/gouvfr/__init__.py:52
+msgid "Contribute"
+msgstr "Contribuer"
 
-#: udata_front/theme/gouvfr/__init__.py:51
-msgid "What is data.gouv.fr?"
-msgstr "Qu'est-ce que data.gouv.fr ?"
+#: udata_front/theme/gouvfr/__init__.py:55
+msgid "Publish a dataset"
+msgstr "Publier un jeu de données"
 
 #: udata_front/theme/gouvfr/__init__.py:56
-msgid "How to publish data ?"
-msgstr "Comment publier des données ?"
-
-#: udata_front/theme/gouvfr/__init__.py:61
-msgid "How to use data ?"
-msgstr "Comment exploiter des données ?"
+msgid "Publish a reuse"
+msgstr "Publier une réutilisation"
 
 #: udata_front/theme/gouvfr/__init__.py:66
 #: udata_front/theme/gouvfr/templates/home.html:47
@@ -2038,9 +2034,9 @@ msgid "Request data for its reuse"
 msgstr "Demande de données aux fins de réutilisation"
 
 #: udata_front/theme/gouvfr/__init__.py:73
-msgid "Strategy of open data"
+msgid "Open data strategy"
 msgstr "Stratégie des données ouvertes"
 
 #: udata_front/theme/gouvfr/__init__.py:74
-msgid "Railroad sheet of open data"
+msgid "Open data roadmap"
 msgstr "Feuille de route de données ouvertes"
