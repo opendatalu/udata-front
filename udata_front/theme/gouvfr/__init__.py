@@ -89,15 +89,16 @@ nav.Bar("gouvfr_opendata", opendata_links)
 
 
 support_links = [
-    nav.Item(_("API"), "gouvlu.docapi"),
+    nav.Item(_("API Tutorial"), "gouvfr.show_page", args={"slug": "api-tutorial"}),
+    nav.Item(_("API Reference"), "gouvlu.docapi"),
     nav.Item(_("Contact us"), None, url="mailto:info@data.public.lu"),
 ]
 
 nav.Bar("gouvfr_support", support_links)
 
 footer_links = [
-    nav.Item(_("Terms of use"), "site.terms"),
-    nav.Item(_("Tracking and privacy"), "gouvfr.suivi"),
+    nav.Item(_("Terms of use"), "gouvfr.show_page", args={"slug": "legal/terms"}),
+    nav.Item(_("Tracking and privacy"), "gouvfr.show_page", args={"slug": "legal/privacy"}),
     nav.Item(_("Accessibility"), "gouvfr.show_page", args={"slug": "legal/declaration"}),
 ]
 
