@@ -88,20 +88,16 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: udata_front/theme/gouvfr/__init__.py:49
-msgid "Getting started on data.public.lu"
+#: udata_front/theme/gouvfr/__init__.py:52
+msgid "Contribute"
 msgstr ""
 
-#: udata_front/theme/gouvfr/__init__.py:51
-msgid "What is data.public.lu?"
+#: udata_front/theme/gouvfr/__init__.py:55
+msgid "Publish a dataset"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:56
-msgid "How to publish data ?"
-msgstr ""
-
-#: udata_front/theme/gouvfr/__init__.py:61
-msgid "How to use data ?"
+msgid "Publish a reuse"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:66
@@ -2074,9 +2070,9 @@ msgid "Request data for its reuse"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:73
-msgid "Strategy of open data"
+msgid "Open data strategy"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:74
-msgid "Railroad sheet of open data"
+msgid "Open data roadmap"
 msgstr ""

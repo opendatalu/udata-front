@@ -49,12 +49,11 @@ gouvfr_menu = nav.Bar(
         nav.Item(_("Reuses"), "reuses.list"),
         nav.Item(_("Organizations"), "organizations.list"),
         nav.Item(
-            _("Getting started on data.public.lu"),
+            _("Contribute"),
             None,
             items=[
-                nav.Item(_("What is data.public.lu?"), "gouvfr.show_page", args={"slug": "about/a-propos_data-gouv"}),
-                nav.Item(_("How to publish data ?"), "gouvfr.show_page", args={"slug": "onboarding/producteurs"}),
-                nav.Item(_("How to use data ?"), "gouvfr.show_page", args={"slug": "onboarding/reutilisateurs"}),
+                nav.Item(_("Publish a dataset"), "gouvfr.show_page", args={"slug": "admin/dataset/new"}),
+                nav.Item(_("Publish a reuse"), "gouvfr.show_page", args={"slug": "admin/reuse/new"}),
             ],
         ),
         nav.Item(_("News"), "posts.list"),
@@ -69,9 +68,8 @@ opendata_links = [
     nav.Item(_("Guide for the usage of open data"), "gouvfr.show_page", args={"slug": "usage"}),
     nav.Item(_("Guide for publishing open data"), "gouvfr.show_page", args={"slug": "publishing"}),
     nav.Item(_("Request data for its reuse"), "gouvfr.show_page", args={"slug": "requesting"}),
-    nav.Item(_("Strategy of open data"), "gouvfr.show_page", args={"slug": "strategy"}),
-    nav.Item(_("Railroad sheet of open data"), "gouvfr.show_page", args={"slug": "5yearplan"}),
-    nav.Item(_("Terms of use"), "site.terms"),
+    nav.Item(_("Open data strategy"), "gouvfr.show_page", args={"slug": "strategy"}),
+    nav.Item(_("Open data roadmap"), "gouvfr.show_page", args={"slug": "5yearplan"}),
     # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
     # nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
     # nav.Item(_("Portal for European data"), None, url="https://data.europa.eu"),
@@ -86,22 +84,18 @@ if export_dataset_id:
     else:
         export_url = url_for("datasets.show", dataset=export_dataset, _external=True)
         opendata_links.append(nav.Item(_("Data catalog"), None, url=export_url))
-opendata_links.append(nav.Item(_("Release notes"), "gouvfr.show_page", args={"slug": "nouveautes"}))
 
 nav.Bar("gouvfr_opendata", opendata_links)
 
 
 support_links = [
-    nav.Item(_("Platform's documentation"), None, url="https://doc.data.public.lu"),
     nav.Item(_("API"), "gouvlu.docapi"),
-    nav.Item(_("Open data guides"), None, url=current_app.config.get("ETALAB_GUIDES_URL", "#")),
     nav.Item(_("Contact us"), None, url="mailto:info@data.public.lu"),
 ]
 
 nav.Bar("gouvfr_support", support_links)
 
 footer_links = [
-    nav.Item(_("Licences"), "gouvfr.show_page", args={"slug": "legal/licences"}),
     nav.Item(_("Terms of use"), "site.terms"),
     nav.Item(_("Tracking and privacy"), "gouvfr.suivi"),
     nav.Item(_("Accessibility"), "gouvfr.show_page", args={"slug": "legal/declaration"}),
