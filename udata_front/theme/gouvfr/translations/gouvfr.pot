@@ -131,8 +131,12 @@ msgstr ""
 msgid "Platform's documentation"
 msgstr ""
 
-#: udata_front/theme/gouvfr/__init__.py:95
-msgid "Portal's API"
+#: udata_front/theme/gouvfr/__init__.py:92
+msgid "API Tutorial"
+msgstr ""
+
+#: udata_front/theme/gouvfr/__init__.py:93
+msgid "API Reference"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:96

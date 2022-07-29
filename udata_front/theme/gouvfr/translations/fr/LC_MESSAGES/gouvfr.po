@@ -130,9 +130,13 @@ msgstr "Nouveautés"
 msgid "Platform's documentation"
 msgstr "Documentation de la plateforme"
 
-#: udata_front/theme/gouvfr/__init__.py:95
-msgid "Portal's API"
-msgstr "API du portail"
+#: udata_front/theme/gouvfr/__init__.py:92
+msgid "API Tutorial"
+msgstr "Tutoriel de l'API"
+
+#: udata_front/theme/gouvfr/__init__.py:93
+msgid "API Reference"
+msgstr "Référence de l'API"
 
 #: udata_front/theme/gouvfr/__init__.py:96
 msgid "Open data guides"
