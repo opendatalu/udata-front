@@ -52,8 +52,8 @@ gouvfr_menu = nav.Bar(
             _("Contribute"),
             None,
             items=[
-                nav.Item(_("Publish a dataset"), "gouvfr.show_page", args={"slug": "admin/dataset/new"}),
-                nav.Item(_("Publish a reuse"), "gouvfr.show_page", args={"slug": "admin/reuse/new"}),
+                nav.Item(_("Publish a dataset"), "admin.index", args={"path": "dataset/new"}),
+                nav.Item(_("Publish a reuse"), "admin.index", args={"path": "reuse/new"}),
             ],
         ),
         nav.Item(_("News"), "posts.list"),
