@@ -895,7 +895,7 @@ msgstr "Les plus anciens"
 #: udata_front/theme/gouvfr/templates/dataset/list.html:35
 #, python-format
 msgid "Search among %(count)s datasets on %(site)s"
-msgstr "Rechercher parmi les %(count)s jeux de données sur %(site)s"
+msgstr "Rechercher parmi les %(count)s jeux de données sur le %(site)s"
 
 #: udata_front/theme/gouvfr/templates/dataset/list.html:41
 msgid "Search reuses"
@@ -1628,7 +1628,7 @@ msgstr "Autres"
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format
 msgid "Search among %(count)s reuses on %(site)s"
-msgstr "Rechercher parmi les %(count)s réutilisations sur %(site)s"
+msgstr "Rechercher parmi les %(count)s réutilisations sur le %(site)s"
 
 #: udata_front/theme/gouvfr/templates/reuse/list.html:57
 msgid "Search in datasets"
