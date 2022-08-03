@@ -1434,7 +1434,7 @@ msgstr "%(start)s à %(end)s sur %(total)s"
 #: udata_front/theme/gouvfr/templates/organization/list.html:36
 #, python-format
 msgid "Search among %(count)s organizations on %(site)s"
-msgstr "Rechercher parmi les %(count)s organisations sur %(site)s"
+msgstr "Rechercher parmi les %(count)s organisations sur le %(site)s"
 
 #: udata_front/theme/gouvfr/templates/participez/participez.html:11
 msgid "Go to documentation"
