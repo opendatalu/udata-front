@@ -2003,15 +2003,15 @@ msgid "FAQ"
 msgstr "Frequently Asked Questions (FAQ)"
 
 #: udata_front/theme/gouvfr/__init__.py:70
-msgid "Guide for the usage of open data"
+msgid "Guide to the use of data"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:71
-msgid "Guide for publishing open data"
+msgid "Guidelines for the publication of open data"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:72
-msgid "Request data for its reuse"
+msgid "Request to reuse public data"
 msgstr ""
 
 #: udata_front/theme/gouvfr/__init__.py:73

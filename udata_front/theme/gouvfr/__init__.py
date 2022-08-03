@@ -65,9 +65,9 @@ theme.menu(gouvfr_menu)
 
 opendata_links = [
     nav.Item(_("FAQ"), "gouvfr.show_page", args={"slug": "faq"}),
-    nav.Item(_("Guide for the usage of open data"), "gouvfr.show_page", args={"slug": "usage"}),
-    nav.Item(_("Guide for publishing open data"), "gouvfr.show_page", args={"slug": "publishing"}),
-    nav.Item(_("Request data for its reuse"), "gouvfr.show_page", args={"slug": "requesting"}),
+    nav.Item(_("Guide to the use of data"), "gouvfr.show_page", args={"slug": "usage"}),
+    nav.Item(_("Guidelines for the publication of open data"), "gouvfr.show_page", args={"slug": "publishing"}),
+    nav.Item(_("Request to reuse public data"), "gouvfr.show_page", args={"slug": "requesting"}),
     nav.Item(_("Open data strategy"), "gouvfr.show_page", args={"slug": "strategy"}),
     nav.Item(_("Open data roadmap"), "gouvfr.show_page", args={"slug": "5yearplan"}),
     # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
