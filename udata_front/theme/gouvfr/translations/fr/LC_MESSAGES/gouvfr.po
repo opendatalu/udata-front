@@ -351,8 +351,8 @@ msgid "home"
 msgstr "accueil"
 
 #: udata_front/theme/gouvfr/templates/home.html:18
-msgid "Open platform for Luxembourgish public data"
-msgstr "Plateforme ouverte des données publiques luxembourgeois"
+msgid "The luxembourgish data platform"
+msgstr "La plateforme de données luxembourgeoise"
 
 #: udata_front/theme/gouvfr/templates/home.html:22
 msgid "Geospatial data"
@@ -895,7 +895,7 @@ msgstr "Les plus anciens"
 #: udata_front/theme/gouvfr/templates/dataset/list.html:35
 #, python-format
 msgid "Search among %(count)s datasets on %(site)s"
-msgstr "Rechercher parmi les %(count)s jeux de données sur %(site)s"
+msgstr "Rechercher parmi les %(count)s jeux de données sur le %(site)s"
 
 #: udata_front/theme/gouvfr/templates/dataset/list.html:41
 msgid "Search reuses"
@@ -1434,7 +1434,7 @@ msgstr "%(start)s à %(end)s sur %(total)s"
 #: udata_front/theme/gouvfr/templates/organization/list.html:36
 #, python-format
 msgid "Search among %(count)s organizations on %(site)s"
-msgstr "Rechercher parmi les %(count)s organisations sur %(site)s"
+msgstr "Rechercher parmi les %(count)s organisations sur le %(site)s"
 
 #: udata_front/theme/gouvfr/templates/participez/participez.html:11
 msgid "Go to documentation"
@@ -1628,7 +1628,7 @@ msgstr "Autres"
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format
 msgid "Search among %(count)s reuses on %(site)s"
-msgstr "Rechercher parmi les %(count)s réutilisations sur %(site)s"
+msgstr "Rechercher parmi les %(count)s réutilisations sur le %(site)s"
 
 #: udata_front/theme/gouvfr/templates/reuse/list.html:57
 msgid "Search in datasets"
@@ -2026,21 +2026,21 @@ msgid "FAQ"
 msgstr "Questions fréquentes (FAQ)"
 
 #: udata_front/theme/gouvfr/__init__.py:70
-msgid "Guide for the usage of open data"
+msgid "Guide to the use of data"
 msgstr "Guide d'utilisation des données ouvertes"
 
 #: udata_front/theme/gouvfr/__init__.py:71
-msgid "Guide for publishing open data"
-msgstr "Guide de publication des données ouvertes"
+msgid "Guidelines for the publication of open data"
+msgstr "Lignes directrices pour la publication de données ouvertes"
 
 #: udata_front/theme/gouvfr/__init__.py:72
-msgid "Request data for its reuse"
-msgstr "Demande de données aux fins de réutilisation"
+msgid "Request to reuse public data"
+msgstr "Demande de réutilisation de données publiques"
 
 #: udata_front/theme/gouvfr/__init__.py:73
 msgid "Open data strategy"
-msgstr "Stratégie des données ouvertes"
+msgstr "Stratégie de données ouvertes"
 
 #: udata_front/theme/gouvfr/__init__.py:74
 msgid "Open data roadmap"
-msgstr "Feuille de route de données ouvertes"
+msgstr "Feuille de route pour l'ouverture des données"
