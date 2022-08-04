@@ -52,12 +52,12 @@ blueprint = I18nBlueprint(
 #     return theme.render("luxembourg/5yearplan.html")
 
 
-# @blueprint.route("/docapi/")
-# def docapi():
-#     return theme.render(
-#         "luxembourg/api.html",
-#         swagger_api_domain=current_app.config.get("SERVER_NAME", ""),
-#     )
+@blueprint.route("/docapi/")
+def docapi():
+    return theme.render(
+        "luxembourg/api.html",
+        swagger_api_domain=current_app.config.get("SERVER_NAME", ""),
+    )
 
 
 # @blueprint.route("/requesting/")
