@@ -279,7 +279,7 @@ msgid "Language selector"
 msgstr "Odabir jezika"
 
 #: udata_front/theme/gouvfr/templates/footer.html:176
-msgid "Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>licence Creative Commons CC-BY</a>"
+msgid "Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>licence Creative Commons CC0</a>"
 msgstr "Ukoliko nije drugačije navedeno, sav sadržaj sajta je dostupan pod <a href='{lo_url}'>licence Creative Commons CC-BY</a>"
 
 #: udata_front/theme/gouvfr/templates/header.html:24
