@@ -1,4 +1,20 @@
 /**
+* Generic
+**************/
+// https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting
+// Used to prevent logo text to be selected
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+/**
 * Logos
 **************/
 .fr-header__logo {
@@ -28,6 +44,26 @@
     }
 }
 
+/**
+* Skiplink
+**************/
+  
+.skiplink {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -105%);
+    transition: transform 0.5s;
+    display:inline-block;
+    padding: 9px;
+    background:white;
+    z-index:400000;
+    color: #b92a23;
+    border: 1px solid black;
+    border-radius: 4px;
+    &:focus {
+     transform: translateY(50%, 0%) !important;
+    }
+}
 
 /**
 * Govbar
@@ -75,6 +111,12 @@
         display: none !important
     }
 }
+
+// In mobile version, the modal has to be below the govbar
+.fr-modal--opened {
+    top: 45px; // govbar height
+}
+
 
 /**
 * Text
@@ -241,7 +283,6 @@ h1,h2,.fs-hg.f-bold {
 * Responsiveness for logo, big red buttons
 **************/
 
-
 @media screen and (max-width: 63em) {
 
     .fr-header__brand-top{
@@ -300,36 +341,4 @@ h1,h2,.fs-hg.f-bold {
     }
 }
 
-// https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-}
 
-
-.fr-modal--opened {
-    top: 45px; // govbar height
-}
-
-  
-.skiplink {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -105%);
-    transition: transform 0.5s;
-    display:inline-block;
-    padding: 9px;
-    background:white;
-    z-index:400000;
-    color: #b92a23;
-    border: 1px solid black;
-    border-radius: 4px;
-    :focus {
-     transform: translateY(50%, 0%);
-    }
-}
