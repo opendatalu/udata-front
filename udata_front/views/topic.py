@@ -71,4 +71,4 @@ def sitemap_urls():
         "vie-quotidienne",
     ]
     for slug in slugs:
-        yield "topics.show_page", {"slug": "topics/%s" % slug}, None, "weekly", 0.8
+        yield "gouvfr.show_page", {"slug": "topics/%s" % slug}, None, "weekly", 0.8

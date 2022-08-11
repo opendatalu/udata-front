@@ -255,4 +255,4 @@ def site_sitemap_urls():
     # yield "site.terms_redirect", {}, None, "monthly", 0.2
     slugs = ["declaration", "privacy", "terms"]
     for slug in slugs:
-        yield "topics.show_page", {"slug": "legal/%s" % slug}, None, "weekly", 0.8
+        yield "gouvfr.show_page", {"slug": "legal/%s" % slug}, None, "weekly", 0.8
