@@ -278,8 +278,7 @@ msgstr ""
 
 #: udata_front/theme/gouvfr/templates/footer.html:176
 msgid ""
-"Unless otherwise stated, all content of this site is availabe under <a "
-"href='{lo_url}'>licence Creative Commons CC-BY</a>"
+"Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>Creative Commons CC0</a> license."
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/header.html:24
