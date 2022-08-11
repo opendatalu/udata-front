@@ -291,6 +291,11 @@ h1,h2,.fs-hg.f-bold {
 
 @media screen and (max-width: 390px) {
     .logo-slogan{
-        display:none;
+        /* display:none; */
+        /* Must be displayed because of .fr-enlarge-link a:before which expands this link over the logo too */
+        border: 0;
+        margin: 0;
+        padding: 0;
+        color: transparent;
     }
 }
