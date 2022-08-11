@@ -2079,3 +2079,7 @@ msgstr ""
 #: udata_front/theme/gouvfr/__init__.py:74
 msgid "Open data roadmap"
 msgstr ""
+
+
+msgid "Skip to content"
+msgstr ""
