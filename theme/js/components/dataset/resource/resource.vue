@@ -92,7 +92,7 @@
       :style="{height: expanded ? 'auto' : 0}"
       :aria-labelledby="'resource-' + resource.id + '-title'"
       :hidden="!expanded"
-      :id="'resource-' + resource.id"
+      :id="`resource-${resource.id}-section`"
     >
       <div class=" fr-mt-0 markdown" v-if="resource.description" v-html="filters.markdown(resource.description)">
       </div>
