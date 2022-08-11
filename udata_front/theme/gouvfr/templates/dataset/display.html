@@ -99,15 +99,29 @@
         <div class="fr-col-auto fr-mt-1v fr-grid-row fr-grid-row--bottom flex-direction-column">
             {{ follow_btn(dataset) }}
             {% if can_edit %}
-                <a
-                    class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-mt-2w fr-icon-edit-line fr-btn--icon-left fr-hidden fr-unhidden-sm"
-                    href="{{ url_for('admin.index', path='dataset/{id}/'.format(id=dataset.id)) }}"
-                >
-                    {{ _('Modify dataset') }}
-                </a>
-                <a
+            <a
+                class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-mt-2w fr-icon-edit-line fr-btn--icon-left fr-hidden fr-unhidden-sm"
+                href="{{ url_for('admin.index', path='dataset/{id}/'.format(id=dataset.id)) }}"
+                aria-hidden="true"
+            >
+                {{ _('Modify dataset') }}
+            </a>
+            <a
                 class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-mt-2w fr-icon-edit-line fr-hidden-sm"
                 href="{{ url_for('admin.index', path='dataset/{id}/'.format(id=dataset.id)) }}"
+                aria-hidden="true"
+            >
+                {{ _('Modify dataset') }}
+            </a>
+            <a
+                class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-mt-2w fr-btn--icon-left fr-hidden fr-unhidden-sm sr-only"
+                href="{{ url_for('admin.index', path='dataset/{id}/'.format(id=dataset.id)) }}"
+            >
+                {{ _('Modify dataset') }}
+            </a>
+            <a
+            class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-mt-2w fr-hidden-sm sr-only"
+            href="{{ url_for('admin.index', path='dataset/{id}/'.format(id=dataset.id)) }}"
             >
                 {{ _('Modify dataset') }}
             </a>

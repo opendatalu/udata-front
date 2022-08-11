@@ -5,7 +5,7 @@
       :id="'resource-' + resource.id + '-header'"
     >
       <div class="fr-col-auto fr-grid-row fr-grid-row--top no-wrap">
-        <div class="fr-col-auto fr-mx-2w fr-icon-svg fr-icon--sm" v-html="resourceImage"></div>
+        <div class="fr-col-auto fr-mx-2w fr-icon-svg fr-icon--sm" v-html="resourceImage" aria-hidden="true"></div>
         <div class="fr-col-auto">
           <h4
             class="fr-mb-1v"

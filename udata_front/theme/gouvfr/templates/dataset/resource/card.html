@@ -9,7 +9,7 @@
         id="resource-{{resource.id}}-header"
     >
         <div class="fr-col-auto fr-grid-row fr-grid-row--top no-wrap">
-            <div class="fr-col-auto fr-mx-2w fr-icon-svg fr-icon--sm">
+            <div class="fr-col-auto fr-mx-2w fr-icon-svg fr-icon--sm" aria-hidden="true">
                 {% include theme(resource_image(resource)) %}
             </div>
             <div class="fr-col-auto">
@@ -50,6 +50,7 @@
                             class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-btn--sm fr-icon-svg"
                         >
                             {% include theme('svg/edit.svg') %}
+                            <span class="sr-only">{{ _('Edit resource') }}</span>
                         </a>
                     </li>
                 {% endif %}
