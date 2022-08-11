@@ -20,7 +20,7 @@
                     {{ _(' by ') }}
                     {% if reuse.organization %}
                     <a
-                        href="{{ url_for('organizations.show', org=reuse.organization) }}"
+                        class="custom-publied-by" href="{{ url_for('organizations.show', org=reuse.organization) }}"
                     >
                         {{organization_name_with_certificate(reuse.organization)}}
                     </a>

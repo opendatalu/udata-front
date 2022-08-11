@@ -1,4 +1,4 @@
 {% from theme('macros/certified.html') import badge_if_certified %}
 {% macro organization_name_with_certificate(org) %}
-{{org.name}}{{badge_if_certified(org)}}
+<span class="publied-by-name">{{org.name}}</span>{{badge_if_certified(org)}}
 {% endmacro %}
