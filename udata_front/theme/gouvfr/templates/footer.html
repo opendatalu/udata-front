@@ -74,34 +74,44 @@
                     <ul class="fr-mt-2w text-grey-380">
                         <li>
                             <a
-                                href="https://github.com/opendatateam/udata/"
+                                href="https://github.com/opendatalu/udata/"
                                 title="{{ _('Open-source engine') }}"
                                 class="fr-footer__top-link"
                             >
                                 udata
                             </a>
-                            <a
-                                href="https://pypi.org/project/udata/{{ package_version('udata') }}/"
-                                title="{{ _('Deployed version') }}"
-                                class="fr-footer__top-link"
-                            >
-                                {{ package_version('udata') }}
-                            </a>
+                            {{
+                                /*
+                                <a
+                                    href="https://pypi.org/project/udata/{{ package_version('udata') }}/"
+                                    title="{{ _('Deployed version') }}"
+                                    class="fr-footer__top-link"
+                                >
+                                    {{ package_version('udata') }}
+                                </a>
+
+                                */
+                            }}
                         </li>
                         <li>
                             <a
-                                href="https://github.com/etalab/udata-front/"
+                                href="https://github.com/opendatalu/udata-front/"
                                 title="{{ _('Data.public.lu extension') }}"
                                 class="fr-footer__top-link"
                             >
                                 udata-front
                             </a>
+                            
+                            {{
+                                /*
                             <a href="https://pypi.org/project/udata-front/{{ package_version('udata-front') }}/"
                                 title="{{ _('Deployed version') }}"
                                 class="fr-footer__top-link"
                             >
                                 {{ package_version('udata-front') }}
                             </a>
+                            */
+                        }}
                         </li>
                     </ul>
                 </div>
