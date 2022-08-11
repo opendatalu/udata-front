@@ -42,7 +42,9 @@ def inject_site():
 def activity_feed():
     activity_keys = request.args.getlist("key")
 
-    feed = AtomFeed(current_app.config.get("SITE_TITLE"), feed_url=request.url, url=request.url_root)
+    feed = AtomFeed(
+        current_app.config.get("SITE_TITLE"), feed_url=request.url, url=request.url_root
+    )
     activities = Activity.objects.order_by("-created_at").limit(current_site.feed_size)
 
     for activity in activities.select_related():
@@ -65,10 +67,14 @@ def activity_feed():
         else:
             related_url = related.url_for(_external=True)
         feed.add(
-            id="%s#activity=%s" % (url_for("site.dashboard", _external=True), activity.id),
+            id="%s#activity=%s"
+            % (url_for("site.dashboard", _external=True), activity.id),
             title="%s by %s on %s" % (activity.key, owner, related),
             url=related_url,
-            author={"name": owner, "uri": owner_url,},
+            author={
+                "name": owner,
+                "uri": owner_url,
+            },
             updated=activity.created_at,
         )
     return feed.get_response()
@@ -155,7 +161,9 @@ def harvests_csv():
     exported_models = current_app.config.get("EXPORT_CSV_MODELS", [])
     if "harvest" in exported_models:
         return redirect(get_export_url("harvest"))
-    adapter = HarvestSourceCsvAdapter(HarvestSource.objects.filter(deleted=None).order_by("created_at"))
+    adapter = HarvestSourceCsvAdapter(
+        HarvestSource.objects.filter(deleted=None).order_by("created_at")
+    )
     return csv.stream(adapter, "harvest")
 
 
@@ -178,16 +186,40 @@ class SiteDashboard(SiteView, DetailView):
             {
                 "title": _("Data"),
                 "widgets": [
-                    {"title": _("Datasets"), "metric": "datasets", "type": "line", "endpoint": "datasets.list",},
-                    {"title": _("Reuses"), "metric": "reuses", "type": "line", "endpoint": "reuses.list",},
-                    {"title": _("Resources"), "metric": "resources", "type": "line",},
+                    {
+                        "title": _("Datasets"),
+                        "metric": "datasets",
+                        "type": "line",
+                        "endpoint": "datasets.list",
+                    },
+                    {
+                        "title": _("Reuses"),
+                        "metric": "reuses",
+                        "type": "line",
+                        "endpoint": "reuses.list",
+                    },
+                    {
+                        "title": _("Resources"),
+                        "metric": "resources",
+                        "type": "line",
+                    },
                 ],
             },
             {
                 "title": _("Community"),
                 "widgets": [
-                    {"title": _("Organizations"), "metric": "organizations", "type": "bar", "endpoint": "organizations.list",},
-                    {"title": _("Users"), "metric": "users", "type": "bar", "endpoint": "users.list"},
+                    {
+                        "title": _("Organizations"),
+                        "metric": "organizations",
+                        "type": "bar",
+                        "endpoint": "organizations.list",
+                    },
+                    {
+                        "title": _("Users"),
+                        "metric": "users",
+                        "type": "bar",
+                        "endpoint": "users.list",
+                    },
                 ],
             },
         )
@@ -219,5 +251,8 @@ def terms():
 @sitemap.register_generator
 def site_sitemap_urls():
     yield "site.home_redirect", {}, None, "daily", 1
-    yield "site.dashboard_redirect", {}, None, "weekly", 0.6
-    yield "site.terms_redirect", {}, None, "monthly", 0.2
+    # yield "site.dashboard_redirect", {}, None, "weekly", 0.6
+    # yield "site.terms_redirect", {}, None, "monthly", 0.2
+    slugs = ["declaration", "privacy", "terms"]
+    for slug in slugs:
+        yield "topics.show_page", {"slug": "legal/%s" % slug}, None, "weekly", 0.8

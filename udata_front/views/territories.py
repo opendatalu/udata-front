@@ -145,20 +145,21 @@ def render_territory(territory):
     return theme.render(template, **context)
 
 
-@sitemap.register_generator
-def sitemap_urls():
-    if current_app.config.get('ACTIVATE_TERRITORIES'):
-        for level in current_app.config.get('HANDLED_LEVELS'):
-            for territory in (GeoZone.objects(level=level)
-                                     .only('id', 'code', 'validity', 'slug')):
-                # Remove 'fr:' manually from the level.
-                territory = dict_to_namedtuple(
-                    'Territory', {
-                        'level_name': level[3:],
-                        'id': territory.id,
-                        'code': territory.code,
-                        'slug': territory.slug,
-                        'validity': territory.validity
-                    })
-                yield ('territories.territory', {'territory': territory},
-                       None, 'weekly', 0.5)
+# They deprecated for the moment these territory pages. They are working in new features
+# @sitemap.register_generator
+# def sitemap_urls():
+#     if current_app.config.get('ACTIVATE_TERRITORIES'):
+#         for level in current_app.config.get('HANDLED_LEVELS'):
+#             for territory in (GeoZone.objects(level=level)
+#                                      .only('id', 'code', 'validity', 'slug')):
+#                 # Remove 'fr:' manually from the level.
+#                 territory = dict_to_namedtuple(
+#                     'Territory', {
+#                         'level_name': level[3:],
+#                         'id': territory.id,
+#                         'code': territory.code,
+#                         'slug': territory.slug,
+#                         'validity': territory.validity
+#                     })
+#                 yield ('territories.territory', {'territory': territory},
+#                        None, 'weekly', 0.5)
