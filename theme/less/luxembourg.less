@@ -49,9 +49,10 @@
 **************/
   
 .skiplink {
+    display:none;
+    transform: translate(-50%, -105%);
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -105%);
     transition: transform 0.3s;
     display:inline-block;
     padding: 9px;
@@ -61,7 +62,8 @@
     border: 1px solid black;
     border-radius: 4px;
     &:focus {
-     transform: translate(-50%, 0%) !important;
+        display:inline-block !important;
+        transform: translate(-50%, 0%) !important;
     }
 }
 
