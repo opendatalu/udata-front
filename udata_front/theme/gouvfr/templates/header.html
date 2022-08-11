@@ -85,7 +85,7 @@
                                         href="{{ url_for('admin.index') }}"
                                         class="fr-link fr-icon-svg fr-icon--sm"
                                     >
-                                        <span class="fr-mr-1w fr-grid-row">
+                                        <span class="fr-mr-1w fr-grid-row" aria-hidden="true">
                                             {% include theme('svg/administration.svg') %}
                                         </span>
                                         {{ _('Administration') }}
@@ -93,8 +93,15 @@
                                 </li>
                                 <li>
                                     <a
+                                        aria-hidden="true"
                                         href="{{ url_for('security.logout') }}"
                                         class="fr-link fr-icon-logout-box-r-line"
+                                    >
+                                        {{ _('Logout') }}
+                                    </a>
+                                    <a
+                                        href="{{ url_for('security.logout') }}"
+                                        class="fr-link sr-only"
                                     >
                                         {{ _('Logout') }}
                                     </a>
