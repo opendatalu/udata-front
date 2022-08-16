@@ -99,13 +99,13 @@
       <dl>
         <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
           <dt class="fr-col-4 fr-col-md-3 fr-col-lg-2">{{ $t('URL') }}</dt>
-          <dd class="fr-ml-0 fr-col-8 fr-col-md-9 fr-col-lg-10 text-overflow-ellipsis">
+          <dd class="fr-ml-0 fr-col-8 fr-col-md-9 fr-col-lg-10">
             <a :href="resource.url">{{resource.url}}</a>
           </dd>
         </div>
         <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
           <dt class="fr-col-4 fr-col-md-3 fr-col-lg-2">{{ $t('Permalink') }}</dt>
-          <dd class="fr-ml-0 fr-col-8 fr-col-md-9 fr-col-lg-10 text-overflow-ellipsis">
+          <dd class="fr-ml-0 fr-col-8 fr-col-md-9 fr-col-lg-10">
             <a :href="resource.latest">{{resource.latest}}</a>
           </dd>
         </div>
