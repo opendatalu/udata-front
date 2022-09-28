@@ -159,6 +159,10 @@ msgstr ""
 msgid "Accessibility"
 msgstr ""
 
+#: udata_front/theme/gouvfr/__init__.py:107
+msgid "Sitemap"
+msgstr ""
+
 #: udata_front/theme/gouvfr/templates/base.html:8
 msgid "You must be connected to do this action."
 msgstr ""

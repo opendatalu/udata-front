@@ -100,6 +100,7 @@ footer_links = [
     nav.Item(_("Terms of use"), "gouvfr.show_page", args={"slug": "legal/terms"}),
     nav.Item(_("Tracking and privacy"), "gouvfr.show_page", args={"slug": "legal/privacy"}),
     nav.Item(_("Accessibility"), "gouvfr.show_page", args={"slug": "legal/declaration"}),
+    nav.Item(_("Sitemap"), "gouvfr.show_page", args={"slug": "plan-site"}),
 ]
 
 nav.Bar("gouvfr_footer", footer_links)
