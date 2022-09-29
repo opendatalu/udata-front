@@ -3,5 +3,5 @@
 <a href="{{ url_for('api.post', post=post) }}"
     title="{{ post.name }}">
     <img alt="{{ post.owner.fullname }}"
-        src="{{ post.owner|avatar_url(150) }}">
+        src="{{ post.image|placeholder('post') }}">
 </a>
