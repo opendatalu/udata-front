@@ -58,7 +58,7 @@ def recent_feed():
     feed = AtomFeed('Last posts',
                     feed_url=request.url, url=request.url_root)
     posts = (Post.objects.order_by('-created_at')
-                .limit(current_site.feed_size))
+                .published().limit(current_site.feed_size))
     for post in posts:
         author = {
             'name': post.owner.fullname,
