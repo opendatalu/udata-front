@@ -140,7 +140,7 @@ msgstr "Référence de l'API"
 
 #: udata_front/theme/gouvfr/__init__.py:96
 msgid "Open data guides"
-msgstr "Guides de l’Open Data"
+msgstr "Guides de l’Open data"
 
 #: udata_front/theme/gouvfr/__init__.py:103
 msgid "Licences"
@@ -157,6 +157,10 @@ msgstr "Politique de confidentialité"
 #: udata_front/theme/gouvfr/__init__.py:106
 msgid "Accessibility"
 msgstr "Accessibilité"
+
+#: udata_front/theme/gouvfr/__init__.py:107
+msgid "Sitemap"
+msgstr "Plan du site"
 
 #: udata_front/theme/gouvfr/templates/base.html:8
 msgid "You must be connected to do this action."
@@ -227,7 +231,7 @@ msgstr "Licence :"
 
 #: udata_front/theme/gouvfr/templates/footer.html:8
 msgid "The Open Data"
-msgstr "L'Open Data"
+msgstr "L'Open data"
 
 #: udata_front/theme/gouvfr/templates/footer.html:18
 msgid "Support"
@@ -895,7 +899,7 @@ msgstr "Les plus anciens"
 #: udata_front/theme/gouvfr/templates/dataset/list.html:35
 #, python-format
 msgid "Search among %(count)s datasets on %(site)s"
-msgstr "Rechercher parmi les %(count)s jeux de données sur le %(site)s"
+msgstr "Rechercher parmi les %(count)s jeux de données sur le portail Open data"
 
 #: udata_front/theme/gouvfr/templates/dataset/list.html:41
 msgid "Search reuses"
@@ -1434,7 +1438,7 @@ msgstr "%(start)s à %(end)s sur %(total)s"
 #: udata_front/theme/gouvfr/templates/organization/list.html:36
 #, python-format
 msgid "Search among %(count)s organizations on %(site)s"
-msgstr "Rechercher parmi les %(count)s organisations sur le %(site)s"
+msgstr "Rechercher parmi les %(count)s organisations sur le portail Open data"
 
 #: udata_front/theme/gouvfr/templates/participez/participez.html:11
 msgid "Go to documentation"
@@ -1628,7 +1632,7 @@ msgstr "Autres"
 #: udata_front/theme/gouvfr/templates/reuse/list.html:53
 #, python-format
 msgid "Search among %(count)s reuses on %(site)s"
-msgstr "Rechercher parmi les %(count)s réutilisations sur le %(site)s"
+msgstr "Rechercher parmi les %(count)s réutilisations sur le portail Open data"
 
 #: udata_front/theme/gouvfr/templates/reuse/list.html:57
 msgid "Search in datasets"
