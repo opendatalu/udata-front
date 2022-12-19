@@ -68,5 +68,5 @@ def docapi():
 @sitemap.register_generator
 def site_sitemap_urls():
     yield "gouvfr.show_page", {"slug": "faq"}, None, "weekly", 1
-    for page in ["usage", "publishing", "requesting", "strategy", "5yearplan"]:
+    for page in ["usage", "publishing", "requesting", "strategy", "5yearplan", "governance"]:
         yield "gouvfr.show_page", {"slug": page}, None, "monthly", 0.2

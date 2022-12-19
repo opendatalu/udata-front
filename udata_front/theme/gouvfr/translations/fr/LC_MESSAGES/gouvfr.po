@@ -2041,13 +2041,17 @@ msgstr "Lignes directrices pour la publication de données ouvertes"
 msgid "Request to reuse public data"
 msgstr "Demande de réutilisation de données publiques"
 
-#: udata_front/theme/gouvfr/__init__.py:73
+#: udata_front/theme/gouvfr/__init__.py:71
 msgid "Open data strategy"
 msgstr "Stratégie de données ouvertes"
 
-#: udata_front/theme/gouvfr/__init__.py:74
+#: udata_front/theme/gouvfr/__init__.py:72
 msgid "Open data roadmap"
-msgstr "Feuille de route pour l'ouverture des données"
+msgstr "Feuille de route pour l'open data"
+
+#: udata_front/theme/gouvfr/__init__.py:73
+msgid "Project governance"
+msgstr "Gouvernance du projet"
 
 msgid "Skip to content"
 msgstr "Aller au contenu"
