@@ -1,6 +1,6 @@
 {{post.content|markdown}}
 
-<a href="{{ url_for('posts.show', post=post) }}"
+<a href="{{ url_for('api.post', post=post) }}"
     title="{{ post.name }}">
     <img alt="{{ post.owner.fullname }}"
         src="{{ post.image|placeholder('post') }}">

@@ -69,7 +69,7 @@ def recent_feed():
                  render_template('post/feed_item.html', post=post),
                  content_type='html',
                  author=author,
-                 url=url_for('api.post',
+                 url=url_for('api',
                              post=post, _external=True),
                  updated=post.last_modified,
                  published=post.created_at)
