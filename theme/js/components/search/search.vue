@@ -244,7 +244,7 @@ export default defineComponent({
     /**
      * Search page size
      */
-    const pageSize = 20;
+    const pageSize = 40;
 
     /**
      * All other params are kept here as facets
