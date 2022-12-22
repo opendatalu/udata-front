@@ -220,7 +220,7 @@ export default defineComponent({
      * @returns {Array<Option>}
      **/
     const mapToOption = (data) => data.map((obj) => ({
-      label: obj.name ?? obj.title ?? obj.text ?? obj?.properties?.name ?? obj.label ?? obj,
+      label: t(obj.name ?? obj.title ?? obj.text ?? obj?.properties?.name ?? obj.label ?? obj),
       value: obj.id ?? obj.text ?? obj.value ?? obj,
       image: obj.logo_thumbnail ?? obj.logo ?? obj.image_url ?? obj.image,
     }));
