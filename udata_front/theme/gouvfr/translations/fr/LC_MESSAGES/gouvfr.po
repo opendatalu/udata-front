@@ -250,10 +250,6 @@ msgstr "Flux RSS"
 msgid "Newsletter"
 msgstr "Infolettre"
 
-#: udata_front/theme/gouvfr/templates/footer.html:71
-msgid "Gouvernement of Luxembourg - Service of Information and press"
-msgstr "Le Gouvernement du Grand-Duché de Luxembourg - Service Information et Presse"
-
 #: udata_front/theme/gouvfr/templates/footer.html:78
 msgid "A DINUM department"
 msgstr "Un département de la DINUM"

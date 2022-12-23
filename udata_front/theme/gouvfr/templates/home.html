@@ -16,7 +16,7 @@
         <div class="fr-grid-row fr-grid-row--gutters">
             <div class="fr-col-12 fr-col-lg-5">
                 <div>                    
-                    <h4>{{ _('Featured topics') }}</h4>                  
+                    <h2 class="as-h4">{{ _('Featured topics') }}</h2>                  
                     <a href="{{ url_for('gouvfr.show_page', slug='topics/geospatial') }}"
                         class="btn-venti fr-my-2w bg-blue-400">
                         <strong>{{ _('Geospatial data') }}</strong>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="fr-col-12 fr-col-offset-lg-1 fr-col-lg-6">
-                <h4>{{ _('News') }}</h4>
+                <h2 class="as-h4">{{ _('News') }}</h2>
                 {% if last_post %}
                 {% set post = last_post %}
                 <div class="fr-grid-row justify-center fr-mb-2w">
@@ -82,7 +82,7 @@
 <section class="metrics-bar">
     <div class="fr-container fr-py-md-7w fr-py-2w">
         <div class="bar fr-p-9v">
-            <h3>data.public.lu {{ _('is') }}</h3>
+            <h2 class="as-h3">data.public.lu {{ _('is') }}</h2>
             <div class="fr-grid-row justify-between fr-mt-md-9v fr-mt-2w">
                 {% for (label, metric) in metrics %}
                 <div class="filet fr-my-1v fr-my-md-0">

@@ -13,7 +13,7 @@
           <div class="fr-sidemenu__inner">
             <button class="fr-sidemenu__btn fr-mt-1w" hidden aria-controls="fr-sidemenu-wrapper" aria-expanded="false">{{$t('Filter results')}}</button>
             <div class="fr-collapse" id="fr-sidemenu-wrapper">
-              <div class="fr-sidemenu__title fr-mb-3v">{{$t('Filters')}}</div>
+              <h2 class="as-p fr-sidemenu__title fr-mb-3v">{{$t('Filters')}}</h2>
               <div class="fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-12">
                   <MultiSelect
@@ -104,9 +104,9 @@
       </div>
       <section class="fr-col-12 fr-col-md-8 fr-col-lg-9 fr-mt-2w fr-mt-md-0 search-results" ref="resultsRef" v-bind="$attrs">
         <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle justify-between fr-pb-1w">
-          <p class="fr-col-auto fr-my-0" v-if="totalResults" role="status">
+          <h2 class="as-p fr-col-auto fr-my-0" v-if="totalResults" role="status">
             {{ $t("{count} results", totalResults) }}
-          </p>
+          </h2>
           <div class="fr-col-auto fr-grid-row fr-grid-row--middle">
             <label for="sort-search" class="fr-col-auto fr-text--sm fr-m-0 fr-mr-1w">
                 {{$t('Sort by:')}}
