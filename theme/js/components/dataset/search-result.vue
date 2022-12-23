@@ -46,6 +46,7 @@
           </p>
           <p class="fr-mb-0 text-mention-grey">
             <template v-if="!externalSource">
+              {{ $t('Created on') }} {{$filters.formatDate(created_at)}}. 
               {{ $t('Updated on {date}', {date: $filters.formatDate(last_modified)}) }}
                 <span v-if="license" class="fr-hidden inline-sm">
                   &mdash;
@@ -109,6 +110,10 @@ export default defineComponent({
       type: Object,
     },
     last_modified: {
+      type: Date,
+      required: true,
+    },
+    created_at: {
       type: Date,
       required: true,
     },
