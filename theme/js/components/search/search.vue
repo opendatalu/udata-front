@@ -9,7 +9,7 @@
     </div>
     <div class="fr-grid-row fr-mt-1w fr-mt-md-5v">
       <div class="fr-col-12 fr-col-md-4 fr-col-lg-3">
-        <nav class="fr-sidemenu" :aria-label="$t('Filter results')">
+        <nav class="fr-sidemenu" :aria-label="$t('Filter results')" role="navigation">
           <div class="fr-sidemenu__inner">
             <button class="fr-sidemenu__btn fr-mt-1w" hidden aria-controls="fr-sidemenu-wrapper" aria-expanded="false">{{$t('Filter results')}}</button>
             <div class="fr-collapse" id="fr-sidemenu-wrapper">

@@ -8,13 +8,13 @@
 
         <div class="search_sidebar fr-col-sm-5 fr-col-md-4 fr-col-12" role="search">
 
-            <nav class="sidebar panel">
+            <nav class="sidebar panel" role="navigation">
                 <site-search v-ref:search action="{{ url_for('search.index') }}"
                     size="lg" placeholder="{{ _('Search') }}">
                 </site-search>
             </nav>
 
-            <nav class="sidebar panel">
+            <nav class="sidebar panel" role="navigation">
                 <!-- Groups -->
                 <div class="list-group">
                     {% for topic in g.featured_topics %}

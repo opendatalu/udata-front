@@ -1,6 +1,6 @@
 {% cache cache_duration, 'footer', g.lang_code|default(config.DEFAULT_LANGUAGE)|string,'-'.join((package_version('udata'), package_version('udata-front'))) %}
 {% include theme("participez/participez.html") %}
-<footer class="fr-footer" id="footer">
+<footer class="fr-footer" id="footer" role="contentinfo">
     <div class="fr-footer__top">
         <div class="fr-container">
             <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">

@@ -1,5 +1,5 @@
 {% from theme('macros/search.html') import site_search with context %}
-<nav class="navbar navbar-static-top navbar-subnav subnav-large subnav-topic {% if topic.color %}topic-{{topic.color}}{% endif %}">
+<nav class="navbar navbar-static-top navbar-subnav subnav-large subnav-topic {% if topic.color %}topic-{{topic.color}}{% endif %}" role="navigation">
     <div class="cover-topic"></div>
     <div class="fr-container">
 
@@ -10,11 +10,11 @@
 
         <div class="search_sidebar fr-col-sm-5 fr-col-md-4 fr-col-12" role="search">
 
-            <nav class="sidebar panel">
+            <nav class="sidebar panel" role="navigation">
                 {{ site_search(size='lg') }}
             </nav>
 
-            <nav class="sidebar panel collapse subnav-collapse">
+            <nav class="sidebar panel collapse subnav-collapse" role="navigation">
                 <!-- Groups -->
                 <div class="list-group">
                     {% for topic in g.featured_topics %}

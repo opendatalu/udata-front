@@ -15,7 +15,7 @@
 {% endblock %}
 {% endif %}
 
-<header class="fr-header">
+<header class="fr-header" role="banner">
     <div class="fr-header__body">
         <div class="fr-container">
             <!--[if lte IE 8]>
@@ -201,7 +201,7 @@
             </ul>
 
             <div class="fr-header__menu-links"></div>
-            <nav class="fr-nav" id="navigation" aria-label="{{ _('Main Menu') }}">
+            <nav class="fr-nav" id="navigation" aria-label="{{ _('Main Menu') }}" role="navigation">
                 <ul class="fr-nav__list">
                     {% for item in current_theme.menu %}
                         {% set active = is_current_endpoint(request, item) %}
