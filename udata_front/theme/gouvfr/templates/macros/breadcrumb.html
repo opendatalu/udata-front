@@ -7,11 +7,11 @@
     <div class="fr-container">
         <div class="fr-grid-row">
             {% if tpl.breadcrumb_bar and tpl.breadcrumb_bar() %}
-            <div class="left-bar fr-col-12 col-lg-9" role="navigation" aria-label="{{ _t('Breadcrumb') }}">
+            <div class="left-bar fr-col-12 col-lg-9" role="navigation" aria-label="{{ _('Breadcrumb') }}">
                 {{ tpl.breadcrumb_bar() }}
             </div>
             {% elif tpl.breadcrumb and tpl.breadcrumb() %}
-            <ol class="breadcrumbs fr-col-12 col-lg-9" role="navigation" aria-label="{{ _t('Breadcrumb') }}">
+            <ol class="breadcrumbs fr-col-12 col-lg-9" role="navigation" aria-label="{{ _('Breadcrumb') }}">
                 <li>
                     <a href="{{ url_for('site.home') }}" title="{{ _('Home') }}">
                         {{ _('Home') }}
