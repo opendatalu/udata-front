@@ -17,34 +17,45 @@
             <div class="fr-col-12 fr-col-lg-5">
                 <div>                    
                     <h2 class="as-h4">{{ _('Featured topics') }}</h2>                  
-                    <a href="{{ url_for('gouvfr.show_page', slug='topics/geospatial') }}"
-                        class="btn-venti fr-my-2w bg-blue-400">
-                        <strong>{{ _('Geospatial data') }}</strong>
-                    </a>
-                    <a href="{{ url_for('gouvfr.show_page', slug='topics/earth-observation-environment') }}"
+                    <ul>
+                    <li>                    
+                        <a href="{{ url_for('gouvfr.show_page', slug='topics/geospatial') }}"
+                                class="btn-venti fr-my-2w bg-blue-400">
+                                <strong>{{ _('Geospatial data') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('gouvfr.show_page', slug='topics/earth-observation-environment') }}"
                         class="btn-venti fr-my-2w bg-blue-400">
                         <strong>{{ _('Earth observation and environment') }}</strong>
-                    </a>
-                    <a href="{{ url_for('gouvfr.show_page', slug='topics/meteo') }}"
-                        class="btn-venti fr-my-2w bg-blue-400">
-                        <strong>{{ _('Meteorological data') }}</strong>
-                    </a>
-                    <a href="{{ url_for('gouvfr.show_page', slug='topics/statistics') }}"
-                        class="btn-venti fr-my-2w bg-blue-400">
-                        <strong>{{ _('Statistics') }}</strong>
-                    </a>
-                    <a href="{{ url_for('gouvfr.show_page', slug='topics/mobility') }}"
-                        class="btn-venti fr-my-2w bg-blue-400">
-                        <strong>{{ _('Mobility') }}</strong>
-                    </a>                                                                                         
-                    <div class="fr-grid-row justify-center fr-mt-2w">
-                        <a
-                            href="{{ url_for('gouvfr.show_page', slug='thematiques-a-la-une') }}"
-                            class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line fr-btn--icon-right"
-                        >
-                            {{ _('All featured topics') }}
                         </a>
-                    </div>
+                    </li>
+                        <a href="{{ url_for('gouvfr.show_page', slug='topics/meteo') }}"
+                            class="btn-venti fr-my-2w bg-blue-400">
+                            <strong>{{ _('Meteorological data') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('gouvfr.show_page', slug='topics/statistics') }}"
+                            class="btn-venti fr-my-2w bg-blue-400">
+                            <strong>{{ _('Statistics') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('gouvfr.show_page', slug='topics/mobility') }}"
+                            class="btn-venti fr-my-2w bg-blue-400">
+                            <strong>{{ _('Mobility') }}</strong>
+                        </a>
+                    </li>
+                    <li class="fr-grid-row justify-center fr-mt-2w">
+                            <a
+                                href="{{ url_for('gouvfr.show_page', slug='thematiques-a-la-une') }}"
+                                class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line fr-btn--icon-right"
+                            >
+                                {{ _('All featured topics') }}
+                            </a>
+                    </li>
+                    </ul>          
                 </div>
             </div>
             <div class="fr-col-12 fr-col-offset-lg-1 fr-col-lg-6">
@@ -83,14 +94,14 @@
     <div class="fr-container fr-py-md-7w fr-py-2w">
         <div class="bar fr-p-9v">
             <h2 class="as-h3">data.public.lu {{ _('is') }}</h2>
-            <div class="fr-grid-row justify-between fr-mt-md-9v fr-mt-2w">
+            <ul class="fr-grid-row justify-between fr-mt-md-9v fr-mt-2w">
                 {% for (label, metric) in metrics %}
-                <div class="filet fr-my-1v fr-my-md-0">
+                <li class="filet fr-my-1v fr-my-md-0">
                     <div class="fs-hg f-bold text-grey-400">{{ current_site.metrics[metric]|format_number }}</div>
                     <span class="text-grey-400">{{ label }}</span>
-                </div>
+                </li>
                 {% endfor %}
-            </div>
+            </ul>
         </div>
     </div>
 </section>
