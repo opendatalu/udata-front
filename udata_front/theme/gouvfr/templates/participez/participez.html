@@ -5,8 +5,7 @@
                 <h2 class="fr-h2 text-white fr-mb-2w">{{ _('Participate') }}</h2>
             </div>
             {% if not read_only_mode %}
-            <div class="fr-col-12 fr-col-sm-6 fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-                <ul>
+            <ul class="fr-col-12 fr-col-sm-6 fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
                 <li class="fr-col-12 fr-col-lg-6">
                     <a
                         href="{{ url_for('admin.index', path='dataset/new') }}"
@@ -23,8 +22,7 @@
                         {{ _('Publish a reuse') }}
                     </a>
                 </li>
-                </ul>
-            </div>
+            </ul>
             {% endif %}
         </div>
     </div>
