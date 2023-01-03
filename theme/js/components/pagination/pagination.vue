@@ -51,7 +51,7 @@ export default {
 -->
 
 <template>
-  <nav class="fr-pagination fr-pagination--centered" aria-label="Pagination" role="navigation">
+  <nav class="fr-pagination fr-pagination--centered" aria-label="Pages" role="navigation">
     <ul class="fr-pagination__list">
       <li>
         <a
