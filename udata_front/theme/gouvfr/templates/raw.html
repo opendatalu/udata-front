@@ -31,7 +31,9 @@
 </head>
 
 <body class="{{body_class}} theme-{{current_theme.variant}}">
-    <a class="skiplink" href="#skipdest">{{ _('Skip to content') }}</a>
+    <nav role="navigation"  aria-label="{{ _t('Quick access') }}">
+        <a class="skiplink" href="#skipdest">{{ _('Skip to content') }}</a>
+    </nav>
     <div id="govbar" class="govbar">
         <span class="govbar-logo" lang="fr" title="Gouvernement du Grand-Duché de Luxembourg">
             <img src="//cdn.public.lu/pictures/logos/gov/gov-light.png" srcset="//cdn.public.lu/pictures/logos/gov/gov-light-hdpi.png 1.5x,

@@ -2084,6 +2084,11 @@ msgstr ""
 msgid "Open data roadmap"
 msgstr ""
 
+msgid "Quick access"
+msgstr ""
 
 msgid "Skip to content"
+msgstr ""
+
+msgid "Breadcrumb"
 msgstr ""
