@@ -105,8 +105,8 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="w-100 fr-grid-row  fr-grid-row--middle justify-between">
-                <p class="fr-col-auto fr-my-0" role="status">{{ _('%(result)s results', result=reuses.total) }}</p>
+            <div class="w-100 fr-grid-row  fr-grid-row--middle justify-between" role="status">
+                <h2 class="fr-col-auto fr-my-0 as-p">{{ _('%(result)s results', result=reuses.total) }}</h2>
                 {{sort_search(reuses, sorts)}}
             </div>
         </form>
