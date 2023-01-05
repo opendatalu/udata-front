@@ -132,10 +132,8 @@
                             aria-controls="{{tab_id}}"
                             class="fr-tag"
                             {% if loop.first %}
-                                aria-pressed="true"
+                                aria-current="page"
                                 aria-selected="true"
-                            {% else %}
-                                aria-pressed="false"
                             {% endif %}
                         >
                             {{ label }}
@@ -192,10 +190,8 @@
                             aria-controls="{{tab_id}}"
                             class="fr-tag"
                             {% if loop.first %}
-                                aria-pressed="true"
+                                aria-current="page"
                                 aria-selected="true"
-                            {% else %}
-                                aria-pressed="false"
                             {% endif %}
                         >
                             {{ label }}

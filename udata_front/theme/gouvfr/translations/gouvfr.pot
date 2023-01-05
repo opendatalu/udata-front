@@ -2092,3 +2092,6 @@ msgstr ""
 
 msgid "Breadcrumb"
 msgstr ""
+
+msgid "Lookup"
+msgstr ""
