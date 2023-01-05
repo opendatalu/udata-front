@@ -1,3 +1,18 @@
+diff --git a/node_modules/@gouvfr/dsfr/dist/component/header/header.module.js b/node_modules/@gouvfr/dsfr/dist/component/header/header.module.js
+index 8336913..c06cb70 100644
+--- a/node_modules/@gouvfr/dsfr/dist/component/header/header.module.js
++++ b/node_modules/@gouvfr/dsfr/dist/component/header/header.module.js
+@@ -71,7 +71,9 @@ class HeaderModal extends api.core.Instance {
+       id = button.id || id;
+       if (button.isPrimary && id) break;
+     }
+-    this.setAttribute('aria-labelledby', id);
++    if(id) {
++      this.setAttribute('aria-labelledby', id);
++    }
+   }
+ 
+   unqualify () {
 diff --git a/node_modules/@gouvfr/dsfr/src/component/header/script/header/header-modal.js b/node_modules/@gouvfr/dsfr/src/component/header/script/header/header-modal.js
 index c6fd1d4..15dc1e7 100644
 --- a/node_modules/@gouvfr/dsfr/src/component/header/script/header/header-modal.js
