@@ -1,8 +1,8 @@
 diff --git a/node_modules/@conciergerie.dev/select-a11y/dist/module.js b/node_modules/@conciergerie.dev/select-a11y/dist/module.js
-index 9327527..a58f89e 100644
+index 9327527..7dbd399 100644
 --- a/node_modules/@conciergerie.dev/select-a11y/dist/module.js
 +++ b/node_modules/@conciergerie.dev/select-a11y/dist/module.js
-@@ -125,6 +125,33 @@ class $5a3b80354f588438$var$Select {
+@@ -125,6 +125,35 @@ class $5a3b80354f588438$var$Select {
          this.wrap.addEventListener('keydown', this._handleKeyboard);
          document.addEventListener('blur', this._handleFocus, true);
          if (this.el.form) this.el.form.addEventListener('reset', this._handleReset);
@@ -12,31 +12,33 @@ index 9327527..a58f89e 100644
 +         * Added code which transmits keys from the list to the input and updates the results
 +         */
 +        
++        const self = this;
++
 +        this.list.addEventListener("keypress", function (event) {
 +            if(event.charCode) {
-+                this.input.value = this.input.value + String.fromCharCode(event.charCode) 
-+                this._handleInput()
++                self.input.value = self.input.value + String.fromCharCode(event.charCode) 
++                self._handleInput()
 +            }
 +        });
 +        
 +        this.list.addEventListener("keydown", function (event) {
 +            if(event.keyCode === 8) {
 +                // Backspace
-+                if(this.input.value.length > 0) {
-+                    this.input.value = this.input.value.substring(0, this.input.value.length - 1)
-+                    this._handleInput()
++                if(self.input.value.length > 0) {
++                    self.input.value = self.input.value.substring(0, self.input.value.length - 1)
++                    self._handleInput()
 +                }
 +            } else if(event.keyCode == 32) {
 +                // Space      
-+                this.input.value = this.input.value + " "
-+                this._handleInput()
++                self.input.value = self.input.value + " "
++                self._handleInput()
 +            }
 +        });
 +
      }
      /**
     * Update texts with new texts
-@@ -366,7 +393,7 @@ class $5a3b80354f588438$var$Select {
+@@ -366,7 +395,7 @@ class $5a3b80354f588438$var$Select {
              this._moveIndex(-1);
              return;
          }
