@@ -1,56 +1,95 @@
-/*
----
-name: Tabs JS
-category: 5 - Interactions
----
+/**
+ * Refacto and improvement of original code to handle tabs.
+ * Added keyboard support.
+ * JFK
+ *
+ * Setup:
+ * 1) Button container has "data-tabs" attribute
+ * 2) Buttons have role="tab" attribute and aria-controls="xxx"
+ * 3) Tabs have id "xxx"
+ */
 
-# Interaction
-Tabs are a two parts system : tabs, with a tag shape (or any style you'd like) buttons, and tabpanel, that the buttons will show.
-Only one tabpanel can be shown at a time, and toggling a new tabpanel will make the previous active tabpanel no longer visible.
-You only need to specify an `id` in the `aria-controls` attribute of the button, then add this `id` to the tabpanel.
+const chooseTab = (buttons, button) => {
+  const previouslyActive = Array.from(buttons).find(
+    (itButton) => itButton.getAttribute("aria-selected") === "true"
+  );
+  if (previouslyActive) {
+    previouslyActive.setAttribute("aria-selected", "false");
+    previouslyActive.removeAttribute("aria-current");
+    document
+      .getElementById(previouslyActive.getAttribute("aria-controls"))
+      .classList.remove("fr-unhidden");
+  }
 
-Tip : don't forget to add both `aria-pressed="true"` and `aria-selected="true"`attributes to the default-active tab and `fr-unhidden` to the tabpanel.
-Tip : if the `aria-controls` is invalid (no div with specified `id`), the tabs will kinda crash. Don't do that.
+  button.setAttribute("aria-selected", "true");
+  button.setAttribute("aria-current", "page");
+  button.focus();
+  const tab = document.getElementById(button.getAttribute("aria-controls"));
+  tab.classList.add("fr-unhidden");
+};
 
-```tabs-interactive.html
-<nav data-tabs>
-    <button class="fr-tag" aria-controls="tab-content-1" role="tab" aria-pressed="true" aria-selected="true">Jeux de données</button>
-    <button class="fr-tag" aria-controls="tab-content-2" role="tab">Réutilisations</button>
-</nav>
-<ul>
-  <li class="fr-hidden fr-unhidden" role="tabpanel"id="tab-content-1">Tab content 1 (jeux de données)</li>
-  <li class="fr-hidden" id="tab-content-2">Tab content 2 (reuse)</li>
-</ul>
-```
-*/
+const chooseNextTab = (buttons, idx, backwards = false) => {
+  const numButtons = buttons.length;
+  if (backwards) {
+    idx -= 1;
+    if (idx < 0) {
+      idx = numButtons - 1;
+    }
+  } else {
+    idx = (idx + 1) % numButtons;
+  }
+  console.log("New idx", idx);
+  chooseTab(buttons, buttons[idx]);
+};
 
-export default (() => {
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll("[data-tabs]");
-    tabs.forEach((tab) => {
-      const tabsButtons = tab.querySelectorAll("[role=tab]");
-      tabsButtons.forEach((tabButton) => {
-        tabButton.addEventListener("click", (el) => {
-          el.preventDefault();
+const keyboardListener = (event, buttons) => {
+  const button = event.target;
+  var idx = null;
+  for (var i = 0; i < buttons.length; i++) {
+    if (
+      buttons[i].getAttribute("aria-controls") ==
+      button.getAttribute("aria-controls")
+    ) {
+      idx = i;
+      break;
+    }
+  }
 
-          const previouslyActive = Array.from(tabsButtons).find((tab) =>
-            tab.getAttribute("aria-selected") === "true"
-          );
-          if (previouslyActive) {
-            previouslyActive.setAttribute("aria-selected", "false");
-            previouslyActive.removeAttribute("aria-current");
-            document
-              .getElementById(previouslyActive.getAttribute("aria-controls"))
-              .classList.remove("fr-unhidden");
-          }
+  switch (event.key) {
+    case "ArrowLeft":
+      console.log("ArrowLeft", idx);
+      chooseNextTab(buttons, idx, true);
+      break;
 
-          el.target.setAttribute("aria-selected", "true");
-          el.target.setAttribute("aria-current", "page");
-          document
-            .getElementById(el.target.getAttribute("aria-controls"))
-            .classList.add("fr-unhidden");
-        });
-      });
+    case "ArrowRight":
+      console.log("ArrowRight", idx);
+      chooseNextTab(buttons, idx);
+      break;
+  }
+};
+
+const loadComponent = (component) => {
+  const buttons = component.querySelectorAll("[role=tab]");
+  buttons.forEach((button) => {
+    button.addEventListener("keydown", (event) => {
+      keyboardListener(event, buttons);
+    });
+
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const button = event.target;
+      chooseTab(buttons, button);
     });
   });
-})();
+};
+
+const loadAllComponents = () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const components = document.querySelectorAll("[data-tabs]");
+    components.forEach((component) => {
+      loadComponent(component);
+    });
+  });
+};
+
+export default loadAllComponents();

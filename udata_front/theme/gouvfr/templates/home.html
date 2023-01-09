@@ -121,14 +121,15 @@
         {# Dataset tabs #}
         <div class="fr-grid-row fr-grid-row--gutters justify-between">
             <div class="fr-col-auto">
-                <h2>{{ _('Datasets') }}</h2>
+                <h2 id="dataset_tablist_title">{{ _('Datasets') }}</h2>
             </div>
             <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-auto">
-                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist navigation">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist navigation" aria-labelledby="dataset_tablist_title">
                         {% for tab_id, label, _, _ in dataset_tabs %}
                         <button
                             role="tab"
+                            id="tab-datasets-{{tab-id}}"
                             aria-controls="{{tab_id}}"
                             class="fr-tag"
                             {% if loop.first %}
@@ -152,7 +153,7 @@
             </div>
         </div>
         {% for tab_id, label, datasets, kwargs in dataset_tabs  %}
-        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" id={{tab_id}}>
+        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" id={{tab_id}} aria-labelledby="tab-datasets-{{tab_id}}">
             <div class="fr-grid-row fr-pt-md-9v fr-pt-2w">
                 {% for dataset in datasets %}
                 <div class="fr-col-12 fr-col-lg-4">{% include theme('dataset/card.html') %}
@@ -179,14 +180,15 @@
     <div class="fr-container">
         <div class="fr-grid-row fr-grid-row--gutters justify-between">
             <div class="fr-col-auto">
-                <h2>{{ _('Data reuses') }}</h2>
+                <h2 id="reuses_tablist_title">{{ _('Data reuses') }}</h2>
             </div>
             <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-auto">
-                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist navigation">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist navigation" aria-labelledby="reuses_tablist_title">
                         {% for tab_id, label, _, _ in reuses_tabs %}
                         <button
                             role="tab"
+                            id="tab-reuses-{{tab_id}}"
                             aria-controls="{{tab_id}}"
                             class="fr-tag"
                             {% if loop.first %}
@@ -213,7 +215,7 @@
     </div>
     <div class="fr-container">
         {% for tab_id, label, reuses, kwargs in reuses_tabs  %}
-        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" id="{{tab_id}}">
+        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" id="{{tab_id}}" aria-labelledby="tab-reuses-{{tab_id}}">
             <div class="fr-grid-row fr-grid-row--gutters fr-pt-2w fr-pt-md-9v">
                 {% for reuse in reuses %}
                 <div class="fr-col-md-4 fr-col-sm-6 fr-col-12 fr-mb-3v">
