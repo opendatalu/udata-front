@@ -1,8 +1,16 @@
 diff --git a/node_modules/@conciergerie.dev/select-a11y/dist/module.js b/node_modules/@conciergerie.dev/select-a11y/dist/module.js
-index 9327527..dccd6c1 100644
+index 9327527..764cb71 100644
 --- a/node_modules/@conciergerie.dev/select-a11y/dist/module.js
 +++ b/node_modules/@conciergerie.dev/select-a11y/dist/module.js
-@@ -72,6 +72,7 @@ class $5a3b80354f588438$var$Select {
+@@ -57,6 +57,7 @@ class $5a3b80354f588438$var$Select {
+         const passedOptions = Object.assign({}, options);
+         const textOptions = Object.assign({}, $5a3b80354f588438$var$text, passedOptions.text);
+         delete passedOptions.text;
++        this.isTyping = false;
+         this._defaultSearch = this._defaultSearch.bind(this);
+         this._options = Object.assign({
+             text: textOptions,
+@@ -72,6 +73,7 @@ class $5a3b80354f588438$var$Select {
          this._handleClear = this._handleClear.bind(this);
          this._handleReset = this._handleReset.bind(this);
          this._handleSuggestionClick = this._handleSuggestionClick.bind(this);
@@ -10,7 +18,7 @@ index 9327527..dccd6c1 100644
          this._positionCursor = this._positionCursor.bind(this);
          this._removeOption = this._removeOption.bind(this);
          this.setText = this.setText.bind(this);
-@@ -122,6 +123,8 @@ class $5a3b80354f588438$var$Select {
+@@ -122,6 +124,8 @@ class $5a3b80354f588438$var$Select {
          this.input.addEventListener('input', this._handleInput);
          this.input.addEventListener('focus', this._positionCursor, true);
          this.list.addEventListener('click', this._handleSuggestionClick);
@@ -19,23 +27,24 @@ index 9327527..dccd6c1 100644
          this.wrap.addEventListener('keydown', this._handleKeyboard);
          document.addEventListener('blur', this._handleFocus, true);
          if (this.el.form) this.el.form.addEventListener('reset', this._handleReset);
-@@ -301,8 +304,13 @@ class $5a3b80354f588438$var$Select {
+@@ -301,8 +305,14 @@ class $5a3b80354f588438$var$Select {
          if (!this.open) return;
          clearTimeout(this._focusTimeout);
          this._focusTimeout = setTimeout(()=>{
 -            if (!this.overlay.contains(document.activeElement) && this.button !== document.activeElement) this._toggleOverlay(false, document.activeElement === document.body);
 -            else if (document.activeElement === this.input) // reset the focus index
 +            if (!this.overlay.contains(document.activeElement) && this.button !== document.activeElement) {
-+                // When we type, for some reason we lose the focus from the option.
-+                // Besides, the original code, closes the suggestions. Original code:
-+                // this._toggleOverlay(false, document.activeElement === document.body); 
-+                // Instead, we set the focus to the input box
-+                this.input.focus();
++                if(this.isTyping) {
++                    this.isTyping = false;
++                    this.input.focus();
++                } else {
++                    this._toggleOverlay(false, document.activeElement === document.body);
++                }
 +            } else if (document.activeElement === this.input) // reset the focus index
              this.focusIndex = null;
              else {
                  const optionIndex = this.suggestions.indexOf(document.activeElement);
-@@ -333,6 +341,36 @@ class $5a3b80354f588438$var$Select {
+@@ -333,6 +343,40 @@ class $5a3b80354f588438$var$Select {
          const shouldClose = this.multiple && event.metaKey ? false : true;
          this._toggleSelection(optionIndex, shouldClose);
      }
@@ -49,30 +58,34 @@ index 9327527..dccd6c1 100644
 +            return;
 +        }
 +
-+        // From keypress
-+        if(event.charCode) {
-+            // Printable chars
-+            this.input.value = this.input.value + String.fromCharCode(event.charCode) 
-+            this._handleInput()
-+        }
-+
-+        // From keydown
-+        else if(event.keyCode === 8) {
-+            // Backspace
-+            if(this.input.value.length > 0) {
-+                this.input.value = this.input.value.substring(0, this.input.value.length - 1)
++        if(event.key) {
++            // For some hard to find reason (inside _handleInput->_fillSuggestions), we will lose the focus to body element.
++            // After losing the focus to the body element, the "blur" listener would toggle off the overlay.
++            // A solution would be temporarily remove the blur listener and reset it with a timeout.
++            // Another solution is adding this flag that we will read on the blur listener.
++            this.isTyping = true; 
++            
++            // From keypress
++            if(event.key.length === 1) {
++                // Printable chars, including space
++                this.input.value = this.input.value + event.key
 +                this._handleInput()
 +            }
-+        } else if(event.keyCode == 32) {
-+            // Space      
-+            this.input.value = this.input.value + " "
-+            this._handleInput()
++    
++            // From keydown
++            else if(event.key === "Backspace") {
++                if(this.input.value.length > 0) {
++                    this.input.value = this.input.value.substring(0, this.input.value.length - 1)
++                    this._handleInput()
++                }
++            }
 +        }
++
 +    }
      _handleInput() {
          // prevent event fireing on focus and blur
          if (this.search === this.input.value) return;
-@@ -366,7 +404,7 @@ class $5a3b80354f588438$var$Select {
+@@ -366,7 +410,7 @@ class $5a3b80354f588438$var$Select {
              this._moveIndex(-1);
              return;
          }
