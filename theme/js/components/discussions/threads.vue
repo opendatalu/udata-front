@@ -19,7 +19,10 @@ Discussions allow users to interact with others.
       </div>
       <div class="fr-col-12 fr-col-sm-6 fr-col-md-5 fr-col-lg-4 fr-grid-row fr-grid-row--bottom flex-direction-column justify-between" v-if="!threadFromURL">
         <ThreadsCreateButton class="fr-col--bottom" :onClick="startThreadWithoutScroll"/>
-        <div class="fr-mt-5v">
+        <div class="fr-mt-5v" style="display:flex; align-items:center">
+          <label for="sortBy" style="min-width:78px;margin-right:8px">
+            {{ _('Sort by') }}
+          </label>
           <select
           name="sortBy"
           id="sortBy"
