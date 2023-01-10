@@ -17,6 +17,7 @@ It's an input working like a [combobox](https://www.w3.org/TR/wai-aria-practices
     <input
       class="fr-input fr-col"
       :placeholder="$t('Search')"
+      :title="$t('Search')"
       type="search"
       ref="input"
       autocomplete="off"
