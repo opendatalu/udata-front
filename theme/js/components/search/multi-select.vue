@@ -49,7 +49,10 @@ Callback:
 
 <template>
   <div class="multiselect w-100" ref="container" :data-selected="!!selected">
-    <label :for="id" :title="explanation">{{placeholder}} <span v-if="explanation" class="fr-icon-information-line" aria-hidden="true"></span></label>
+    <label :for="id" :title="explanation">{{placeholder}} 
+      <span v-if="explanation" class="fr-icon-information-line" aria-hidden="true"></span>
+      <span v-if="explanation" class="sr-only">{{explanation}}</span>
+    </label>
     <select
       class="multiselect__input"
       :id="id"

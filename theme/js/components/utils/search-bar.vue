@@ -5,6 +5,7 @@
         {{ $t('Search resources') }}
       </label>
       <input
+        :title="$t('Search resources')"
         class="fr-input"
         placeholder="Rechercher"
         type="search"
