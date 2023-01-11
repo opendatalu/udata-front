@@ -27,6 +27,8 @@ import i18n from "./plugins/i18n";
 import bodyClass from "./plugins/bodyClass";
 import filters from "./plugins/filters";
 
+import PatchTitle from "./patches/title_update"
+
 import InitSentry from "./sentry";
 
 /**
