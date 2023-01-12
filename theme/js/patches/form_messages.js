@@ -80,8 +80,13 @@ function setDOMError(input_id, error) {
   error_msg.classList.add("lu-error-msg", "fr-error-text", "fr-mt-1v");
   error_msg.textContent = error;
   error_msg.setAttribute("id", error_element_id);
-  input.after(error_msg);
 
+  if (input.getAttribute("type") == "checkbox") {
+    input.parentElement.after(error_msg);
+  } else {
+    input.after(error_msg);
+  }
+  
   input.setAttribute("aria-invalid", "true");
   input.setAttribute("aria-describedby", error_element_id);
 }
