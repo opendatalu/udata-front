@@ -144,9 +144,7 @@ const DATASET_FILTERS =
     ? ["organization", "tag", "format", "license", "geozone", "granularity"]
     : null;
 
-const SEARCH_INPUT = CURRENT_PAGE
-  ? document.querySelector(".fr-search-bar > input.fr-input[type=search]")
-  : null;
+var SEARCH_INPUT = null; // To be loaded on DOM ready
 
 var url_query_string = null; // This one is polled with an interval
 var search_input_query = null; // "q" only exists in datasets page, therefore we need to bind the input
@@ -155,6 +153,9 @@ var search_input_query = null; // "q" only exists in datasets page, therefore we
  * Main method
  */
 function startTitleUpdate() {
+  SEARCH_INPUT = document.querySelector(
+    ".fr-search-bar > input.fr-input[type=search]"
+  );
   setInterval(function () {
     if (
       window.location.search !== url_query_string ||
