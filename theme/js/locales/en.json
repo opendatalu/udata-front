@@ -137,5 +137,6 @@
   "Autre": "Other",
   "validation_not_empty": "This field must be filled.",
   "validation_passwords": "The passwords do not match.",
-  "validation_email": "An e-mail address is required. For instance: {example_email}"
+  "validation_email": "An e-mail address is required. For instance: {example_email}.",
+  "validation_conditions": "You have to accept the conditions to proceed."
 }

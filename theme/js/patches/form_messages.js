@@ -46,6 +46,14 @@ class Validator {
     return true;
   }
 
+  validateChecked(input) {
+    if (!input.checked) {
+      this.errors[input.getAttribute("id")] = t("validation_conditions");
+      return false;
+    }
+    return true;
+  }
+
   getErrors() {
     return this.errors;
   }
@@ -80,12 +88,13 @@ function setDOMError(input_id, error) {
 
 function loadDOMElements() {
   FORM = document.querySelector("form.form");
-  EMAIL_INPUT = document.getElementById("email");
-  PASSWORD_INPUT = document.getElementById("password");
+  EMAIL_INPUT = FORM.getElementById("email");
+  PASSWORD_INPUT = FORM.getElementById("password");
   if (CURRENT_PAGE === "/register") {
-    PASSWORD_CONFIRM_INPUT = document.getElementById("password_confirm");
-    FIRST_NAME_INPUT = document.getElementById("first_name-id");
-    LAST_NAME_INPUT = document.getElementById("last_name-id");
+    PASSWORD_CONFIRM_INPUT = FORM.getElementById("password_confirm");
+    FIRST_NAME_INPUT = FORM.getElementById("first_name-id");
+    LAST_NAME_INPUT = FORM.getElementById("last_name-id");
+    READ_CONDITIONS_INPUT = FORM.getElementById("accept_conditions");
   }
 }
 
@@ -96,6 +105,7 @@ function disableHTML5Validations() {
     PASSWORD_CONFIRM_INPUT.removeAttribute("required");
     FIRST_NAME_INPUT.removeAttribute("required");
     LAST_NAME_INPUT.removeAttribute("required");
+    READ_CONDITIONS_INPUT.removeAttribute("required");
   }
 
   // type=email is HTML5 and it includes validation too that prevents our validation
@@ -115,6 +125,7 @@ let PASSWORD_INPUT = null;
 let PASSWORD_CONFIRM_INPUT = null;
 let FIRST_NAME_INPUT = null;
 let LAST_NAME_INPUT = null;
+let READ_CONDITIONS_INPUT = null;
 
 /**
  * Main method
@@ -136,6 +147,7 @@ function callback(event) {
     }
     validator.validateNotEmpty(FIRST_NAME_INPUT);
     validator.validateNotEmpty(LAST_NAME_INPUT);
+    validator.validateChecked(READ_CONDITIONS_INPUT);
   }
 
   const errors = validator.getErrors();
