@@ -6,52 +6,16 @@
  * - The filters of the page datasets and reuses
  */
 
+import {
+  getCurrentPage,
+  getQueryStringParam,
+  getMetaTagValue,
+  addOnLoadListener,
+} from "./helpers";
+
 /**
  * Functions
  */
-
-function getCurrentPage() {
-  for (var i = 0; i < PAGES.length; i++) {
-    if (window.location.href.includes(PAGES[i])) {
-      return PAGES[i];
-    }
-  }
-  return null;
-}
-
-function getQueryStringParam(p, search) {
-  if (search) {
-    search = search.split("?").pop();
-  } else {
-    search = window.location.search;
-  }
-
-  const params = new Proxy(new URLSearchParams(search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
-  return params[p];
-}
-
-function decodeParam(encoded) {
-  if (!encoded) {
-    return "";
-  }
-  return decodeURIComponent(encoded.replaceAll("+", " "));
-}
-
-function getMetaTagValue(metaName) {
-  const metas = document.getElementsByTagName("meta");
-  for (let i = 0; i < metas.length; i++) {
-    if (
-      metas[i].getAttribute("name") === metaName ||
-      metas[i].getAttribute("property") === metaName
-    ) {
-      return metas[i].getAttribute("content");
-    }
-  }
-  return "";
-}
-
 function getFilterNumber(qs_name) {
   const idx = DATASET_FILTERS.indexOf(qs_name);
   if (idx !== -1) {
@@ -78,6 +42,21 @@ function getFilterValue(qs_name) {
   return document
     .getElementById("multiselect-" + idx + "-button")
     .textContent.trim();
+}
+
+function getReuseFilters() {
+  var key_to_label = {};
+  const ul = document.querySelector(".fr-container ul.fr-tags-group");
+  const rows = ul.querySelectorAll("li > a");
+  for (var i = 0; i < rows.length; i++) {
+    let href = rows[i].getAttribute("href");
+    let label = rows[i].textContent.trim();
+    let key = getQueryStringParam("topic", href);
+    if (key) {
+      key_to_label[key] = label;
+    }
+  }
+  return key_to_label;
 }
 
 function updateTitle() {
@@ -117,26 +96,11 @@ function updateTitle() {
   document.title = title_parts.join(" - ");
 }
 
-function getReuseFilters() {
-  var key_to_label = {};
-  const ul = document.querySelector(".fr-container ul.fr-tags-group");
-  const rows = ul.querySelectorAll("li > a");
-  for (var i = 0; i < rows.length; i++) {
-    let href = rows[i].getAttribute("href");
-    let label = rows[i].textContent.trim();
-    let key = getQueryStringParam("topic", href);
-    if (key) {
-      key_to_label[key] = label;
-    }
-  }
-  return key_to_label;
-}
-
 /**
  * Constats & variables
  */
-const PAGES = ["/reuses", "/datasets", "/organizations"];
-const CURRENT_PAGE = getCurrentPage();
+const AVAILABLE_PAGES = ["/reuses", "/datasets", "/organizations"];
+const CURRENT_PAGE = getCurrentPage(AVAILABLE_PAGES);
 const BASE_TITLE = CURRENT_PAGE ? getMetaTagValue("og:title") : null;
 const REUSE_FILTERS = CURRENT_PAGE === "/reuses" ? getReuseFilters() : null;
 const DATASET_FILTERS =
@@ -170,12 +134,6 @@ function startTitleUpdate() {
 
 export default (function () {
   if (CURRENT_PAGE) {
-    if (document.readyState === "complete") {
-      startTitleUpdate();
-    } else {
-      window.addEventListener("DOMContentLoaded", () => {
-        startTitleUpdate();
-      });
-    }
+    addOnLoadListener(startTitleUpdate);
   }
 })();

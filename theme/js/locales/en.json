@@ -134,5 +134,8 @@
   "{n} reuses": "{n} reuses | {n} reuse | {n} reuses",
   "Grande region": "Greater Region",
   "Point d'Intérêt": "Point of Interest",
-  "Autre": "Other"
+  "Autre": "Other",
+  "validation_not_empty": "This field must be filled.",
+  "validation_passwords": "The passwords do not match.",
+  "validation_email": "An e-mail address is required. For instance \"john.doe@gmail.com\"."
 }
