@@ -18,7 +18,7 @@ class Validator {
 
   validateNotEmpty(input) {
     if (!input.value) {
-      this.errors[input] = t("validation_not_empty");
+      this.errors[input.getAttribute("id")] = t("validation_not_empty");
       return false;
     }
     return true;
@@ -30,7 +30,7 @@ class Validator {
         email.value
       )
     ) {
-      this.errors[input] = t("validation_email");
+      this.errors[input.getAttribute("id")] = t("validation_email");
       return false;
     }
     return true;
@@ -38,7 +38,7 @@ class Validator {
 
   validatePasswordMatch(input1, input2) {
     if (input1.value !== input2.value) {
-      this.errors[input2] = t("validation_passwords");
+      this.errors[input2.getAttribute("id")] = t("validation_passwords");
     }
   }
 
@@ -60,19 +60,38 @@ function resetDOMErrors() {
   });
 }
 
-function setDOMError(input, error) {
-  const error_element_id = input.getAttribute("id") + "-error";
+function setDOMError(input_id, error) {
+  const input = document.getElementById(input_id);
+  const error_element_id = input_id + "-error";
 
-  let error_msg = document.createElement("div");
-  error_msg.classList.add("lu-error-msg");
+  let error_msg = document.createElement("p");
+  error_msg.classList.add("lu-error-msg", "fr-error-text", "fr-mt-1v");
   error_msg.textContent = error;
-  error_msg.style.color = "red";
-  error_msg.style.marginTop = "10px";
   error_msg.setAttribute("id", error_element_id);
   input.after(error_msg);
 
   input.setAttribute("aria-invalid", "true");
   input.setAttribute("aria-describedby", error_element_id);
+}
+
+function loadInputVars() {
+  EMAIL_INPUT = document.getElementById("email");
+  PASSWORD_INPUT = document.getElementById("password");
+  if (CURRENT_PAGE === "/register") {
+    PASSWORD_CONFIRM_INPUT = document.getElementById("password");
+    FIRST_NAME_INPUT = document.getElementById("first_name-id");
+    LAST_NAME_INPUT = document.getElementById("last_name-id");
+  }
+}
+
+function disableHTML5Validations() {
+  EMAIL_INPUT.removeAttribute("required");
+  PASSWORD_INPUT.removeAttribute("required");
+  if (PASSWORD_CONFIRM_INPUT) {
+    PASSWORD_CONFIRM_INPUT.removeAttribute("required");
+    FIRST_NAME_INPUT.removeAttribute("required");
+    LAST_NAME_INPUT.removeAttribute("required");
+  }
 }
 
 /**
@@ -82,48 +101,58 @@ const AVAILABLE_PAGES = ["/login", "/register"];
 const CURRENT_PAGE = getCurrentPage(AVAILABLE_PAGES);
 const FORM = CURRENT_PAGE ? document.querySelector("form.form") : null;
 
+// Loaded on DOM ready
+let EMAIL_INPUT = null;
+let PASSWORD_INPUT = null;
+let PASSWORD_CONFIRM_INPUT = null;
+let FIRST_NAME_INPUT = null;
+let LAST_NAME_INPUT = null;
+
 /**
  * Main method
  */
 
-function callback() {
+function callback(event) {
   resetDOMErrors();
 
   let validator = new Validator();
 
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
-
-  validator.validateNotEmpty(email) && validator.validateEmail(email);
+  validator.validateNotEmpty(EMAIL_INPUT) &&
+    validator.validateEmail(EMAIL_INPUT);
   validator.validateNotEmpty(password);
 
   if (CURRENT_PAGE === "/register") {
-    let password_confirm = document.getElementById("password");
-    let first_name = document.getElementById("first_name-id");
-    let last_name = document.getElementById("last_name-id");
-
-    validator.validateNotEmpty(password_confirm) &&
-      validator.validatePasswordMatch(password, password_confirm);
-    validator.validateNotEmpty(first_name);
-    validator.validateNotEmpty(last_name);
+    validator.validateNotEmpty(PASSWORD_CONFIRM_INPUT) &&
+      validator.validatePasswordMatch(PASSWORD_INPUT, PASSWORD_CONFIRM_INPUT);
+    validator.validateNotEmpty(FIRST_NAME_INPUT);
+    validator.validateNotEmpty(LAST_NAME_INPUT);
   }
 
-  validator.getErrors().forEach((input, error) => {
-    setDOMError(input, error);
-  });
+  const errors = validator.getErrors();
+  const error_keys = Object.keys(errors);
+
+  if (error_keys.length > 0) {
+    event.preventDefault();
+
+    error_keys.forEach((input_id) => {
+      setDOMError(input_id, errors[input_id]);
+    });
+  }
 }
 
-function bindSubmit() {
+function init() {
+  loadInputVars();
+  disableHTML5Validations();
   addSubmitListener(callback, FORM);
 }
 
 export default (function () {
   if (CURRENT_PAGE) {
     if (document.readyState === "complete") {
-      bindSubmit();
+      init();
     } else {
       window.addEventListener("DOMContentLoaded", () => {
-        bindSubmit();
+        init();
       });
     }
   }

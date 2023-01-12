@@ -135,7 +135,7 @@
   "Grande region": "Grande region",
   "Point d'intérêt": "Point d'intérêt",
   "Autre": "Autre",
-  "validation_not_empty": "Ce champ doit être rempli.",
+  "validation_not_empty": "Ce champ est obligatoire.",
   "validation_passwords": "Les mots de passe ne correspondent pas.",
   "validation_email": "Une addresse e-mail est nécessaire. Par example: \"john.doe@gmail.com\"."
 }
