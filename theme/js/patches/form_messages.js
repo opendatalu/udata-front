@@ -52,7 +52,7 @@ class Validator {
 function resetDOMErrors() {
   document.querySelectorAll(".lu-error-msg").forEach((el) => {
     // Remove aria labels from input
-    let input_id = el.getAttribute("aria-describedby").slice(0, -6); // Remove "-error"
+    let input_id = el.getAttribute("id").slice(0, -6); // Remove "-error"
     let input = document.getElementById(input_id);
     input.removeAttribute("aria-invalid");
     input.removeAttribute("aria-describedby");

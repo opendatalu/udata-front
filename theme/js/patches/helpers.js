@@ -54,12 +54,12 @@ function addSubmitListener(form, callback) {
   //   });
 }
 
-function addOnLoadListener(callback) {
+function addOnLoadListener(fnc) {
   if (document.readyState === "complete") {
-    callback();
+    fnc();
   } else {
     window.addEventListener("DOMContentLoaded", () => {
-      callback();
+      fnc();
     });
   }
 }
