@@ -88,13 +88,13 @@ function setDOMError(input_id, error) {
 
 function loadDOMElements() {
   FORM = document.querySelector("form.form");
-  EMAIL_INPUT = FORM.getElementById("email");
-  PASSWORD_INPUT = FORM.getElementById("password");
+  EMAIL_INPUT = document.getElementById("email");
+  PASSWORD_INPUT = document.getElementById("password");
   if (CURRENT_PAGE === "/register") {
-    PASSWORD_CONFIRM_INPUT = FORM.getElementById("password_confirm");
-    FIRST_NAME_INPUT = FORM.getElementById("first_name-id");
-    LAST_NAME_INPUT = FORM.getElementById("last_name-id");
-    READ_CONDITIONS_INPUT = FORM.getElementById("accept_conditions");
+    PASSWORD_CONFIRM_INPUT = document.getElementById("password_confirm");
+    FIRST_NAME_INPUT = document.getElementById("first_name-id");
+    LAST_NAME_INPUT = document.getElementById("last_name-id");
+    READ_CONDITIONS_INPUT = document.getElementById("accept_conditions");
   }
 }
 
