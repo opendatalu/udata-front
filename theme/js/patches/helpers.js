@@ -31,14 +31,27 @@ function getMetaTagValue(metaName) {
     }
   }
   return "";
-}
 
+}
 function addSubmitListener(form, callback) {
   if (form.addEventListener) {
     form.addEventListener("submit", callback, false); //Modern browsers
   } else if (form.attachEvent) {
     form.attachEvent("onsubmit", callback); //Old IE
   }
+
+  // // Also prevent sending when pressing Enter in any input of the form.
+  // form
+  //   .querySelectorAll(
+  //     "input[type=email], input[type=password], input[type=text]"
+  //   )
+  //   .forEach((input) => {
+  //     input.addEventListener("keypress", function (ev) {
+  //       if (ev.key == "Enter") {
+  //         return callback(ev);
+  //       }
+  //     });
+  //   });
 }
 
 function addOnLoadListener(callback) {
