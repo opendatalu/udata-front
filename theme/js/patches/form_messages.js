@@ -2,7 +2,11 @@
  * Adds DOM validation messages for login & register pages.
  */
 
-import { getCurrentPage, addSubmitListener } from "./helpers";
+import {
+  getCurrentPage,
+  addSubmitListener,
+  addOnLoadListener,
+} from "./helpers";
 import i18n from "../plugins/i18n.js";
 
 const { t } = i18n.global;
@@ -91,6 +95,9 @@ function disableHTML5Validations() {
     FIRST_NAME_INPUT.removeAttribute("required");
     LAST_NAME_INPUT.removeAttribute("required");
   }
+
+  // type=email is HTML5 and it includes validation too that prevents our validation
+  EMAIL_INPUT.setAttribute("type", "text");
 }
 
 /**
@@ -151,12 +158,6 @@ function init() {
 
 export default (function () {
   if (CURRENT_PAGE) {
-    if (document.readyState === "complete") {
-      init();
-    } else {
-      window.addEventListener("DOMContentLoaded", () => {
-        init();
-      });
-    }
+    addOnLoadListener(init);
   }
 })();
