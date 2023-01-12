@@ -28,6 +28,7 @@ import bodyClass from "./plugins/bodyClass";
 import filters from "./plugins/filters";
 
 import PatchTitle from "./patches/title_update"
+import PatchForms from "./patches/form_messages"
 
 import InitSentry from "./sentry";
 
