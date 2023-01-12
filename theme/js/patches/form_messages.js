@@ -123,13 +123,15 @@ function callback(event) {
 
   let validator = new Validator();
 
-  validator.validateNotEmpty(EMAIL_INPUT) &&
+  if (validator.validateNotEmpty(EMAIL_INPUT)) {
     validator.validateEmail(EMAIL_INPUT);
+  }
   validator.validateNotEmpty(PASSWORD_INPUT);
 
   if (CURRENT_PAGE === "/register") {
-    validator.validateNotEmpty(PASSWORD_CONFIRM_INPUT) &&
+    if (validator.validateNotEmpty(PASSWORD_CONFIRM_INPUT)) {
       validator.validatePasswordMatch(PASSWORD_INPUT, PASSWORD_CONFIRM_INPUT);
+    }
     validator.validateNotEmpty(FIRST_NAME_INPUT);
     validator.validateNotEmpty(LAST_NAME_INPUT);
   }
@@ -138,16 +140,12 @@ function callback(event) {
   const error_keys = Object.keys(errors);
 
   if (error_keys.length > 0) {
-    event.preventDefault();
-
     error_keys.forEach((input_id) => {
       setDOMError(input_id, errors[input_id]);
     });
 
-    return false;
+    event.preventDefault();
   }
-
-  return true;
 }
 
 function init() {
