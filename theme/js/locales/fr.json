@@ -137,5 +137,5 @@
   "Autre": "Autre",
   "validation_not_empty": "Ce champ est obligatoire.",
   "validation_passwords": "Les mots de passe ne correspondent pas.",
-  "validation_email": "Une addresse e-mail est nécessaire. Par example: jean.smith@gmail.com"
+  "validation_email": "Une addresse e-mail est nécessaire. Par example: {example_email}"
 }
