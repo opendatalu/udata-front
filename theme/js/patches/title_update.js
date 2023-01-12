@@ -3,27 +3,30 @@
  * It takes into account:
  * - The search query
  * - The page number
- * - The filters
+ * - The filters of the page datasets and reuses
  */
-
 
 /**
- * Constants
+ * Functions
  */
-const QS_SEARCH_FILTERS = [
-  "organization",
-  "tag",
-  "format",
-  "license",
-  "geozone",
-  "granularity",
-];
 
-/**
- * Generic helpers
- */
-function getQueryStringParam(p) {
-  const params = new Proxy(new URLSearchParams(window.location.search), {
+function getCurrentPage() {
+  for (var i = 0; i < PAGES.length; i++) {
+    if (window.location.href.includes(PAGES[i])) {
+      return PAGES[i];
+    }
+  }
+  return null;
+}
+
+function getQueryStringParam(p, search) {
+  if (search) {
+    search = search.split("?").pop();
+  } else {
+    search = window.location.search;
+  }
+
+  const params = new Proxy(new URLSearchParams(search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
   return params[p];
@@ -49,11 +52,8 @@ function getMetaTagValue(metaName) {
   return "";
 }
 
-/**
- * Helpers dedicated to retrieve the filter values from the DOM
- */
 function getFilterNumber(qs_name) {
-  const idx = QS_SEARCH_FILTERS.indexOf(qs_name);
+  const idx = DATASET_FILTERS.indexOf(qs_name);
   if (idx !== -1) {
     return idx + 1;
   }
@@ -80,27 +80,30 @@ function getFilterValue(qs_name) {
     .textContent.trim();
 }
 
-/**
- * Main method to update the title
- */
-
-const baseTitle = getMetaTagValue("og:title");
-
 function updateTitle() {
   var title_parts = [];
 
-  const searchQuery = decodeParam(getQueryStringParam("q"));
-  if (searchQuery) {
-    title_parts.push(searchQuery);
+  // searchQuery = decodeParam(getQueryStringParam("q")); // Only binded to URL in /datasets page.
+  if (search_input_query) {
+    title_parts.push(search_input_query);
   }
 
-  // Filters
-  for (var i = 0; i < QS_SEARCH_FILTERS.length; i++) {
-    let filter_key = QS_SEARCH_FILTERS[i];
-    if (getQueryStringParam(filter_key)) {
-      let filter_name = getFilterLabel(filter_key);
-      let filter_value = getFilterValue(filter_key);
-      title_parts.push(filter_name + ": " + filter_value);
+  if (CURRENT_PAGE === "/datasets") {
+    for (var i = 0; i < DATASET_FILTERS.length; i++) {
+      let filter_key = DATASET_FILTERS[i];
+      if (getQueryStringParam(filter_key)) {
+        let filter_name = getFilterLabel(filter_key);
+        let filter_value = getFilterValue(filter_key);
+        title_parts.push(filter_name + ": " + filter_value);
+      }
+    }
+  } else if (CURRENT_PAGE === "/reuses") {
+    const filter_key = getQueryStringParam("topic");
+    if (filter_key) {
+      const filter_label = REUSE_FILTERS[filter_key];
+      if (filter_label) {
+        title_parts.push(filter_label);
+      }
     }
   }
 
@@ -109,41 +112,69 @@ function updateTitle() {
     title_parts.push("Page " + page);
   }
 
-  title_parts.push(baseTitle);
+  title_parts.push(BASE_TITLE);
 
   document.title = title_parts.join(" - ");
 }
 
-/**
- * Poll the search filters in the query string to check for changes
- * If changes, update title.
- * No listener exists
- */
-
-var search_string = null;
-function checkSearchChange() {
-  if (window.location.search !== search_string) {
-    search_string = window.location.search;
-    updateTitle();
+function getReuseFilters() {
+  var key_to_label = {};
+  const ul = document.querySelector(".fr-container ul.fr-tags-group");
+  const rows = ul.querySelectorAll("li > a");
+  for (var i = 0; i < rows.length; i++) {
+    let href = rows[i].getAttribute("href");
+    let label = rows[i].textContent.trim();
+    let key = getQueryStringParam("topic", href);
+    if (key) {
+      key_to_label[key] = label;
+    }
   }
+  return key_to_label;
 }
 
-function startTitleUpdate() {
-  const searchInput = document.querySelector(
-    ".fr-search-bar > input.fr-input[type=search]"
-  );
+/**
+ * Constats & variables
+ */
+const PAGES = ["/reuses", "/datasets", "/organizations"];
+const CURRENT_PAGE = getCurrentPage();
+const BASE_TITLE = CURRENT_PAGE ? getMetaTagValue("og:title") : null;
+const REUSE_FILTERS = CURRENT_PAGE === "/reuses" ? getReuseFilters() : null;
+const DATASET_FILTERS =
+  CURRENT_PAGE === "/datasets"
+    ? ["organization", "tag", "format", "license", "geozone", "granularity"]
+    : null;
 
-  if (searchInput) {
-    setInterval(checkSearchChange, 500);
-  }
+const SEARCH_INPUT = CURRENT_PAGE
+  ? document.querySelector(".fr-search-bar > input.fr-input[type=search]")
+  : null;
+
+var url_query_string = null; // This one is polled with an interval
+var search_input_query = null; // "q" only exists in datasets page, therefore we need to bind the input
+
+/**
+ * Main method
+ */
+function startTitleUpdate() {
+  setInterval(function () {
+    if (
+      window.location.search !== url_query_string ||
+      SEARCH_INPUT.value !== search_input_query
+    ) {
+      url_query_string = window.location.search;
+      search_input_query = SEARCH_INPUT.value;
+      updateTitle();
+    }
+  }, 500);
 }
 
 export default (function () {
-  if (document.readyState === "complete") {
-    startTitleUpdate();
-  } else {
-    window.addEventListener("DOMContentLoaded", () => {
+  if (CURRENT_PAGE) {
+    if (document.readyState === "complete") {
       startTitleUpdate();
-    });
+    } else {
+      window.addEventListener("DOMContentLoaded", () => {
+        startTitleUpdate();
+      });
+    }
   }
 })();
