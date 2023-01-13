@@ -7,7 +7,7 @@
               v-if="organization"
               type="dataset"
               :src="organization.logo_thumbnail"
-              :alt="organization.name"
+              alt=""
               :size="60"
             />
             <Avatar

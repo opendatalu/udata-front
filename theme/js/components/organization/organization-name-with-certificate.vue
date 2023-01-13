@@ -1,10 +1,9 @@
 <template>
-  {{ organization.name }} 
+  {{ organization.name }}
   <span
     v-if="organizationCertified"
-    v-html="certified"
     class="fr-icon-svg fr-icon--sm"
-    :title="$t('The identity of this public service is certified by {certifier}', { certifier: title })"
+    ref="svgContainer"
   >
   </span>
 </template>
@@ -23,12 +22,22 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { organizationCertified } = useOrganizationCertified(props.organization);
+    const { organizationCertified } = useOrganizationCertified(
+      props.organization
+    );
     return {
       certified,
       organizationCertified,
       title,
     };
+  },
+  mounted() {
+    const svg = this.$refs.svgContainer.querySelector("svg");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", this.$t(
+        "The identity of this public service is certified by {certifier}",
+        { certifier: this.title }
+      ),);
   },
 });
 </script>
