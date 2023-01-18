@@ -429,3 +429,33 @@ h1,h2,.fs-hg.f-bold {
     margin-top: 0;
     font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 }
+
+
+/**
+* Patch aria-pressed=true to aria-current=page, break some styles
+*/
+
+a.fr-tag[aria-current=page]:after, button.fr-tag[aria-current=page]:after {
+    --text-action-high-blue-france: #b92a23;
+}
+
+a.fr-tag[aria-current=page]:after, button.fr-tag[aria-current=page]:after, input[type=button].fr-tag[aria-current=page]:after, input[type=image].fr-tag[aria-current=page]:after, input[type=reset].fr-tag[aria-current=page]:after, input[type=submit].fr-tag[aria-current=page]:after {
+    content: "";
+    vertical-align: middle;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    --icon-size: 1rem;
+    color: var(--text-action-high-blue-france);
+    -webkit-mask-image: url(/_themes/gouvfr/checkbox-circle-line.828ec1ce.svg);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    background-color: currentColor;
+    flex: none;
+    margin: -0.5rem;
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    right: 0;
+    -webkit-mask-image: url(/_themes/gouvfr/checkbox-circle-line.828ec1ce.svg);
+    mask-image: url(/_themes/gouvfr/checkbox-circle-line.828ec1ce.svg);
+}
