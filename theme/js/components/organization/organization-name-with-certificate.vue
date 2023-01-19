@@ -2,6 +2,7 @@
   {{ organization.name }}
   <span
     v-if="organizationCertified"
+    v-html="certified"
     class="fr-icon-svg fr-icon--sm"
     ref="svgContainer"
   >
