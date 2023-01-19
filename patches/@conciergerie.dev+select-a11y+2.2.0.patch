@@ -1,5 +1,24 @@
+diff --git a/node_modules/@conciergerie.dev/select-a11y/dist/main.js b/node_modules/@conciergerie.dev/select-a11y/dist/main.js
+index 9b58221..d7f2281 100644
+--- a/node_modules/@conciergerie.dev/select-a11y/dist/main.js
++++ b/node_modules/@conciergerie.dev/select-a11y/dist/main.js
+@@ -189,10 +189,10 @@ class $21b19656d700fd08$var$Select {
+         suggestions.classList.add('select-a11y-suggestions');
+         suggestions.id = `a11y-${this.id}-suggestions`;
+         container.innerHTML = `
+-      <p id="a11y-usage-${this.id}-js" class="sr-only">${this._options.text.help}</p>
+-      <label for="a11y-${this.id}-js" class="sr-only">${this._options.text.placeholder}</label>
+-      <input type="search" id="a11y-${this.id}-js" class="${this.el.className}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${this._options.text.placeholder}" aria-describedby="a11y-usage-${this.id}-js">
+-    `;
++            <p id="a11y-usage-${this.id}-js" class="sr-only">${this._options.text.help}</p>
++            <label for="a11y-${this.id}-js" style="display:block;margin-bottom:6px">${this._options.text.placeholder}</label>
++            <input type="search" id="a11y-${this.id}-js" class="${this.el.className}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="a11y-usage-${this.id}-js">
++        `;
+         container.appendChild(suggestions);
+         this.list = suggestions;
+         /** @type {HTMLInputElement} */ this.input = container.querySelector('input');
 diff --git a/node_modules/@conciergerie.dev/select-a11y/dist/module.js b/node_modules/@conciergerie.dev/select-a11y/dist/module.js
-index 9327527..6c9e02d 100644
+index 9327527..fcb2396 100644
 --- a/node_modules/@conciergerie.dev/select-a11y/dist/module.js
 +++ b/node_modules/@conciergerie.dev/select-a11y/dist/module.js
 @@ -57,6 +57,7 @@ class $5a3b80354f588438$var$Select {
@@ -27,6 +46,21 @@ index 9327527..6c9e02d 100644
          this.wrap.addEventListener('keydown', this._handleKeyboard);
          document.addEventListener('blur', this._handleFocus, true);
          if (this.el.form) this.el.form.addEventListener('reset', this._handleReset);
+@@ -179,10 +183,10 @@ class $5a3b80354f588438$var$Select {
+         suggestions.classList.add('select-a11y-suggestions');
+         suggestions.id = `a11y-${this.id}-suggestions`;
+         container.innerHTML = `
+-      <p id="a11y-usage-${this.id}-js" class="sr-only">${this._options.text.help}</p>
+-      <label for="a11y-${this.id}-js" class="sr-only">${this._options.text.placeholder}</label>
+-      <input type="search" id="a11y-${this.id}-js" class="${this.el.className}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${this._options.text.placeholder}" aria-describedby="a11y-usage-${this.id}-js">
+-    `;
++            <p id="a11y-usage-${this.id}-js" class="sr-only">${this._options.text.help}</p>
++            <label for="a11y-${this.id}-js" style="display:block;margin-bottom:6px">${this._options.text.placeholder}</label>
++            <input type="search" id="a11y-${this.id}-js" class="${this.el.className}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="a11y-usage-${this.id}-js">
++        `;
+         container.appendChild(suggestions);
+         this.list = suggestions;
+         /** @type {HTMLInputElement} */ this.input = container.querySelector('input');
 @@ -301,8 +305,14 @@ class $5a3b80354f588438$var$Select {
          if (!this.open) return;
          clearTimeout(this._focusTimeout);
