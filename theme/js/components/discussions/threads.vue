@@ -21,7 +21,7 @@ Discussions allow users to interact with others.
         <ThreadsCreateButton class="fr-col--bottom" :onClick="startThreadWithoutScroll"/>
         <div class="fr-mt-5v" style="display:flex; align-items:center">
           <label for="sortBy" style="min-width:78px;margin-right:8px">
-            {{ $t('Sort by:') }}
+            {{ $t('Sort by') }}
           </label>
           <select
           name="sortBy"

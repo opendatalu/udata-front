@@ -1125,8 +1125,8 @@ msgid "No result found"
 msgstr "Aucun résultat trouvé"
 
 #: udata_front/theme/gouvfr/templates/macros/sort_search.html:9
-msgid "Sort by:"
-msgstr "Trier par :"
+msgid "Sort by"
+msgstr "Trier par"
 
 #: udata_front/theme/gouvfr/templates/macros/uploader.html:8
 msgid "Drag a file here"

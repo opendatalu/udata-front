@@ -1104,7 +1104,7 @@ msgid "No result found"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/macros/sort_search.html:9
-msgid "Sort by:"
+msgid "Sort by"
 msgstr ""
 
 #: udata_front/theme/gouvfr/templates/macros/uploader.html:8

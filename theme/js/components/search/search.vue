@@ -111,7 +111,7 @@
           </div>
           <div class="fr-col-auto fr-grid-row fr-grid-row--middle">
             <label for="sort-search" class="fr-col-auto fr-text--sm fr-m-0 fr-mr-1w">
-                {{$t('Sort by:')}}
+                {{$t('Sort by')}}
             </label>
             <div class="fr-col">
                 <select
