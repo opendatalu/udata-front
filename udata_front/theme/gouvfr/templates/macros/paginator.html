@@ -13,6 +13,8 @@
             <a
                 {% if p.page > 1 %}
                     href="{{ url_rewrite(url, **{arg_name: 1}) }}"
+                {% else %}
+                    href="#"
                 {% endif %}
                 class="fr-pagination__link fr-pagination__link--first"
                 rel="nofollow"
@@ -24,6 +26,8 @@
             <a
                 {% if p.page > 1 %}
                     href="{{ url_rewrite(url, **{arg_name: p.page - 1}) }}"
+                {% else %}
+                    href="#"
                 {% endif %}
                 class="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
                 rel="nofollow"

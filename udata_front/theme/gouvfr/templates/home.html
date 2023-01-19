@@ -30,6 +30,7 @@
                         <strong>{{ _('Earth observation and environment') }}</strong>
                         </a>
                     </li>
+                    <li>
                         <a href="{{ url_for('gouvfr.show_page', slug='topics/meteo') }}"
                             class="btn-venti fr-my-2w bg-blue-400">
                             <strong>{{ _('Meteorological data') }}</strong>
@@ -124,8 +125,8 @@
                 <h2 id="dataset_tablist_title">{{ _('Datasets') }}</h2>
             </div>
             <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
-                <div class="fr-col-auto">
-                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist navigation" aria-labelledby="dataset_tablist_title">
+                <div class="fr-col-auto" role="navigation">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist" aria-labelledby="dataset_tablist_title">
                         {% for tab_id, label, _, _ in dataset_tabs %}
                         <button
                             role="tab"
@@ -183,8 +184,8 @@
                 <h2 id="reuses_tablist_title">{{ _('Data reuses') }}</h2>
             </div>
             <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
-                <div class="fr-col-auto">
-                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist navigation" aria-labelledby="reuses_tablist_title">
+                <div class="fr-col-auto" role="navigation">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist" aria-labelledby="reuses_tablist_title">
                         {% for tab_id, label, _, _ in reuses_tabs %}
                         <button
                             role="tab"

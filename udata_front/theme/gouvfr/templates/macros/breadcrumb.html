@@ -11,14 +11,16 @@
                 {{ tpl.breadcrumb_bar() }}
             </div>
             {% elif tpl.breadcrumb and tpl.breadcrumb() %}
-            <ol class="breadcrumbs fr-col-12 col-lg-9" role="navigation" aria-label="{{ _('Breadcrumb') }}">
-                <li>
-                    <a href="{{ url_for('site.home') }}" title="{{ _('Home') }}">
-                        {{ _('Home') }}
-                    </a>
-                </li>
-                {{ tpl.breadcrumb() }}
-            </ol>
+            <div role="navigation">
+                <ol class="breadcrumbs fr-col-12 col-lg-9" aria-label="{{ _('Breadcrumb') }}">
+                    <li>
+                        <a href="{{ url_for('site.home') }}" title="{{ _('Home') }}">
+                            {{ _('Home') }}
+                        </a>
+                    </li>
+                    {{ tpl.breadcrumb() }}
+                </ol>    
+            </div>
             {% endif %}
             <div class="fr-col-12 fr-col-md-4 col-lg-3 toolbar">
                 {% if tpl.toolbar_container and tpl.toolbar_container() %}
