@@ -125,22 +125,24 @@
                 <h2 id="dataset_tablist_title">{{ _('Datasets') }}</h2>
             </div>
             <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
-                <div class="fr-col-auto" role="navigation">
-                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist" aria-labelledby="dataset_tablist_title">
-                        {% for tab_id, label, _, _ in dataset_tabs %}
-                        <button
-                            role="tab"
-                            id="tab-datasets-{{tab_id}}"
-                            aria-controls="{{tab_id}}"
-                            class="fr-tag"
-                            {% if loop.first %}
-                                aria-current="page"
-                                aria-selected="true"
-                            {% endif %}
-                        >
-                            {{ label }}
-                        </button>
-                        {% endfor %}
+                <div class="fr-col-auto">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" role="navigation" aria-labelledby="dataset_tablist_title">
+                        <div data-tabs role="tablist">
+                            {% for tab_id, label, _, _ in dataset_tabs %}
+                            <button
+                                role="tab"
+                                id="tab-datasets-{{tab_id}}"
+                                aria-controls="{{tab_id}}"
+                                class="fr-tag"
+                                {% if loop.first %}
+                                    aria-current="page"
+                                    aria-selected="true"
+                                {% endif %}
+                            >
+                                {{ label }}
+                            </button>
+                            {% endfor %}
+                        </div>
                     </nav>
                 </div>
                 <div class="fr-col-auto">
@@ -184,22 +186,24 @@
                 <h2 id="reuses_tablist_title">{{ _('Data reuses') }}</h2>
             </div>
             <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
-                <div class="fr-col-auto" role="navigation">
-                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" data-tabs role="tablist" aria-labelledby="reuses_tablist_title">
-                        {% for tab_id, label, _, _ in reuses_tabs %}
-                        <button
-                            role="tab"
-                            id="tab-reuses-{{tab_id}}"
-                            aria-controls="{{tab_id}}"
-                            class="fr-tag"
-                            {% if loop.first %}
-                                aria-current="page"
-                                aria-selected="true"
-                            {% endif %}
-                        >
-                            {{ label }}
-                        </button>
-                        {% endfor %}
+                <div class="fr-col-auto">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" role="navigation" aria-labelledby="reuses_tablist_title">
+                        <div data-tabs role="tablist">
+                            {% for tab_id, label, _, _ in reuses_tabs %}
+                            <button
+                                role="tab"
+                                id="tab-reuses-{{tab_id}}"
+                                aria-controls="{{tab_id}}"
+                                class="fr-tag"
+                                {% if loop.first %}
+                                    aria-current="page"
+                                    aria-selected="true"
+                                {% endif %}
+                            >
+                                {{ label }}
+                            </button>
+                            {% endfor %}
+                        </div>
                     </nav>
                 </div>
                 <div class="fr-col-auto">
