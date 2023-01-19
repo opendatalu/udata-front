@@ -2,9 +2,8 @@
   {{ organization.name }}
   <span
     v-if="organizationCertified"
-    v-html="certified"
+    v-html="certifiedAltered"
     class="fr-icon-svg fr-icon--sm"
-    ref="svgContainer"
   >
   </span>
 </template>
@@ -27,18 +26,22 @@ export default defineComponent({
       props.organization
     );
     return {
-      certified,
       organizationCertified,
       title,
     };
   },
-  mounted() {
-    const svg = this.$refs.svgContainer.querySelector("svg");
-    svg.setAttribute("role", "img");
-    svg.setAttribute("aria-label", this.$t(
-        "The identity of this public service is certified by {certifier}",
-        { certifier: this.title }
-      ),);
+  computed: {
+    certifiedAltered() {
+      return certified.replace(
+        "<svg",
+        '<svg role="img" aria-label="' +
+          this.$t(
+            "The identity of this public service is certified by {certifier}",
+            { certifier: this.title }
+          ) +
+          '"'
+      );
+    },
   },
 });
 </script>
