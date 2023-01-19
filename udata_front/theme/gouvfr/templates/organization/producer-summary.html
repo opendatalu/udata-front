@@ -39,12 +39,12 @@
         <div class="fr-grid-row fr-grid-row--gutters">
             {% if organization.metrics.datasets %}
             <div class="fr-col-auto">
-                {{ organization.metrics.datasets }} {{ _('datasets') }}
+                <p style="margin: 0">{{ organization.metrics.datasets }} {{ _('datasets') }}</p>
             </div>
             {% endif %}
             {% if organization.metrics.reuses %}
             <div class="fr-col-auto">
-                    {{ organization.metrics.reuses }} {{ _('reuses') }}
+                <p style="margin: 0">{{ organization.metrics.reuses }} {{ _('reuses') }}</p>
             </div>
             {% endif %}
         </div>
