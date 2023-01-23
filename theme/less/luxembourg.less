@@ -429,17 +429,17 @@ h2,
 * Patch aria-pressed=true to aria-current=page, break some styles
 */
 
-a.fr-tag[aria-current="page"],
-button.fr-tag[aria-current="page"] {
+a.fr-tag[aria-selected="true"],
+button.fr-tag[aria-selected="true"] {
     --background-action-high-blue-france: #b92a23;
 }
 
-a.fr-tag[aria-current="page"]:after,
-button.fr-tag[aria-current="page"]:after,
-input[type="button"].fr-tag[aria-current="page"]:after,
-input[type="image"].fr-tag[aria-current="page"]:after,
-input[type="reset"].fr-tag[aria-current="page"]:after,
-input[type="submit"].fr-tag[aria-current="page"]:after {
+a.fr-tag[aria-selected="true"]:after,
+button.fr-tag[aria-selected="true"]:after,
+input[type="button"].fr-tag[aria-selected="true"]:after,
+input[type="image"].fr-tag[aria-selected="true"]:after,
+input[type="reset"].fr-tag[aria-selected="true"]:after,
+input[type="submit"].fr-tag[aria-selected="true"]:after {
     content: "";
     vertical-align: middle;
     width: var(--icon-size);
@@ -460,12 +460,12 @@ input[type="submit"].fr-tag[aria-current="page"]:after {
     mask-image: url(../img/checkbox-circle-line.svg);
 }
 
-a.fr-tag[aria-current="page"],
-button.fr-tag[aria-current="page"],
-input[type="button"].fr-tag[aria-current="page"],
-input[type="image"].fr-tag[aria-current="page"],
-input[type="reset"].fr-tag[aria-current="page"],
-input[type="submit"].fr-tag[aria-current="page"] {
+a.fr-tag[aria-selected="true"],
+button.fr-tag[aria-selected="true"],
+input[type="button"].fr-tag[aria-selected="true"],
+input[type="image"].fr-tag[aria-selected="true"],
+input[type="reset"].fr-tag[aria-selected="true"],
+input[type="submit"].fr-tag[aria-selected="true"] {
     color: var(--text-inverted-grey);
     background-color: #0000;
     background-position: 50%;
