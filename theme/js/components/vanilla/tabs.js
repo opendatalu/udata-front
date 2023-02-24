@@ -15,14 +15,12 @@ const chooseTab = (buttons, button) => {
   );
   if (previouslyActive) {
     previouslyActive.setAttribute("aria-selected", "false");
-    previouslyActive.removeAttribute("aria-current");
     document
       .getElementById(previouslyActive.getAttribute("aria-controls"))
       .classList.remove("fr-unhidden");
   }
 
   button.setAttribute("aria-selected", "true");
-  button.setAttribute("aria-current", "page");
   button.focus();
   const tab = document.getElementById(button.getAttribute("aria-controls"));
   tab.classList.add("fr-unhidden");
@@ -38,7 +36,7 @@ const chooseNextTab = (buttons, idx, backwards = false) => {
   } else {
     idx = (idx + 1) % numButtons;
   }
-  console.log("New idx", idx);
+  // console.log("New idx", idx);
   chooseTab(buttons, buttons[idx]);
 };
 
@@ -57,12 +55,12 @@ const keyboardListener = (event, buttons) => {
 
   switch (event.key) {
     case "ArrowLeft":
-      console.log("ArrowLeft", idx);
+      // console.log("ArrowLeft", idx);
       chooseNextTab(buttons, idx, true);
       break;
 
     case "ArrowRight":
-      console.log("ArrowRight", idx);
+      // console.log("ArrowRight", idx);
       chooseNextTab(buttons, idx);
       break;
   }
@@ -70,7 +68,15 @@ const keyboardListener = (event, buttons) => {
 
 const loadComponent = (component) => {
   const buttons = component.querySelectorAll("[role=tab]");
-  buttons.forEach((button) => {
+  buttons.forEach((button, i) => {
+
+    // First button is accessible with tab, not the rest.
+    if(i == 0) {
+      button.setAttribute("tabindex", "0")
+    } else {
+      button.setAttribute("tabindex", "-1")
+    }
+
     button.addEventListener("keydown", (event) => {
       keyboardListener(event, buttons);
     });

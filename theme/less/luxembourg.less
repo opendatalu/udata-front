@@ -429,6 +429,83 @@ h2,
 * Patch aria-pressed=true to aria-current=page, break some styles
 */
 
+a.fr-tag[aria-selected="true"],
+button.fr-tag[aria-selected="true"] {
+    --background-action-high-blue-france: #b92a23;
+}
+
+a.fr-tag[aria-selected="true"]:after,
+button.fr-tag[aria-selected="true"]:after,
+input[type="button"].fr-tag[aria-selected="true"]:after,
+input[type="image"].fr-tag[aria-selected="true"]:after,
+input[type="reset"].fr-tag[aria-selected="true"]:after,
+input[type="submit"].fr-tag[aria-selected="true"]:after {
+    content: "";
+    vertical-align: middle;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    --icon-size: 1rem;
+    color: var(--text-action-high-blue-france);
+    -webkit-mask-image: url(../img/checkbox-circle-line.svg);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    background-color: currentColor;
+    flex: none;
+    margin: -0.5rem;
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    right: 0;
+    -webkit-mask-image: url(../img/checkbox-circle-line.svg);
+    mask-image: url(../img/checkbox-circle-line.svg);
+}
+
+a.fr-tag[aria-selected="true"],
+button.fr-tag[aria-selected="true"],
+input[type="button"].fr-tag[aria-selected="true"],
+input[type="image"].fr-tag[aria-selected="true"],
+input[type="reset"].fr-tag[aria-selected="true"],
+input[type="submit"].fr-tag[aria-selected="true"] {
+    color: var(--text-inverted-grey);
+    background-color: #0000;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: radial-gradient(
+        circle at 100% 0.25rem,
+        transparent 0.57812rem,
+        var(--background-action-high-blue-france) 0.625rem
+    );
+    position: relative;
+    overflow: visible;
+}
+
+/**
+* .markdown blockquote ---> .markdown .blockquote
+*/
+
+.markdown .blockquote {
+    margin: initial;
+    margin-left: 0;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.markdown .blockquote:before {
+    content: " ";
+    width: 4px;
+    height: 100%;
+    background-color: #b92a23;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/**
+* Keep aria-current=page tab styles, for reuses page
+*/
+
 a.fr-tag[aria-current="page"],
 button.fr-tag[aria-current="page"] {
     --background-action-high-blue-france: #b92a23;
@@ -478,26 +555,4 @@ input[type="submit"].fr-tag[aria-current="page"] {
     );
     position: relative;
     overflow: visible;
-}
-
-/**
-* .markdown blockquote ---> .markdown .blockquote
-*/
-
-.markdown .blockquote {
-    margin: initial;
-    margin-left: 0;
-    padding-left: 1rem;
-    position: relative;
-}
-
-.markdown .blockquote:before {
-    content: " ";
-    width: 4px;
-    height: 100%;
-    background-color: #b92a23;
-    border-radius: 2px;
-    position: absolute;
-    top: 0;
-    left: 0;
 }

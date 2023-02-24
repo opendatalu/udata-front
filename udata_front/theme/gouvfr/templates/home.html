@@ -135,7 +135,6 @@
                                 aria-controls="{{tab_id}}"
                                 class="fr-tag"
                                 {% if loop.first %}
-                                    aria-current="page"
                                     aria-selected="true"
                                 {% endif %}
                             >
@@ -156,7 +155,7 @@
             </div>
         </div>
         {% for tab_id, label, datasets, kwargs in dataset_tabs  %}
-        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" id={{tab_id}} aria-labelledby="tab-datasets-{{tab_id}}">
+        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" tabindex="0" id={{tab_id}} aria-labelledby="tab-datasets-{{tab_id}}">
             <div class="fr-grid-row fr-pt-md-9v fr-pt-2w">
                 {% for dataset in datasets %}
                 <div class="fr-col-12 fr-col-lg-4">{% include theme('dataset/card.html') %}
@@ -196,7 +195,6 @@
                                 aria-controls="{{tab_id}}"
                                 class="fr-tag"
                                 {% if loop.first %}
-                                    aria-current="page"
                                     aria-selected="true"
                                 {% endif %}
                             >
@@ -220,10 +218,10 @@
     </div>
     <div class="fr-container">
         {% for tab_id, label, reuses, kwargs in reuses_tabs  %}
-        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" id="{{tab_id}}" aria-labelledby="tab-reuses-{{tab_id}}">
+        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" tabindex="0" id="{{tab_id}}" aria-labelledby="tab-reuses-{{tab_id}}">
             <div class="fr-grid-row fr-grid-row--gutters fr-pt-2w fr-pt-md-9v">
                 {% for reuse in reuses %}
-                <div class="fr-col-md-4 fr-col-sm-6 fr-col-12 fr-mb-3v">
+                <div class="fr-col-md-\fr\reuses\wuertle-wordle-op-letzebuergesch\4 fr-col-sm-6 fr-col-12 fr-mb-3v">
                     {% include theme('reuse/card.html') %}
                 </div>
                 {% endfor %}

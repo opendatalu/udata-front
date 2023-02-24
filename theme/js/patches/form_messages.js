@@ -29,7 +29,7 @@ class Validator {
   }
 
   validateEmail(input) {
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,10}$/.test(input.value)) {
+    if (!/^[\w\-\.+]+@([\w-]+\.)+[\w-]{2,10}$/.test(input.value)) {
       this.errors[input.getAttribute("id")] = t("validation_email", {
         example_email: "jean.smith@gmail.com",
       });

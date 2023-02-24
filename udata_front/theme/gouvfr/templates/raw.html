@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block extra_css %}{% endblock %}
     {% block theme_css %}
-    <link href="{{ theme_static('less/index.css') }}?v=2" rel="stylesheet">
-    <link href="{{ theme_static('js/index.css') }}" rel="stylesheet">
+    <link href="{{ theme_static('less/index.css') }}&v=3" rel="stylesheet">
+    <link href="{{ theme_static('js/index.css') }}&v=3" rel="stylesheet">
     <link rel="shortcut icon" href="{{ theme_static('img/favicon.png') }}">
     {% endblock %}
     {# ATOM Feeds #}
@@ -46,7 +46,7 @@
         {% block body %}{% endblock %}
     </div>
 
-    <script src="{{ theme_static('js/index.js') }}"></script>
+    <script src="{{ theme_static('js/index.js') }}&v=3"></script>
     {% block extra_js %}{% endblock %}
 
     {{ hook('footer.snippets') }}
