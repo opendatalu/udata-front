@@ -2073,3 +2073,5 @@ msgstr "Se souvenir de moi"
 msgid "Retype Password"
 msgstr "Réécrire le mot de passe"
 
+msgid "License Not Specified"
+msgstr "Licence non spécifiée"

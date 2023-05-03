@@ -2052,3 +2052,5 @@ msgstr ""
 msgid "Retype Password"
 msgstr ""
 
+msgid "License Not Specified"
+msgstr "Licence non spécifiée"
