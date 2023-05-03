@@ -2039,3 +2039,6 @@ msgstr ""
 
 msgid "Skip to content"
 msgstr ""
+
+msgid "Fact sheets"
+msgstr ""

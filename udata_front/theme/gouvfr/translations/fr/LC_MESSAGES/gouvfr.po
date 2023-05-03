@@ -2060,3 +2060,6 @@ msgstr "Fil d'Ariane"
 
 msgid "Lookup"
 msgstr "Recherche"
+
+msgid "Fact sheets"
+msgstr "Fiches d'information"

@@ -2028,3 +2028,6 @@ msgstr ""
 
 msgid "Skip to content"
 msgstr "Ir al contenido"
+
+msgid "Fact sheets"
+msgstr "Ficha de información"

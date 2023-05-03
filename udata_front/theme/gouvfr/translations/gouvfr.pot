@@ -2095,3 +2095,6 @@ msgstr ""
 
 msgid "Lookup"
 msgstr ""
+
+msgid "Fact sheets"
+msgstr ""

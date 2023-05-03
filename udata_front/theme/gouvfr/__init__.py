@@ -71,6 +71,7 @@ opendata_links = [
     nav.Item(_("Open data strategy"), "gouvfr.show_page", args={"slug": "strategy"}),
     nav.Item(_("Open data roadmap"), "gouvfr.show_page", args={"slug": "5yearplan"}),
     nav.Item(_("Project governance"), "gouvfr.show_page", args={"slug": "governance"}),
+    nav.Item(_("Fact sheets"), "gouvfr.show_page", args={"slug": "fact-sheets/licenses"}),
     # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
     # nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
     # nav.Item(_("Portal for European data"), None, url="https://data.europa.eu"),
