@@ -91,7 +91,7 @@
                 {% endif %}
                 {% if dataset.license %}
                 {% if dataset.license.url %}<a href="{{ dataset.license.url }}">{% endif %}
-                {{ dataset.license.title }}
+                {{ _( dataset.license.title ) }}
                 {% if dataset.license.url %}</a>{% endif %}
                 {% endif %}
             </p>

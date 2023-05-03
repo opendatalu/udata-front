@@ -2063,3 +2063,13 @@ msgstr "Recherche"
 
 msgid "Fact sheets"
 msgstr "Fiches d'information"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Remember Me"
+msgstr "Se souvenir de moi"
+
+msgid "Retype Password"
+msgstr "Réécrire le mot de passe"
+

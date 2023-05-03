@@ -2042,3 +2042,13 @@ msgstr ""
 
 msgid "Fact sheets"
 msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Remember Me"
+msgstr ""
+
+msgid "Retype Password"
+msgstr ""
+

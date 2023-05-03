@@ -2031,3 +2031,13 @@ msgstr "Ir al contenido"
 
 msgid "Fact sheets"
 msgstr "Ficha de información"
+
+msgid "Password"
+msgstr ""
+
+msgid "Remember Me"
+msgstr ""
+
+msgid "Retype Password"
+msgstr ""
+
