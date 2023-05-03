@@ -209,7 +209,7 @@ def show_page(slug):
     )
 
 
-@blueprint.route("/pages/<path:image>")
+@blueprint.route("/pages/<gh_image:image>")
 def show_image(image: str):
     mime_type, _ = mimetypes.guess_type(image)
 
