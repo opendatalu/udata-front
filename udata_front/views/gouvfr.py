@@ -1,8 +1,9 @@
 import frontmatter
 import logging
 import requests
-
-from flask import url_for, redirect, abort, current_app, g, request
+import mimetypes
+from typing import Optional
+from flask import url_for, redirect, abort, current_app, g, request, Response
 from jinja2.exceptions import TemplateNotFound
 
 # from mongoengine.errors import ValidationError
@@ -11,6 +12,7 @@ from udata_front import theme
 from udata_front.theme import theme_static_with_version
 from udata.app import cache
 from udata.frontend import template_hook
+from base64 import b64encode, b64decode
 from udata.models import Reuse, Dataset
 from udata.i18n import I18nBlueprint
 
@@ -90,6 +92,44 @@ def get_page_content(slug):
     return content, gh_url, extension
 
 
+def get_image_content(slug) -> Optional[bytes]:
+    content = None
+    for locale in [g.lang_code, None]:
+        content = get_image_content_locale(slug, locale)
+        if content:
+            break
+    else:  # no cached version or no content from gh
+        log.error(f"No content found inc. from cache for image {slug}")
+        abort(404)
+    return content
+
+
+@cache.memoize(PAGE_CACHE_DURATION)
+def get_image_content_locale(slug: str, locale: str) -> Optional[bytes]:
+    """
+    Gets an image from the GH repo.
+    Caches if found.
+    """
+    cache_key = "pages-images-{slug}-{locale}".format(
+        slug=slug, locale="default" if locale is None else locale
+    )
+    content = cache.get(cache_key)
+    if content:
+        return b64decode(content)
+    raw_url, _ = get_pages_gh_urls(slug, locale=locale)
+    try:
+        response = requests.get(raw_url, timeout=5)
+        if response.status_code == 404:
+            log.error(f"Timeout while getting {slug} image from gh: {e}")
+            return None
+        response.raise_for_status()
+        cache.set(cache_key, b64encode(content))
+        return response.content
+    except requests.exceptions.RequestException as e:
+        log.exception(f"Error while getting {slug} image from gh: {e}")
+        return None
+
+
 @cache.memoize(PAGE_CACHE_DURATION)
 def get_page_content_locale(slug, locale):
     """
@@ -167,6 +207,21 @@ def show_page(slug):
     return theme.render(
         "page.html", page=page, gh_url=gh_url, extension=extension, **data
     )
+
+
+@blueprint.route("/pages/<path:image>")
+def show_image(image: str):
+    mime_type, _ = mimetypes.guess_type(image)
+
+    if mime_type is None:
+        return "Invalid image format", 400
+    
+    image_data: bytes = get_image_content(image)
+
+    if image_data is None:
+        return "Image not found", 404
+
+    return Response(image_data, content_type=mime_type)
 
 
 @blueprint.route("/suivi/")
