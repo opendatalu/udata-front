@@ -123,7 +123,7 @@ def get_image_content_locale(slug: str, locale: str) -> Optional[bytes]:
             log.error(f"Timeout while getting {slug} image from gh: {e}")
             return None
         response.raise_for_status()
-        cache.set(cache_key, b64encode(content))
+        cache.set(cache_key, b64encode(response.content))
         return response.content
     except requests.exceptions.RequestException as e:
         log.exception(f"Error while getting {slug} image from gh: {e}")
