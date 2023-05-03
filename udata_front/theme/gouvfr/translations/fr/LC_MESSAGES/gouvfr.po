@@ -995,7 +995,7 @@ msgstr "Type MIME"
 
 #: udata_front/theme/gouvfr/templates/dataset/resource/card.html:123
 msgid "Created on"
-msgstr "Créée le"
+msgstr "Créé le"
 
 #: udata_front/theme/gouvfr/templates/dataset/resource/card.html:129
 msgid "Modified on"
