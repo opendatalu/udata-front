@@ -351,8 +351,8 @@ msgid "home"
 msgstr "accueil"
 
 #: udata_front/theme/gouvfr/templates/home.html:18
-msgid "The luxembourgish data platform"
-msgstr "La plateforme de données luxembourgeoise"
+msgid "The luxembourgish open data platform"
+msgstr "La plateforme de données ouvertes luxembourgeoise"
 
 #: udata_front/theme/gouvfr/templates/home.html:22
 msgid "Geospatial data"
