@@ -10,13 +10,13 @@
 <div class="fr-checkbox-group">
     {{ f() }}
     <label class="fr-label" for="{{ f.id }}">
-        {{ _t(f.label.text) }}
+        {{ _(f.label.text) }}
     </label>
 </div>
 {% else %}
 <div class="fr-input-group field {% if f.errors %}fr-input-group--error{% endif %}">
     <label for="{{ f.id }}" class="fr-label {% if f.flags.required %}required{% endif %}">
-        {{ _t(f.label.text) }}
+        {{ _(f.label.text) }}
     </label>
     {% if f.id == "email" %}
     <input id="{{ f.id }}" name="{{ f.id }}" type="email" {% if f.flags.required %}required{% endif %}/>
