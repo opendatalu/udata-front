@@ -144,6 +144,10 @@ def context(name):
     return wrapper
 
 
+from werkzeug.routing import BaseConverter
+class ImageConverter(BaseConverter):
+    regex = r'.+\.(?:png|jpg|jpeg|gif|svg)'
+
 def init_app(app):
     app.config.setdefault('THEME_VARIANT', 'gouvfr')
 
@@ -165,3 +169,7 @@ def init_app(app):
     @app.context_processor
     def inject_current_theme():
         return {'current_theme': current}
+
+
+    app.url_map.converters['gh_image'] = ImageConverter
+
