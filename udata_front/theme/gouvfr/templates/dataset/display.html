@@ -227,7 +227,7 @@
                                 <dt class="fr-text--sm fr-mb-0 text-mention-grey">{{ _('License') }}</dt>
                                 <dd class="fr-text--sm fr-ml-0 fr-mb-2w">
                                     {% if dataset.license.url %}<a href="{{ dataset.license.url }}">{% endif %}
-                                    {{ dataset.license.title }}
+                                    {{ _(dataset.license.title) }}
                                     {% if dataset.license.url %}</a>{% endif %}
                                 </dd>
                                 {% endif %}
