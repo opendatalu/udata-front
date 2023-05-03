@@ -426,3 +426,9 @@ def visibles(value):
 @front.app_template_global()
 def selected(current_value, value):
     return 'selected' if current_value == value else ''
+
+
+
+@front.app_template_filter()
+def eval_lazy(val):
+    return str(val)
