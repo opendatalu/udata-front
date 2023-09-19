@@ -107,6 +107,14 @@ footer_links = [
 
 nav.Bar("gouvfr_footer", footer_links)
 
+social_links = [
+    nav.Item(_("RSS feed"), "gouvfr.show_page", url=url_for('datasets.recent_feed')),
+    nav.Item(_("Newsletter"), "gouvfr.show_page", args={"slug": "newsletter"}),
+    nav.Item("info@data.public.lu", None, url="mailto:info@data.public.lu")
+]
+
+nav.Bar("gouvfr_social", social_links)
+
 NETWORK_LINKS = [
     ("Geoportail.lu", "http://www.geoportail.lu"),
     ("Data.Europa.eu", "http://www.data.europa.eu"),
