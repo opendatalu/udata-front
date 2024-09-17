@@ -44,25 +44,13 @@
                         </li>
                     </ul>
                     <ul class="fr-footer__top-list fr-grid-row">
+                        {% for item in nav.gouvfr_social %}
                         <li>
-                            <a
-                                href="{{ url_for('datasets.recent_feed') }}"
-                                title="{{ _('RSS feed') }}"
-                                class="fr-footer__top-link"
-                            >
-                                RSS
+                            <a href="{{ item.url }}" class="fr-footer__top-link">
+                                {{ item.label }}
                             </a>
                         </li>
-                    </ul>
-                    <ul class="fr-footer__top-list fr-grid-row">
-                        <li>
-                            <a
-                                href="mailto:info%40data.public.lu"
-                                class="fr-footer__top-link"
-                            >
-                                info@data.public.lu
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="fr-col-12 fr-col-sm-3">
