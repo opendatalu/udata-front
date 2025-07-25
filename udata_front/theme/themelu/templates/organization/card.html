@@ -1,0 +1,36 @@
+{% cache cache_duration, 'org-card', organization.id|string, g.lang_code %}
+{% from theme('macros/organization_name_with_certificate.html') import organization_name_with_certificate %}
+<article class="fr-tile fr-tile--left fr-enlarge-link">
+    <div class="fr-tile__body">
+        <div class="fr-grid-row fr-grid-row--middle fr-mb-3w">
+            <div class="fr-tile__img fr-col-auto fr-m-0">
+                <div class="logo">
+                    <img src="{{ organization.logo(70)|placeholder('organization') }}" class="fr-responsive-img" alt="">
+                </div>
+            </div>
+            <h3 class="fr-tile__title fr-col fr-ml-1w">
+                <a class="fr-tile__link inline" href="{{ url_for('organizations.show', org=organization) }}">{{ organization_name_with_certificate(organization) }}</a>
+            </h3>
+        </div>
+        <p class="fr-tile__desc fr-mb-3w">{{ organization.description|mdstrip(150) }}</p>
+        <ul class="fr-tags-group fr-mt-auto">
+            <li class="not-enlarged">
+                <a
+                    href="{{ url_for('datasets.list', organization=organization.id) }}"
+                    class="fr-tag"
+                >
+                    {{ ngettext('<strong class="fr-mr-1v">%(num)d</strong> dataset', '<strong class="fr-mr-1v">%(num)d</strong> datasets', organization.metrics.datasets or 0) }}
+                </a>
+            </li>
+            <li class="not-enlarged">
+                <a
+                    href="{{ url_for('organizations.show', org=organization, _anchor='organization-reuses') }}"
+                    class="fr-tag"
+                >
+                    {{ ngettext('<strong class="fr-mr-1v">%(num)d</strong> reuse', '<strong class="fr-mr-1v">%(num)d</strong> reuses', organization.metrics.reuses or 0) }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</article>
+{% endcache %}

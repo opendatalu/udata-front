@@ -1,0 +1,21 @@
+{% cache cache_duration, 'territory-search-result', territory.id, g.lang_code %}
+<li class="search-result territory-result">
+    <a href="{{ territory.url }}" title="{{ territory.name }}">
+        <div class="result-body">
+            <h4 class="result-title ellipsis">{{ territory.name }}</h4>
+            <div class="result-description clamp-2">
+                {{ _('INSEE code:') }} {{ territory.code }}<br/>
+            </div>
+        </div>
+        <ul class="list-inline result-info">
+            <li>
+                <a class="btn btn-xs" v-tooltip tooltip-placement="top"
+                    title="{{ _('Administrative level') }}">
+                    <span class="fa fa-bullseye fa-fw"></span>
+                    {{ territory.level_i18n_name }}
+                </a>
+            </li>
+        </ul>
+    </a>
+</li>
+{% endcache %}

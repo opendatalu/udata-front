@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{%- set bundle = bundle|default('site') -%}
+{%- set bundle_js = '{0}.js'.format(bundle)-%}
+{%- set bundle_css = '{0}.css'.format(bundle)-%}
+<html lang="{{ g.lang_code }}" data-fr-scheme="light" data-fr-theme="light">
+
+<head>
+    {% block raw_head %}
+    {% from theme('macros/metadata.html') import metadata with context %}
+    {{ metadata(meta or {}) }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extra_css %}{% endblock %}
+    {% block theme_css %}
+    <link href="{{ theme_static('assets/style.css') }}" rel="stylesheet">
+    <link href="{{ theme_static('assets/index.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ theme_static('img/favicon.png') }}">
+    {% endblock %}
+    {# ATOM Feeds #}
+    <link href="{{ url_for('datasets.recent_feed') }}" rel="alternate" type="application/atom+xml"
+        title="{{ _('Recent datasets') }}" />
+
+    <link href="{{ url_for('reuses.recent_feed') }}" rel="alternate" type="application/atom+xml"
+        title="{{ _('Recent reuses') }}" />
+
+    {% block extra_head %}{% endblock %}
+
+    {{ hook('header.snippets') }}
+
+    {% endblock raw_head %}
+
+</head>
+
+<body class="{{body_class}} theme-{{current_theme.variant}}">
+
+    <nav role="navigation"  aria-label="{{ _('Quick access') }}">
+        <a class="skiplink" href="#skipdest">{{ _('Skip to content') }}</a>
+    </nav>
+    <div id="govbar" class="govbar">
+        <span class="govbar-logo" lang="fr" title="Gouvernement du Grand-Duché de Luxembourg">
+            <img src="//cdn.public.lu/pictures/logos/gov/gov-light.png" srcset="//cdn.public.lu/pictures/logos/gov/gov-light-hdpi.png 1.5x,
+      //cdn.public.lu/pictures/logos/gov/gov-light-xhdpi.png 2x,
+      //cdn.public.lu/pictures/logos/gov/gov-light-xxhdpi.png 3x" alt="Gouvernement du Grand-Duché de Luxembourg">
+        </span>
+    </div>
+
+
+    <div id="app">
+        {% block body %}{% endblock %}
+    </div>
+    <script>
+    window.esmsInitOptions = {
+        shimMode: true,
+    }
+    </script>
+
+    <script type="importmap-shim">
+    {
+        "imports": {
+            "vue": "{{ theme_static('js/vue.esm-browser.prod.js', inline_burst=True, force_version=True) }}",
+            "vue-content-loader": "{{ theme_static('js/vue-content-loader.es.js', inline_burst=True, force_version=True) }}"
+        }
+    }
+    </script>
+    <script type="module-shim" src="{{ theme_static('js/vue.esm-browser.prod.js', inline_burst=True, force_version=True) }}"></script>
+    <script type="module-shim" src="{{ theme_static('js/vue-content-loader.es.js', inline_burst=True, force_version=True) }}"></script>
+    <script type="module-shim" src="{{ theme_static('js/index.js', inline_burst=True, force_version=True) }}"></script>
+
+    <script async type="module" src="{{ theme_static('js/es-module-shims.js', inline_burst=True, force_version=True) }}"></script>
+
+    <script type="systemjs-importmap">
+    {
+        "imports": {
+            "vue": "{{ theme_static('js/vue.esm-browser.prod-legacy.js', inline_burst=True, force_version=True) }}",
+            "vue-content-loader": "{{ theme_static('js/vue-content-loader.es-legacy.js', inline_burst=True, force_version=True) }}"
+        }
+    }
+    </script>
+    <script nomodule src="{{ theme_static('js/s.min.js') }}"></script>
+    <script nomodule src="{{ theme_static('js/vue.esm-browser.prod-legacy.js', inline_burst=True, force_version=True) }}"></script>
+    <script nomodule src="{{ theme_static('js/vue-content-loader.es-legacy.js', inline_burst=True, force_version=True) }}"></script>
+    <script nomodule src="{{ theme_static('js/_commonjsHelpers-legacy.js', inline_burst=True, force_version=True) }}"></script>
+    <script nomodule src="{{ theme_static('js/polyfills-legacy.js', inline_burst=True, force_version=True) }}"></script>
+    <script nomodule src="{{ theme_static('js/index-legacy.js', inline_burst=True, force_version=True) }}"></script>
+    {% block extra_js %}{% endblock %}
+
+    {{ hook('footer.snippets') }}
+
+</body>
+
+</html>

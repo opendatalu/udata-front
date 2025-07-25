@@ -3,7 +3,7 @@
  */
 
 var ALLOWED_DOMAINS = [
-    'www.data.public.lu', 'static.data.public.lu', 'files.data.public.lu',
+    'www.data.gouv.fr', 'static.data.gouv.fr', 'files.data.gouv.fr',
 ]
 
 var count = 0;

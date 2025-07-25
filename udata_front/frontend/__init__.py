@@ -1,15 +1,23 @@
+import re
 import inspect
 from importlib import import_module
-from flask import abort, current_app
+from flask import abort, current_app, request, g
 from flask_navigation import Navigation
+from authlib.integrations.flask_client import OAuth
 from udata import entrypoints
 # included for retro-compatibility reasons (some plugins may import from here instead of udata)
 from udata.frontend import template_hook  # noqa
 from udata.i18n import I18nBlueprint
+from ..redirects import blueprint_root_redirects
 
 nav = Navigation()
+oauth = OAuth()
 
 front = I18nBlueprint('front', __name__)
+
+@front.before_app_request
+def inject_no_lang():
+    g.url_nolang = re.sub(r"\/\w{2}\/", "/##lang##/", request.url)
 
 
 @front.app_context_processor
@@ -21,7 +29,7 @@ def inject_current_theme():
 @front.app_context_processor
 def inject_cache_duration():
     return {
-        'cache_duration': 60 * current_app.config['TEMPLATE_CACHE_DURATION']
+        'cache_duration': current_app.config['TEMPLATE_CACHE_DURATION']
     }
 
 
@@ -32,8 +40,8 @@ def _load_views(app, module):
         app.register_blueprint(blueprint)
 
 
-VIEWS = ['gouvfr', 'dataset', 'organization', 'follower', 'post',
-         'reuse', 'site', 'territories', 'topic', 'user', 'gouvlu']
+VIEWS = ['themelu', 'dataset', 'organization', 'follower', 'post',
+         'reuse', 'site', 'territories', 'topic', 'user', 'mcp', 'beta']
 
 
 def init_app(app):
@@ -41,6 +49,8 @@ def init_app(app):
 
     nav.init_app(app)
     theme.init_app(app)
+
+    app.register_blueprint(blueprint_root_redirects)
 
     from . import helpers, error_handlers, menu_helpers, resource_helpers  # noqa
 
@@ -77,3 +87,24 @@ def init_app(app):
     if app.config.get('DEBUG_TOOLBAR'):
         from flask_debugtoolbar import DebugToolbarExtension
         DebugToolbarExtension(app)
+
+    if app.config.get('CAPTCHETAT_BASE_URL'):
+        # Security override init
+        from udata.auth import security
+        from udata_front.forms import ExtendedRegisterForm
+        with app.app_context():
+            security.forms['register_form'].cls = ExtendedRegisterForm
+            security.forms['confirm_register_form'].cls = ExtendedRegisterForm
+
+    if app.config.get('MONCOMPETPRO_OPENID_CONF_URL'):
+        # MonComptPro SSO
+        oauth.init_app(app)
+        oauth.register(
+            name='mcp',
+            client_id=app.config.get('MONCOMPETPRO_CLIENT_ID'),
+            client_secret=app.config.get('MONCOMPETPRO_CLIENT_SECRET'),
+            server_metadata_url=app.config.get('MONCOMPETPRO_OPENID_CONF_URL'),
+            client_kwargs={
+                'scope': app.config.get('MONCOMPETPRO_SCOPE')
+            }
+        )

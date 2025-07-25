@@ -1,140 +1,151 @@
-{% cache cache_duration, 'footer', g.lang_code|default(config.DEFAULT_LANGUAGE)|string,'-'.join((package_version('udata'), package_version('udata-front'))) %}
-<footer class="fr-footer" id="footer" role="contentinfo" style="box-shadow: none">
-    {% include theme("participez/participez.html") %}
-    <div class="fr-footer__top" style="margin-top: 0">
-        <div class="fr-container">
-            <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
-                <div class="fr-col-12 fr-col-sm-3">
-                    <h2 class="as-h3 fr-footer__top-cat">{{ _('The Open Data') }}</h2>
-                    <ul class="fr-footer__top-list">
-                        {% for item in nav.gouvfr_opendata %}
-                        <li>
-                            <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="fr-col-12 fr-col-sm-3">
-                    <h2 class="as-h3 fr-footer__top-cat">{{ _('Support') }}</h2>
-                    <ul class="fr-footer__top-list">
-                        {% for item in nav.gouvfr_support %}
-                        <li>
-                            <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="fr-col-12 fr-col-sm-3">
-                    <h2 class="as-h3 fr-footer__top-cat">{{ _('Social networks') }}</h2>
-                    <ul class="fr-footer__top-list socials fr-grid-row">
-                        <li>
-                            <a class="fr-footer__top-link fr-raw-link" href="https://twitter.com/opendatalu" title="Twitter">
-                                {% include theme('svg/socials/twitter.svg') %} <span class="sr-only">Twitter</span>
-                            </a>
-                        </li>
-                        <li class="fr-ml-9v">
-                            <a class="fr-footer__top-link fr-raw-link" href="https://github.com/opendatalu/" title="Github">
-                                {% include theme('svg/socials/github.svg') %} <span class="sr-only">Github</span>
-                            </a>
-                        </li>
-                        <li class="fr-ml-9v">
-                            <a rel="me" class="fr-footer__top-link fr-raw-link" href="https://mas.to/@OpenDataLu">
-                                {% include theme('svg/socials/mastodon.svg') %} <span class="sr-only">Mastodon</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="fr-footer__top-list fr-grid-row">
-                        <li>
-                            <a
-                                href="{{ url_for('datasets.recent_feed') }}"
-                                title="{{ _('RSS feed') }}"
-                                class="fr-footer__top-link"
-                            >
-                                RSS
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="fr-footer__top-list fr-grid-row">
-                        <li>
-                            <a
-                                href="mailto:info%40data.public.lu"
-                                class="fr-footer__top-link"
-                            >
-                                info@data.public.lu
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="fr-col-12 fr-col-sm-3">
-                    <div class="fr-footer__top-cat footer-lux-logo">&nbsp;
-                        <a
-                            href="https://sip.gouvernement.lu/"
-                            class="fr-raw-link"
-                        >
-                            <span class="sr-only">Le Gouvernement du Grand-Duché de Luxembourg - Service Information et Presse</span>
-                            {% include theme('luxembourg/luxembourg_logo.svg') %}
-                        </a>
+<footer role="contentinfo">
+    {% include theme("newsletter.html") %}
+    <div class="fr-footer" id="footer">
+        {% cache cache_duration, 'footer-top', g.lang_code|default(config.DEFAULT_LANGUAGE)|string,'-'.join((package_version('udata'), package_version('udata-front'))) %}
+        <div class="fr-footer__top">
+            <div class="fr-container">
+                <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+                    <div class="fr-col-12 fr-col-sm-3">
+                        <h3 class="fr-footer__top-cat">{{ _('Open Data') }}</h3>
+                        <ul class="fr-footer__top-list">
+                            {% for item in nav.gouvfr_opendata %}
+                            <li>
+                                <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <ul class="fr-mt-2w text-grey-380">
-                        <li>
-                            <a
-                                href="https://github.com/opendatalu/udata/"
-                                class="fr-footer__top-link"
-                            >
-                                udata
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="https://github.com/opendatalu/udata-front/"
-                                class="fr-footer__top-link"
-                            >
-                                udata-front
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="fr-col-12 fr-col-sm-3">
+                        <h3 class="fr-footer__top-cat">{{ _('Platform') }}</h3>
+                        <ul class="fr-footer__top-list">
+                            {% for item in nav.gouvfr_platform %}
+                            <li>
+                                <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="fr-col-12 fr-col-sm-3">
+                        <h3 class="fr-footer__top-cat">{{ _('Resources') }}</h3>
+                        <ul class="fr-footer__top-list">
+                            {% for item in nav.gouvfr_resources %}
+                            <li>
+                                <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="fr-col-12 fr-col-sm-3">
+                        <h3 class="fr-footer__top-cat">{{ _('Development') }}</h3>
+                         <ul class="fr-footer__top-list">
+                            <li>
+                                <a
+                                    href="{{config.API_DOC_EXTERNAL_LINK}}"
+                                    class="fr-footer__top-link"
+                                >
+                                   {{  _("Portal's API") }}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/opendatateam/udata/"
+                                    class="fr-footer__top-link"
+                                >
+                                    {{ _('Open-source engine: udata ({version})').format(
+                                        version=package_version('udata')
+                                    ) }}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/datagouv/udata-front/"
+                                    title="{{ _('data.gouv.fr extension: udata-front') }}"
+                                    class="fr-footer__top-link"
+                                >
+                                    {{ _('udata theme extension: udata-front ({version})').format(
+                                        version=package_version('udata-front')
+                                    ) }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="fr-container">
-        <div class="fr-footer__body">
-            <div class="fr-footer__brand fr-enlarge-link">
-                <a href="/" title="Retour à l’accueil de data.public.lu">
-                    <p class="logo-small">
-                        <span class="sr-only">Retour à l'accueil de data.public.lu</span>
-                        {% include theme('luxembourg/data_public_logo.svg') %}
+        {% endcache %}
+        <div class="fr-container">
+            <div class="fr-footer__body">
+            {% cache cache_duration, 'footer-brand-and-links', g.lang_code|default(config.DEFAULT_LANGUAGE)|string %}
+                <div class="fr-footer__brand fr-enlarge-link">
+                    <p class="fr-logo" title="république française">
+                        république
+                        <br>française
                     </p>
-                </a>
+                    <a class="fr-footer__brand-link" href="/" title="{{_('Go back to website home - data.gouv.fr - République Française')}}">
+                        {% include theme('svg/logotype.svg') %}
+                    </a>
+                </div>
+                <div class="fr-footer__content">
+                    <p class="fr-footer__content-desc">{{ _("A product of the Direction Interministérielle du Numérique (DINUM).") }}</p>
+                    <ul class="fr-footer__content-list">
+                        {% for item in nav.gouvfr_network %}
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link"  target="_blank" href="{{ item.url }}">{{ item.label }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endcache %}
+                <div class="fr-col-auto fr-ml-auto self-end">
+                    <nav role="navigation" class="fr-translate fr-nav">
+                        <div class="fr-nav__item">
+                            <button
+                                class="fr-translate__btn fr-btn fr-btn--tertiary"
+                                aria-controls="translate-in-footer"
+                                aria-expanded="false"
+                                title="{{ _('Select a Language') }}"
+                            >
+                                {{g.lang_code|upper}} - {{current_language_name()}}
+                            </button>
+                            <div class="fr-collapse fr-translate__menu fr-menu" id="translate-in-footer">
+                                <ul class="fr-menu__list">
+                                {% for code, name in config['LANGUAGES'].items() %}
+                                    <li>
+                                        <a
+                                            class="fr-translate__language fr-nav__link"
+                                            hreflang="{{code}}"
+                                            lang="{{code}}"
+                                            href="{{language_url(code)}}"
+                                            {% if g.lang_code == code %}aria-current="true"{% endif %}
+                                        >
+                                            {{code|upper}} - {{name}}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
             </div>
-            <div class="fr-footer__content">
-                <ul class="fr-footer__content-list">
-                    {% for item in nav.gouvfr_network %}
-                    <li class="fr-footer__content-item">
-                        <a class="fr-footer__content-link" href="{{ item.url }}">{{ item.label }}</a>
-                    </li>
+            {% cache cache_duration, 'footer-bottom', g.lang_code|default(config.DEFAULT_LANGUAGE)|string %}
+            <div class="fr-footer__bottom">
+                <ul class="fr-footer__bottom-list">
+                    {% for item in nav.gouvfr_footer %}
+                        <li class="fr-footer__bottom-item">
+                            <a href="{{ '' if item.items else item.url }}" class="fr-footer__bottom-link">
+                                {{ item.label }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
+                <div class="fr-footer__bottom-copy">
+                    <p>{{ _("Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>Open Licence 2.0</a>").format(
+                        lo_url='https://github.com/etalab/licence-ouverte/blob/master/LO.md#licence-ouverte-20open-licence-20'
+                    ) }}</p>
+                </div>
             </div>
-            <div class="fr-col-6 fr-col-sm-4 fr-col-md-3 fr-col-lg-2 fr-ml-auto self-end">
-            </div>
-        </div>
-        <div class="fr-footer__bottom">
-            <ul class="fr-footer__bottom-list">
-                {% for item in nav.gouvfr_footer %}
-                    <li class="fr-footer__bottom-item">
-                        <a href="{{ '' if item.items else item.url }}" class="fr-footer__bottom-link">
-                            {{ item.label }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-            <div class="fr-footer__bottom-copy">
-                <p>{{ _("Unless otherwise stated, all content of this site is availabe under <a href='{lo_url}'>Creative Commons CC0</a> license.").format(
-                    lo_url='https://creativecommons.org/licenses/by/3.0/lu/'
-                ) }}</p>
-            </div>
+            {% endcache %}
         </div>
     </div>
 </footer>
-{% endcache %}

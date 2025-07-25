@@ -17,7 +17,7 @@ from udata.i18n import lazy_gettext as _
 log = logging.getLogger(__name__)
 
 RE_POST_IMG = re.compile(
-    r"""
+    r'''
     <img .*? (?:(?:
         src="(?P<src>https?://.+?)"
         |
@@ -25,100 +25,126 @@ RE_POST_IMG = re.compile(
         |
         sizes="(?P<sizes>.+?)"
     )\s*)+ .*?/>
-    """,
-    re.I | re.X | re.S,
+    ''',
+    re.I | re.X | re.S
 )
 
-RE_STRIP_TAGS = re.compile(r"</?(img|br|p|div|ul|li|ol)[^<>]*?>", re.I | re.M)
+RE_STRIP_TAGS = re.compile(r'</?(img|br|p|div|ul|li|ol)[^<>]*?>', re.I | re.M)
 
 # Add some html5 allowed attributes
-EXTRA_ATTRIBUTES = ("srcset", "sizes")
+EXTRA_ATTRIBUTES = ('srcset', 'sizes')
 feedparser.sanitizer._HTMLSanitizer.acceptable_attributes.update(set(EXTRA_ATTRIBUTES))
 
 # Wordpress ATOM timeout
 WP_TIMEOUT = 5
 
 # Feed allowed enclosure type as thumbnails
-FEED_THUMBNAIL_MIMES = ("image/jpeg", "image/png", "image/webp")
+FEED_THUMBNAIL_MIMES = ('image/jpeg', 'image/png', 'image/webp')
 
 
-gouvfr_menu = nav.Bar(
-    "gouvfr_menu",
-    [
-        nav.Item(_("Data"), "datasets.list"),
-        nav.Item(_("Reuses"), "reuses.list"),
-        nav.Item(_("Organizations"), "organizations.list"),
+gouvfr_menu = nav.Bar('gouvfr_menu', [
+    nav.Item(_('Data'), 'datasets.list'),
+    nav.Item(_('Reuses'), 'reuses.list'),
+    nav.Item(_('Organizations'), 'organizations.list'),
+    nav.Item(_('Getting started on data.gouv.fr'), None, items=[
         nav.Item(
-            _("Contribute"),
-            None,
-            items=[
-                nav.Item(_("Publish a dataset"), "admin.index", args={"path": "dataset/new"}),
-                nav.Item(_("Publish a reuse"), "admin.index", args={"path": "reuse/new"}),
-            ],
+            _('What is data.gouv.fr?'),
+            'gouvfr.show_page',
+            args={'slug': 'about/a-propos_data-gouv'}
         ),
-        nav.Item(_("News"), "posts.list"),
-        nav.Item(_("Contact us"), None, url="mailto:info@data.public.lu"),
-    ],
-)
+        nav.Item(
+            _('How to publish data ?'),
+            'gouvfr.show_page',
+            args={'slug': 'onboarding/producteurs'}
+        ),
+        nav.Item(
+            _('How to use data ?'),
+            'gouvfr.show_page',
+            args={'slug': 'onboarding/reutilisateurs'}
+        ),
+        nav.Item(
+            _('data.gouv.fr guides'),
+            None,
+            url=current_app.config.get('GUIDES_URL')
+        ),
+    ]),
+    nav.Item(_('News'), 'posts.list'),
+    nav.Item(_('Contact us'), None, url=current_app.config.get('SUPPORT_URL', '#')),
+])
 
 theme.menu(gouvfr_menu)
 
 opendata_links = [
-    nav.Item(_("FAQ"), "gouvfr.show_page", args={"slug": "faq"}),
-    nav.Item(_("Guide to the use of data"), "gouvfr.show_page", args={"slug": "usage"}),
-    nav.Item(_("Guidelines for the publication of open data"), "gouvfr.show_page", args={"slug": "publishing"}),
-    nav.Item(_("Request to reuse public data"), "gouvfr.show_page", args={"slug": "requesting"}),
-    nav.Item(_("Open data strategy"), "gouvfr.show_page", args={"slug": "strategy"}),
-    nav.Item(_("Open data roadmap"), "gouvfr.show_page", args={"slug": "5yearplan"}),
-    nav.Item(_("Project governance"), "gouvfr.show_page", args={"slug": "governance"}),
-    nav.Item(_("Fact sheets"), "gouvfr.show_page", args={"slug": "fact-sheets/index"}),
-    # nav.Item(_("Featured topics"), "gouvfr.show_page", args={"slug": "thematiques-a-la-une"}),
-    # nav.Item(_("Reference Data"), "gouvfr.show_page", args={"slug": "spd/reference"}),
-    # nav.Item(_("Portal for European data"), None, url="https://data.europa.eu"),
+    nav.Item(_('Topics'), 'gouvfr.show_page', args={'slug': 'thematiques-a-la-une'}),
+    nav.Item(_('Reference Data'), 'gouvfr.show_page', args={'slug': 'spd/reference'}),
 ]
 
-export_dataset_id = current_app.config.get("EXPORT_CSV_DATASET_ID")
+export_dataset_id = current_app.config.get('EXPORT_CSV_DATASET_ID')
 if export_dataset_id:
     try:
         export_dataset = Dataset.objects.get(id=export_dataset_id)
     except Dataset.DoesNotExist:
         pass
     else:
-        export_url = url_for("datasets.show", dataset=export_dataset, _external=True)
-        opendata_links.append(nav.Item(_("Data catalog"), None, url=export_url))
+        export_url = url_for('datasets.show', dataset=export_dataset,
+                             _external=True)
+        opendata_links.append(nav.Item(_('Data catalog'), None, url=export_url))
+opendata_links.append(nav.Item(_('Follow data opening'), None,
+                      url="https://ouverture.data.gouv.fr"))
+opendata_links.append(nav.Item(_('Portal for European data'), None,
+                      url="https://data.europa.eu"))
 
-nav.Bar("gouvfr_opendata", opendata_links)
+nav.Bar('gouvfr_opendata', opendata_links)
 
 
-support_links = [
-    nav.Item(_("API Tutorial"), "gouvfr.show_page", args={"slug": "api-tutorial"}),
-    nav.Item(_("API Reference"), "gouvlu.docapi"),
-    nav.Item(_("Contact us"), None, url="mailto:info@data.public.lu"),
+platform_links = [
+    nav.Item(_('Guides'), None, url=current_app.config.get('GUIDES_URL', '#')),
+    nav.Item(_('Roadmap and news'), 'gouvfr.show_page', args={'slug': 'nouveautes'}),
+    nav.Item(_('Contact us'), None, url='https://support.data.gouv.fr'),
+    nav.Item(_('Give us your feedback'), None,
+             url=current_app.config.get('FEEDBACK_FORM_URL', '#')),
+    nav.Item(_('Statistics'), 'site.dashboard'),
 ]
 
-nav.Bar("gouvfr_support", support_links)
+nav.Bar('gouvfr_platform', platform_links)
+
+resources_links = [
+    nav.Item(_("api.gouv.fr"), None, url='https://api.gouv.fr'),
+    nav.Item(_("schema.data.gouv.fr"), None,
+             url=current_app.config.get('SCHEMA_DOCUMENTATION_URL', '#')),
+    nav.Item("meteo.data.gouv.fr", None, url="https://meteo.data.gouv.fr"),
+    nav.Item("transport.data.gouv.fr", None, url="https://transport.data.gouv.fr"),
+    nav.Item("defis.data.gouv.fr", None, url="https://defis.data.gouv.fr"),
+]
+
+nav.Bar('gouvfr_resources', resources_links)
 
 footer_links = [
-    nav.Item(_("Terms of use"), "gouvfr.show_page", args={"slug": "legal/terms"}),
-    nav.Item(_("Tracking and privacy"), "gouvfr.show_page", args={"slug": "legal/privacy"}),
-    nav.Item(_("Accessibility"), "gouvfr.show_page", args={"slug": "legal/declaration"}),
-    nav.Item(_("Sitemap"), "gouvfr.show_page", args={"slug": "plan-site"}),
+    nav.Item(_('Licences'), 'gouvfr.show_page', args={'slug': 'legal/licences'}),
+    nav.Item(_('Terms of use'), 'gouvfr.show_page', args={'slug': 'legal/cgu'}),
+    nav.Item(_('Tracking and privacy'), 'gouvfr.suivi'),
+    nav.Item(_('Legal notice'), 'gouvfr.show_page', args={'slug': 'legal/legal-notice'}),
+    nav.Item(_('Accessibility: partially compliant'),
+             'gouvfr.show_page', args={'slug': 'legal/accessibility'}),
 ]
 
-nav.Bar("gouvfr_footer", footer_links)
+nav.Bar('gouvfr_footer', footer_links)
 
 NETWORK_LINKS = [
-    ("Geoportail.lu", "http://www.geoportail.lu"),
-    ("Data.Europa.eu", "http://www.data.europa.eu"),
-    ("Gouvernement.lu", "http://www.gouvernement.lu"),
+    ('legifrance.gouv.fr', 'https://legifrance.gouv.fr'),
+    ('info.gouv.fr', 'https://www.info.gouv.fr'),
+    ('service-public.fr', 'https://www.service-public.fr'),
 ]
 
-nav.Bar("gouvfr_network", [nav.Item(label, label, url=url) for label, url in NETWORK_LINKS])
+nav.Bar(
+    'gouvfr_network',
+    [nav.Item(label, label, url=url) for label, url in NETWORK_LINKS]
+)
 
 
 @cache.memoize(50)
 def get_blog_post(lang):
-    """
+    '''
     Extract the latest post summary from an RSS or an Atom feed.
 
     Image is searched and extracted from (in order of priority):
@@ -126,22 +152,22 @@ def get_blog_post(lang):
       - enclosures of image type (first match)
       - first image found in content
     Image size is ot taken in account but could in future improvements.
-    """
-    wp_atom_url = current_app.config.get("WP_ATOM_URL")
+    '''
+    wp_atom_url = current_app.config.get('WP_ATOM_URL')
     if not wp_atom_url:
         return
 
     feed = None
 
-    for code in lang, current_app.config["DEFAULT_LANGUAGE"]:
+    for code in lang, current_app.config['DEFAULT_LANGUAGE']:
         feed_url = wp_atom_url.format(lang=code)
         try:
             response = requests.get(feed_url, timeout=WP_TIMEOUT)
         except requests.Timeout:
-            log.error("Timeout while fetching %s", feed_url, exc_info=True)
+            log.error('Timeout while fetching %s', feed_url, exc_info=True)
             continue
         except requests.RequestException:
-            log.error("Error while fetching %s", feed_url, exc_info=True)
+            log.error('Error while fetching %s', feed_url, exc_info=True)
             continue
         feed = feedparser.parse(response.content)
 
@@ -153,35 +179,39 @@ def get_blog_post(lang):
 
     post = feed.entries[0]
 
-    blogpost = {"title": post.title, "link": post.link, "date": parse(post.published)}
-    description = post.get("description", None)
-    content = post.get("content", [{}])[0].get("value") or description
-    summary = post.get("summary", content)
-    blogpost["summary"] = RE_STRIP_TAGS.sub("", summary).strip()
+    blogpost = {
+        'title': post.title,
+        'link': post.link,
+        'date': parse(post.published)
+    }
+    description = post.get('description', None)
+    content = post.get('content', [{}])[0].get('value') or description
+    summary = post.get('summary', content)
+    blogpost['summary'] = RE_STRIP_TAGS.sub('', summary).strip()
 
-    for thumbnail in post.get("media_thumbnail", []):
-        blogpost["image_url"] = thumbnail["url"]
+    for thumbnail in post.get('media_thumbnail', []):
+        blogpost['image_url'] = thumbnail['url']
         break
 
-    if "image_url" not in blogpost:
-        for enclosure in post.get("enclosures", []):
-            if enclosure.get("type") in FEED_THUMBNAIL_MIMES:
-                blogpost["image_url"] = enclosure["href"]
+    if 'image_url' not in blogpost:
+        for enclosure in post.get('enclosures', []):
+            if enclosure.get('type') in FEED_THUMBNAIL_MIMES:
+                blogpost['image_url'] = enclosure['href']
                 break
 
-    if "image_url" not in blogpost:
+    if 'image_url' not in blogpost:
         match = RE_POST_IMG.search(content)
         if match:
-            blogpost["image_url"] = match.group("src").replace("&amp;", "&")
-            if match.group("srcset"):
-                blogpost["srcset"] = match.group("srcset").replace("&amp;", "&")
-            if match.group("sizes"):
-                blogpost["sizes"] = match.group("sizes")
+            blogpost['image_url'] = match.group('src').replace('&amp;', '&')
+            if match.group('srcset'):
+                blogpost['srcset'] = match.group('srcset').replace('&amp;', '&')
+            if match.group('sizes'):
+                blogpost['sizes'] = match.group('sizes')
 
     return blogpost
 
 
-@theme.context("home")
+@theme.context('home')
 def home_context(context):
-    context["blogpost"] = get_blog_post(g.lang_code)
+    context['blogpost'] = get_blog_post(g.lang_code)
     return context

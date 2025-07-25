@@ -1,0 +1,79 @@
+.well {
+    display: block;
+    padding: @spacing-sm;
+    border-radius: 4px;
+    font-weight: @font-weight-bold;
+
+    > * {
+        vertical-align: middle;
+    }
+
+    a {
+        display: inline;
+        color: inherit;
+        vertical-align: baseline;
+    }
+
+    &.well--colored-links {
+        a {
+            color: @blue-400;
+        }
+    }
+
+    [class^="fr-icon-"] {
+        vertical-align: baseline;
+    }
+
+    &.well-success {
+        background: @background-contrast-success;
+        color: @text-default-success;
+        .fr-link {
+            color: @text-default-success;
+        }
+    }
+
+    &.well-warning {
+        background: @background-contrast-warning;
+        color: @text-default-warning;
+    }
+
+    &.well-error {
+        background: @background-contrast-error;
+        color: @text-default-error;
+    }
+
+    &.well-blue-cumulus {
+        background: @background-contrast-blue-cumulus;
+        color: @text-label-blue-cumulus;
+    }
+
+    &.well-orange-terre-battue {
+        background: @background-contrast-orange-terre-battue;
+        color: @text-label-orange-terre-battue;
+    }
+
+    &.well-grey-100 {
+        background: @grey-100;
+        color: @contrast-grey-100;
+    }
+
+    &.well-secondary-success {
+        .well-success;
+        border: 1px solid @border-plain-success;
+    }
+
+    &.well-secondary-warning {
+        .well-warning;
+        border: 1px solid @border-plain-warning;
+    }
+
+    &.well-secondary-error {
+        .well-error;
+        border: 1px solid @border-plain-error;
+    }
+
+    &.well-secondary-grey-100 {
+        .well-grey-100;
+        border: 1px solid @border-default-grey;
+    }
+}

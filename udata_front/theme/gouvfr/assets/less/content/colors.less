@@ -1,0 +1,172 @@
+/*
+---
+name: Colors
+category: 2 - Content
+---
+
+## Text color
+Convey meaning through color with a handful of color utility classes. Colors are coded with the following scheme :
+`{color}-{weight}` where weight is a number in increments of 100 (100, 200, 300...), the bigger the number the darker the color.
+
+```text-colors.html
+<p class="text-white">text-white</p>
+<p class="text-blue-100">text-blue-100</p>
+<p class="text-blue-300">text-blue-300</p>
+<p class="text-blue-400">text-blue-400</p>
+<p class="text-orange-100">text-orange-100</p>
+<p class="text-grey-50">text-grey-50</p>
+<p class="text-grey-100">text-grey-100</p>
+<p class="text-grey-200">text-grey-200</p>
+<p class="text-grey-300">text-grey-300</p>
+<p class="text-grey-380">text-grey-380</p>
+<p class="text-grey-400">text-grey-400</p>
+<p class="text-green-400">text-green-400</p>
+```
+
+## Link colors
+Includes support for styling links with hover states, too.
+
+```typography-2.html
+<p><a href="#" class="text-white">text-white</a></p>
+<p><a href="#" class="text-blue-100">text-blue-100</a></p>
+<p><a href="#" class="text-blue-300">text-blue-300</a></p>
+<p><a href="#" class="text-blue-400">text-blue-400</a></p>
+<p><a href="#" class="text-orange-100">text-orange-100</a></p>
+<p><a href="#" class="text-yellow-100">text-yellow-100</a></p>
+<p><a href="#" class="text-grey-50">text-grey-50</a></p>
+<p><a href="#" class="text-grey-100">text-grey-100</a></p>
+<p><a href="#" class="text-grey-200">text-grey-200</a></p>
+<p><a href="#" class="text-grey-300">text-grey-300</a></p>
+<p><a href="#" class="text-grey-380">text-grey-380</a></p>
+<p><a href="#" class="text-grey-400">text-grey-400</a></p>
+<p><a href="#" class="text-green-400">text-green-400</a></p>
+```
+
+## Background color
+Similar to the contextual text color classes, easily set the background of an element to any contextual class.
+
+```bg-colors.html
+<p><span class="pill bg-white"></span>bg-white</p>
+<p><span class="pill bg-blue-100"></span>bg-blue-100</p>
+<p><span class="pill bg-blue-300"></span>bg-blue-300</p>
+<p><span class="pill bg-blue-400"></span>bg-blue-400</p>
+<p><span class="pill bg-orange-100"></span>bg-orange-100</p>
+<p><span class="pill bg-grey-50"></span>bg-grey-50</p>
+<p><span class="pill bg-grey-100"></span>bg-grey-100</p>
+<p><span class="pill bg-grey-200"></span>bg-grey-200</p>
+<p><span class="pill bg-grey-300"></span>bg-grey-300</p>
+<p><span class="pill bg-grey-380"></span>bg-grey-380</p>
+<p><span class="pill bg-grey-400"></span>bg-grey-400</p>
+<p><span class="pill bg-green-400"></span>bg-green-400</p>
+```
+
+*/
+
+@import "../variables.less";
+
+each(@colors, {
+    .text-@{value} {
+        color: @@value !important;
+    }
+
+    .bg-@{value} {
+        background-color: @@value !important;
+        --hover-tint: @@value;
+        --active-tint: @@value;
+    }
+});
+
+// Missing from DSFR >1.6 and color changes.
+:root {
+    --grey-850-200: #cecece;
+    --success-625-425: #27A658;
+    --background-alt-blue-france: @background-alt-blue-cumulus;
+    --background-alt-blue-france-hover: @background-alt-blue-cumulus-hover;
+    --background-alt-blue-france-active: @background-alt-blue-cumulus-active;
+    --border-default-blue-france: @border-default-blue-cumulus;
+    --text-action-high-blue-france: @blue-400;
+    --background-action-high-blue-france: @blue-400;
+    --background-action-high-blue-france-hover: @blue-400-hover;
+    --background-action-high-blue-france-active: @blue-400-active;
+    --background-active-blue-france: @blue-400;
+    --background-active-blue-france-hover: @blue-400-hover;
+    --background-active-blue-france-active: @blue-400-active;
+}
+:root[data-fr-theme=dark] {
+    --grey-850-200: #3a3a3a;
+    --success-625-425: #18753c;
+}
+
+.bg-contrast-grey {
+    background-color: @background-contrast-grey;
+}
+
+.bg-contrast-warning {
+    background-color: @background-contrast-warning;
+}
+
+.bg-contrast-info {
+    background-color: @background-contrast-info;
+}
+
+.bg-contrast-blue-cumulus {
+    background-color: @background-contrast-blue-cumulus;
+}
+
+.bg-contrast-orange-terre-battue {
+    background-color: @background-contrast-orange-terre-battue;
+}
+
+.bg-alt-blue-cumulus {
+    background-color: @background-alt-blue-cumulus;
+}
+
+.bg-alt-grey {
+    background-color: @background-alt-grey;
+}
+
+.bg-alt-green-tilleul-verveine {
+    background-color: @background-alt-green-tilleul-verveine;
+}
+
+.text-disabled-grey {
+    color: @text-disabled-grey !important;
+}
+
+.text-mention-grey {
+    color: @text-mention-grey !important;
+}
+
+.text-default-grey {
+    color: @text-default-grey !important;
+}
+
+.text-default-error {
+    color: @text-default-error !important;
+}
+
+.text-default-success {
+    color: @text-default-success !important;
+}
+
+.text-default-warning {
+    color: @text-default-warning !important;
+}
+
+.text-default-info {
+    color: @text-default-info !important;
+}
+
+.text-title-grey {
+    color: @text-title-grey !important;
+}
+
+.text-label-orange-terre-battue {
+    color: @text-label-orange-terre-battue !important;
+}
+
+.text-white--link-white {
+    a {
+        color: @white;
+    }
+}

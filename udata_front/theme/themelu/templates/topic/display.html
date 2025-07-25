@@ -1,0 +1,83 @@
+{% extends theme('layouts/1-column.html') %}
+
+{% set meta = {
+    'title': topic.name,
+    'description': topic.description|mdstrip(60)|forceescape,
+    'keywords': [_('topic')] + topic.tags,
+} %}
+
+{% set bundle = 'topic' %}
+
+{% set body_class = 'topic-display' %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link">
+        {{ _('Topics') }}
+    </a>
+</li>
+<li>
+	<a class="fr-breadcrumb__link" aria-current="page">
+		{{ topic.name }}
+	</a>
+</li>
+{% endblock %}
+
+{% block main_content %}
+
+
+{% cache cache_duration, 'topic-content', topic.id|string, g.lang_code %}
+<div class="fr-container">
+    <h1 class="fr-mb-5v">{{ topic.name }}</h1>
+    <p>
+        {{ topic.description|markdown }}
+    </p>
+    <section>
+        <p>
+            <a href="{{ url_for('topics.reuses', topic=topic) }}">{{ _('Latest reuses') }}</a>
+        </p>
+        {% if recent_reuses %}
+            <ul>
+                {% for reuse in recent_reuses %}
+                {% set features = ['preview'] %}
+                <li>
+                    {% include theme('reuse/card.html') %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
+
+    {# Datasets section #}
+    {% set dataset_tabs = (
+        ('popular-datasets', _('Featured datasets'), datasets, {}),
+        ('recent-datasets', _('Latest datasets'), recent_datasets, {'sort': '-created'}),
+    ) %}
+
+    <section>
+        {# Dataset tabs #}
+        {% if dataset_tabs %}
+            {% for tab_id, label, datasets, kwargs in dataset_tabs  %}
+            <div id="{{tab_id}}">
+                <h2 class="fr-mb-3v">{{label}}</h2>
+                <ul class="fr-grid-row fr-grid-row--gutters">
+                    {% for dataset in datasets %}
+                    <li class="fr-col-12 fr-col-md-4 fr-col-sm-6">
+                        {% include theme('dataset/card-xs.html') %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p class="text-center">
+                    <a href="{{ url_for('topics.datasets', topic=topic) }}" class="btn btn-default btn-more">
+                        {{ _('See more datasets') }}
+                    </a>
+                </p>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {# end Dataset tabs #}
+    </section>
+    {# End datasets section #}
+</div>
+{% endcache %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends theme('mail/base.html') %}
+
+{% block body %}
+<p><b>Nom:</b> {{ contact.civility }}, {{ contact.family_name }}, {{ contact.first_name }}</p>
+<p><b>Email:</b> {{ contact.email }}</p>
+<p><b>Téléphone:</b> {{ contact.phone }}</p>
+<p><b>Subject:</b>{{ contact.subject }}</p>
+<p><b>Message:</p>
+<p><pre>{{ contact.message }}</pre></p>
+{% endblock %}

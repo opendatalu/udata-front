@@ -1,0 +1,245 @@
+{% extends theme('base.html') %}
+
+{% set meta = {
+    'title': _('Home'),
+    'description': _("%(site)s home", site=config['SITE_TITLE']),
+    'keywords': [_('home')],
+} %}
+
+{% set read_only_mode = config.READ_ONLY_MODE %}
+
+{% block content %}
+{% cache cache_duration, 'home', g.lang_code %}
+
+<section class="hero fr-py-3w fr-py-md-9v">
+    <div class="fr-container">
+        <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-12 fr-col-lg-5">
+                <div>                    
+                    <h2 class="as-h4">{{ _('Featured topics') }}</h2>                  
+                    <ul>
+                    <li>                    
+                        <a href="{{ url_for('themelu.show_page', slug='topics/geospatial') }}"
+                                class="btn-venti fr-my-2w bg-dark-red-udata">
+                                <strong>{{ _('Geospatial data') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('themelu.show_page', slug='topics/earth-observation-environment') }}"
+                        class="btn-venti fr-my-2w bg-red-udata">
+                        <strong>{{ _('Earth observation and environment') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('themelu.show_page', slug='topics/meteo') }}"
+                            class="btn-venti fr-my-2w bg-orange-udata">
+                            <strong>{{ _('Meteorological data') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('themelu.show_page', slug='topics/statistics') }}"
+                            class="btn-venti fr-my-2w bg-blue-udata">
+                            <strong>{{ _('Statistics') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('themelu.show_page', slug='topics/mobility') }}"
+                            class="btn-venti fr-my-2w bg-green-udata">
+                            <strong>{{ _('Mobility') }}</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('themelu.show_page', slug='topics/companies') }}"
+                            class="btn-venti fr-my-2w" style="background: #8c1ba9">
+                            <strong>{{ _('Companies') }}</strong>
+                        </a>
+                    </li>
+                    <li class="fr-grid-row justify-center fr-mt-2w">
+                            <a
+                                href="{{ url_for('themelu.show_page', slug='thematiques-a-la-une') }}"
+                                class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line fr-btn--icon-right"
+                            >
+                                {{ _('All featured topics') }}
+                            </a>
+                    </li>
+                    </ul>          
+                </div>
+            </div>
+            <div class="fr-col-12 fr-col-offset-lg-1 fr-col-lg-6">
+                <h2 class="fr-text--md fr-my-0">{{ _('News') }}</h2>
+                {% if last_post %}
+                {% set post = last_post %}
+                <div class="fr-grid-row justify-center fr-mb-2w">
+                    {% include theme('post/search-result.html') %}
+                </div>
+                <div class="fr-grid-row justify-center">
+                    <a
+                        href="{{ url_for('posts.list') }}"
+                        class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line fr-btn--icon-right"
+                    >
+                        {{ _('All news') }}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% set metrics = [
+    (_('Datasets'), 'datasets'),
+    (_('Files'), 'resources'),
+    (_('Reuses'), 'reuses'),
+    (_('Users'), 'users'),
+    (_('Organizations'), 'organizations'),
+    (_('Discussions'), 'discussions'),
+] %}
+
+
+{# Metrics Section #}
+<section class="metrics-bar">
+    <div class="fr-container fr-py-md-7w fr-py-2w">
+        <div class="bar fr-p-9v">
+            <h3><b>data.public</b><span style="font-style: italic; font-weight: 400;">.lu</span> {{ _('is') }}</h3>
+            <div class="fr-grid-row justify-between fr-mt-md-9v fr-mt-2w">
+                {% for (label, metric) in metrics %}
+                <div class="filet fr-my-1v fr-my-md-0">
+                    <p class="fr-m-0 text-grey-400">
+                        <span class="fr-h1 fr-m-0 block">{{ current_site.metrics[metric]|format_number }}</span>
+                        {{ label }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{# Datasets section #}
+{% set visible_datasets = current_site.settings.home_datasets|visibles %}
+{% set nb_datasets = visible_datasets|length %}
+{% set dataset_tabs = (
+    ('editorial-datasets', _('Featured datasets'), visible_datasets, {}),
+    ('recent-datasets', _('Latest datasets'), recent_datasets[:nb_datasets], {'sort': '-created'}),
+    ('reference-datasets', _('Reference datasets'), spd_datasets, {}),
+) %}
+
+<section class="datasets fr-pb-7w fr-pt-2w bg-grey-50">
+    <div class="fr-container">
+        {# Dataset tabs #}
+        <div class="fr-grid-row fr-grid-row--gutters justify-between">
+            <div class="fr-col-auto">
+                <h2 class="fr-m-0" id="dataset_tablist_title">{{ _('Datasets') }}</h2>
+            </div>
+            <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-auto">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" role="navigation" aria-labelledby="dataset_tablist_title">
+                        <div data-tabs role="tablist">
+                            {% for tab_id, label, _, _ in dataset_tabs %}
+                            <button
+                                role="tab"
+                                id="tab-datasets-{{tab_id}}"
+                                aria-controls="{{tab_id}}"
+                                class="fr-tag"
+                                {% if loop.first %}
+                                    aria-selected="true"
+                                {% endif %}
+                            >
+                                {{ label }}
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </nav>
+                </div>
+                <div class="fr-col-auto">
+                    <a
+                        href="{{ url_for('datasets.list') }}"
+                        class="fr-link fr-icon-arrow-right-s-line fr-link--icon-right"
+                    >
+                        {{ _('See more datasets') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% for tab_id, label, datasets, kwargs in dataset_tabs  %}
+        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" tabindex="0" id={{tab_id}} aria-labelledby="tab-datasets-{{tab_id}}">
+            <div class="fr-grid-row fr-grid-row--gutters fr-pt-1w">
+                {% for dataset in datasets %}
+                <div class="fr-col-12 fr-col-lg-4">
+                    {% include theme('dataset/card-xs.html') %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        {# end Dataset tabs #}
+    </div>
+</section>
+{# End datasets section #}
+
+{# Reuses section #}
+{% set visible_reuses = current_site.settings.home_reuses|visibles %}
+{% set nb_reuses = visible_reuses|length %}
+{% set reuses_tabs = (
+    ('best-reuses', _('Featured reuses'), visible_reuses, {}),
+    ('latest-reuses', _('Latest reuses'), recent_reuses[:nb_reuses], {'sort': '-created'}),
+) %}
+
+{# Reuse section #}
+<section class="reuse fr-py-3w fr-py-md-7w">
+    <div class="fr-container">
+        <div class="fr-grid-row fr-grid-row--gutters justify-between">
+            <div class="fr-col-auto">
+                <h2 class="fr-m-0">{{ _('Data reuses') }}</h2>
+            </div>
+            <div class="fr-col-auto fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-auto">
+                    <nav class="fr-tags-group fr-hidden fr-unhidden-lg" role="navigation" aria-labelledby="reuses_tablist_title">
+                        <div data-tabs role="tablist">
+                            {% for tab_id, label, _, _ in reuses_tabs %}
+                            <button
+                                role="tab"
+                                id="tab-reuses-{{tab_id}}"
+                                aria-controls="{{tab_id}}"
+                                class="fr-tag"
+                                {% if loop.first %}
+                                    aria-selected="true"
+                                {% else %}
+                                {% endif %}
+                            >
+                                {{ label }}
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </nav>
+                </div>
+                <div class="fr-col-auto">
+                    <a
+                    href="{{ url_for('reuses.list', sort='-created') }}"
+                    title="{{ _('Latest reuses') }}"
+                    class="fr-link fr-icon-arrow-right-s-line fr-link--icon-right"
+                >
+                    {{ _('See more reuses') }}
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fr-container">
+        {% for tab_id, label, reuses, kwargs in reuses_tabs  %}
+        <div class="fr-hidden {% if loop.first %}fr-unhidden{% endif %}" role="tabpanel" tabindex="0" id="{{tab_id}}" aria-labelledby="tab-reuses-{{tab_id}}">
+            <div class="fr-grid-row fr-grid-row--gutters fr-pt-1w">
+                {% for reuse in reuses %}
+                <div class="fr-col-md-4 fr-col-sm-6 fr-col-12 fr-mb-3v">
+                    {% include theme('reuse/card.html') %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{# End reuse section #}
+{% endcache %}
+{% endblock %}

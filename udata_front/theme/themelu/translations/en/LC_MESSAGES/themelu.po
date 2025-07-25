@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: udata-front\n"
+"Report-Msgid-Bugs-To: data.gouv@data.public.lu\n"
+"POT-Creation-Date: 2024-04-25 17:58+0200\n"
+"PO-Revision-Date: 2024-05-14 13:53\n"
+"Last-Translator: Data.public.lu Team <data.gouv@data.public.lu>\n"
+"Language: en\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Crowdin-Project: udata-front\n"
+"X-Crowdin-Project-ID: 474458\n"
+"X-Crowdin-Language: en\n"
+"X-Crowdin-File: /master/udata_front/theme/themelu/translations/themelu.pot\n"
+"X-Crowdin-File-ID: 17\n"
+
+msgid "Civility"
+msgstr "Title"
+
+msgid "message_sent"
+msgstr "The message has been sent"
+
+msgid "Sitemap"
+msgstr "Site map"
+
+
+msgid "Entreprises"
+msgstr "Companies"

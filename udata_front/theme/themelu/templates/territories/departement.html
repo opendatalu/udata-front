@@ -1,0 +1,30 @@
+{% extends theme("territories/territory.html") %}
+
+{% set meta = {
+    'title': territory.name,
+    'description': _('Datasets related to the county of %(name)s with INSEE code %(code)s', name=territory.name, code=territory.code),
+    'keywords': [territory.name, territory.code],
+} %}
+
+{% block breadcrumb %}
+    <li>
+        <a class="fr-breadcrumb__link" href="{{ url_for('territories.home') }}">
+            {{ _('Territories') }}
+        </a>
+    </li>
+
+    <li> {{ _('Region:') }}
+        <a class="fr-breadcrumb__link" aria-current="page">
+            {{ territory.name }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block territory_content %}
+<div class="fr-col-12">
+    <h1 class="fr-mb-5v">{{ territory.name }}</h1>
+    <p>
+        {{ _('INSEE code:') }} {{ territory.code }}
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends theme("layouts/1-column.html") %}
+{% from theme('macros/paginator.html') import paginator with context %}
+
+{% set meta = {
+    'title': _('Users'),
+    'description': _("%(site)s user search", site=config['SITE_TITLE']),
+    'keywords': [_('search'), _('users')],
+    'robots': 'noindex,nofollow',
+} %}
+
+{% set bundle = 'search' %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ _('Users') }}
+    </a>
+</li>
+{% endblock %}
+
+{% block main_content %}
+<div class="fr-grid-row">
+    <div class="fr-col-lg-8">
+
+        <ul class="search-results fr-grid-row">
+            {% for user in users %}
+            <li class="fr-col-12">
+            {% include theme('user/card.html') %}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="clearfix"></div>
+        {{ paginator(users) }}
+    </div>
+
+</div>
+{% endblock %}

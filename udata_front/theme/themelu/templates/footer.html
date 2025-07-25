@@ -1,0 +1,155 @@
+{% cache cache_duration, 'footer', g.lang_code|default(config.DEFAULT_LANGUAGE)|string,'-'.join((package_version('udata'), package_version('udata-front'))) %}
+<footer class="fr-footer" id="footer" role="contentinfo" style="box-shadow: none">
+    {% include theme("participez/participez.html") %}
+    {% include theme("newsletter.html") %}
+    <div class="fr-footer__top" style="margin-top: 0">
+        <div class="fr-container">
+            <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+                <div class="fr-col-12 fr-col-sm-3">
+                    <h2 class="as-h3 fr-footer__top-cat">{{ _('The Open Data') }}</h2>
+                    <ul class="fr-footer__top-list">
+                        {% for item in nav.themelu_footer_opendata %}
+                        <li>
+                            <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="fr-col-12 fr-col-sm-3">
+                    <h2 class="as-h3 fr-footer__top-cat">{{ _('Support') }}</h2>
+                    <ul class="fr-footer__top-list">
+                        {% for item in nav.themelu_footer_support %}
+                        <li>
+                            <a class="fr-footer__top-link" href="{{ item.url }}">{{ item.label }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!--
+                <div class="fr-col-12 fr-col-sm-3">
+                    <h2 class="as-h3 fr-footer__top-cat">{{ _('Social networks') }}</h2>
+                    <ul class="fr-footer__top-list socials fr-grid-row">
+                        <li>
+                            <a class="fr-footer__top-link fr-raw-link" href="https://twitter.com/opendatalu" title="Twitter">
+                                {% include theme('svg/socials/twitter.svg') %} <span class="sr-only">Twitter</span>
+                            </a>
+                        </li>
+                        <li class="fr-ml-9v">
+                            <a class="fr-footer__top-link fr-raw-link" href="https://github.com/opendatalu/" title="Github">
+                                {% include theme('svg/socials/github.svg') %} <span class="sr-only">Github</span>
+                            </a>
+                        </li>
+                        <li class="fr-ml-9v">
+                            <a rel="me" class="fr-footer__top-link fr-raw-link" href="https://mas.to/@OpenDataLu">
+                                {% include theme('svg/socials/mastodon.svg') %} <span class="sr-only">Mastodon</span>
+                            </a>
+                        </li>
+                        <li class="fr-ml-9v">
+                            <a rel="me" class="fr-footer__top-link fr-raw-link" href="https://www.linkedin.com/company/opendatalu/">
+                                {% include theme('svg/socials/linkedin.svg') %} <span class="sr-only">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="fr-footer__top-list">
+                        <li class="fr-footer__top-link">
+                            <a
+                                href="{{ url_for('datasets.recent_feed') }}"
+                                title="{{ _('RSS feed') }}"
+                                class="fr-footer__top-link"
+                            >
+                                RSS
+                            </a>
+                        </li>
+                        
+                        {% for item in nav.themelu_footer_below_networks %}
+                        <li>
+                            <a class="fr-footer__top-link" 
+                            title="{{ item.label }}" 
+                            href="{{ item.url }}">{{ item.label }}</a>
+                        </li>
+                        {% endfor %}
+                        <li class="fr-footer__top-link">
+                            <a
+                                href="mailto:info%40data.public.lu"
+                                class="fr-footer__top-link"
+                            >
+                                info@data.public.lu
+                            </a>
+                        </li>
+                    </ul>
+                </div>-->
+                <div class="fr-col-12 fr-col-sm-3">
+                </div>
+                <div class="fr-col-12 fr-col-sm-3">
+                    <div class="fr-footer__top-cat footer-lux-logo">&nbsp;
+                        <a
+                            href="https://sip.gouvernement.lu/"
+                            class="fr-raw-link"
+                        >
+                            <span class="sr-only">Le Gouvernement du Grand-Duché de Luxembourg - Service Information et Presse</span>
+                            {% include theme('luxembourg/luxembourg_logo.svg') %}
+                        </a>
+                    </div>
+                    <ul class="fr-mt-2w text-grey-380">
+                        <li>
+                            <a
+                                href="https://github.com/opendatalu/udata/"
+                                class="fr-footer__top-link"
+                            >
+                                udata
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/opendatalu/udata-front/"
+                                class="fr-footer__top-link"
+                            >
+                                udata-front
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fr-container">
+        <div class="fr-footer__body">
+            <div class="fr-footer__brand fr-enlarge-link">
+                <a href="/" title="Retour à l’accueil de data.public.lu">
+                    <p class="logo-small">
+                        <span class="sr-only">Retour à l'accueil de data.public.lu</span>
+                        {% include theme('luxembourg/data_public_logo.svg') %}
+                    </p>
+                </a>
+            </div>
+            <div class="fr-footer__content">
+                <ul class="fr-footer__content-list">
+                    {% for item in nav.themelu_network %}
+                    <li class="fr-footer__content-item">
+                        <a class="fr-footer__content-link" href="{{ item.url }}">{{ item.label }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="fr-col-6 fr-col-sm-4 fr-col-md-3 fr-col-lg-2 fr-ml-auto self-end">
+            </div>
+        </div>
+        <div class="fr-footer__bottom">
+            <ul class="fr-footer__bottom-list">
+                {% for item in nav.themelu_footer_links %}
+                    <li class="fr-footer__bottom-item">
+                        <a href="{{ '' if item.items else item.url }}" class="fr-footer__bottom-link">
+                            {{ item.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="fr-footer__bottom-copy">
+                <p>{{ _("Unless otherwise stated, all content of this site is available under <a href='{lo_url}'>Creative Commons CC0</a> license.").format(
+                    lo_url='https://creativecommons.org/licenses/by/3.0/lu/'
+                ) }}</p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endcache %}

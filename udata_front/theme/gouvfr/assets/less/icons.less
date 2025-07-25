@@ -1,0 +1,31 @@
+/*
+---
+name: Icons
+category: 3 - Components
+---
+
+`.fr-icon-svg` is a special class allowing you to use a SVG icon instead of DSFR `.fr-icon` icons.
+
+## Icons sizes
+
+This is a port of DSFR `.fr-icon--*` for SVG sizing. DSFR ones only works with `::before` and `::after`.
+
+*/
+
+.fr-icon-svg {
+    &::before {
+        content: none;
+    }
+    img, svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    &.fr-btn--sm svg, &.fr-btn--sm img, &.fr-icon--sm svg, &.fr-icon--sm img {
+        width: 1rem;
+        height: 1rem;
+    }
+    &.fr-icon--lg svg, &.fr-icon--lg img {
+        width: 2rem;
+        height: 2rem;
+    }
+}

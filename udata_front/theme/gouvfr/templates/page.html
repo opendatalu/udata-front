@@ -1,7 +1,5 @@
 {% extends theme('layouts/1-column.html') %}
 
-{% from theme('macros/paginator.html') import paginator with context %}
-
 {% set meta = {
     'title': page.title or '',
     'description': page.description or '',
@@ -11,6 +9,14 @@
 {% set bundle = 'post' %}
 
 {% set body_class = 'post-display' %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ page.title or '' }}
+    </a>
+</li>
+{% endblock %}
 
 {% block main_content %}
 <div class="fr-container fr-py-3w" v-pre>
@@ -23,17 +29,9 @@
 
 {% if datasets %}
 <div class="fr-container fr-mt-2w">
-    <h2>{{ _('Datasets') }} <sup>{{ total_datasets }}</sup></h2>
-    <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col-12">
-            {% for dataset in datasets %}
-                {% include theme('dataset/search-result.html') %}
-            {% endfor %}
-        </div>
-    </div>
+    <h2>{{ _('Datasets') }} <sup>{{ datasets|length }}</sup></h2>
+    {% include theme('dataset/search-results.html') %}
 </div>
-<br/>
-{{ paginator(datasets, arg_name='datasets_page') }}
 {% endif %}
 
 {% if reuses %}
@@ -47,8 +45,6 @@
         {% endfor %}
     </ul>
 </div>
-<br/>
-{{ paginator(reuses, arg_name='reuses_page') }}
 {% endif %}
 
 <div class="fr-container fr-my-7w">

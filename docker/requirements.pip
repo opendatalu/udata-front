@@ -1,0 +1,4 @@
+uwsgi==2.0.21
+gevent==24.2.1
+invoke==2.2.0
+setuptools==68.2.2
