@@ -1,0 +1,28 @@
+{% extends theme('user/base.html') %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link">
+        {{ _('Users') }}
+    </a>
+</li>
+<li>
+    <a class="fr-breadcrumb__link">
+        {{ user.fullname }}
+    </a>
+</li>
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ _('Activity') }}
+    </a>
+</li>
+{% endblock %}
+
+{% set user_tab = 'activity' %}
+
+{% block user_content %}
+<activity-timeline user-id="{{ user.id }}">
+    {# Load spinner until JS is ready #}
+    <div class="text-center"><span class="fa fa-4x fa-cog fa-spin"></span></div>
+</activity-timeline>
+{% endblock %}

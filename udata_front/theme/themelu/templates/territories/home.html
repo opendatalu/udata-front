@@ -1,0 +1,39 @@
+{% extends theme("layouts/1-column.html") %}
+{% set bundle = 'territory' %}
+
+{% set meta = {
+    'title': _('French regions'),
+    'description': _('French regions'),
+} %}
+
+{% set body_class="territory" %}
+
+{% block breadcrumb %}
+    <li>
+        <a class="fr-breadcrumb__link"  aria-current="page">
+            {{ _('Territories') }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block main_content %}
+<div class="fr-container">
+    <div class="fr-alert fr-alert--info fr-my-2w">
+        <p class="fr-alert__title">{{ _('Work in progress') }}</p>
+        <p>{{ _('The territories pages are currently being renovated to improve user experience.') }}</p>
+    </div>
+    <div class="fr-grid-row">
+        <div class="fr-col-12">
+            <h1 class="fr-mb-5v">{{ _('Territories') }}</h1>
+            <p>
+                {{ _('Sorted alphabetically:') }}
+            </p>
+            <p>
+                {% for region in regions %}
+                    <a href="{{ region.url }}">{{ region.name }}</a>{% if loop.last %}.{% else %},{% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

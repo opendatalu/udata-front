@@ -1,0 +1,114 @@
+{% extends theme('user/base.html') %}
+
+{% set user_tab = 'following' %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link">
+        {{ _('Users') }}
+    </a>
+</li>
+<li>
+    <a
+        class="fr-breadcrumb__link"
+        href="{{url_for('users.show', user=user)}}"
+    >
+        {{ user.fullname }}
+    </a>
+</li>
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ _('Following') }}
+    </a>
+</li>
+{% endblock %}
+
+{% block user_content %}
+{% if followed_users or followed_datasets or followed_organizations or followed_reuses %}
+
+    {% set activated = False %}
+    {% set tabs = (
+        ('datasets', _('Datasets'), followed_datasets),
+        ('reuses', _('Reuses'), followed_reuses),
+        ('organizations', _('Organizations'), followed_organizations),
+        ('users', _('Users'), followed_users),
+    ) %}
+
+    {% set activated = False %}
+
+    {% if followed_datasets %}
+        <h3>
+        {{ ngettext(
+            'Follow %(num)d dataset',
+            'Follow %(num)d datasets',
+            followed_datasets|length
+        ) }}
+        </h3>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+            {% for dataset in followed_datasets %}
+            <div class="fr-col-sm-6">
+                {% include theme('dataset/card-xs.html') %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if followed_reuses %}
+        <h3>
+        {{ ngettext(
+            'Follow %(num)d reuse',
+            'Follow %(num)d reuses',
+            followed_reuses|length
+        ) }}
+        </h3>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+            {% for reuse in followed_reuses %}
+            <div class="fr-col-sm-6">
+                {% include theme('reuse/card.html') %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if followed_organizations %}
+        <h3>
+        {{ ngettext(
+            'Follow %(num)d organization',
+            'Follow %(num)d organizations',
+            followed_organizations|length
+        ) }}
+        </h3>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+            {% for organization in followed_organizations %}
+            <div class="fr-col-sm-6">
+                {% include theme('organization/card.html') %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if followed_users %}
+        <h3>
+        {{ ngettext(
+            'Follow %(num)d user',
+            'Follow %(num)d users',
+            followed_users|length
+        ) }}
+        </h3>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+        {% for user in followed_users %}
+            <div class="fr-col-sm-6">
+                {% include theme('user/card.html') %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+{% else %}
+
+    <p class="text-center lead">
+        {{ _('%(user)s is not following anyone', user=user.fullname) }}
+    </p>
+
+{% endif %}
+{% endblock %}

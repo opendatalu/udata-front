@@ -1,0 +1,12 @@
+{
+  "application": "udata",
+  "identifier": "themelu",
+  "name": "data.public.lu",
+  "author": "ACT Luxembourg",
+  "description": "Data.public.lu theme",
+  "website": "http://data.public.lu",
+  "license": "AGPL",
+  "version": "0.1.0",
+  "doctype": "html5",
+  "variants": ["deuil"]
+}

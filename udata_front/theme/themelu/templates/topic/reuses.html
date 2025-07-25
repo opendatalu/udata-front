@@ -1,0 +1,48 @@
+{% extends theme('layouts/1-column.html') %}
+
+{% from theme('macros/paginator.html') import paginator with context %}
+
+{% set meta = {
+    'title': _('%(topic)s reuses', topic=topic.name),
+    'description': _("%(site)s %(topic)s related reuses", site=config['SITE_TITLE'], topic=topic.name),
+    'keywords': [_('search'), _('reuses'), _('topic')] + topic.tags,
+    'robots': 'noindex',
+} %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link">
+        {{ _('Topics') }}
+    </a>
+</li>
+<li>
+    <a class="fr-breadcrumb__link" href="{{ url_for('topics.display', topic=topic) }}">
+    {{ topic.name }}
+    </a>
+</li>
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ _('Reuses') }}
+    </a>
+</li>
+{% endblock %}
+
+
+{% block main_content %}
+<section class="default">
+    <div class="fr-container">
+        <div class="fr-grid-row">
+            <div class="fr-col-md-8 fr-col-lg-9 smaller">
+                {% if reuses %}
+                    <ul class="search-results">
+                        {% for reuse in reuses %}
+                            {% include theme('reuse/search-result.html') %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

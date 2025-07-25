@@ -88,7 +88,7 @@ class SiteViewsTest(GouvfrFrontTestCase):
         self.app.config['EXPORT_CSV_MODELS'] = []
         datasets = [DatasetFactory(resources=[ResourceFactory()])
                     for _ in range(5)]
-        hidden_dataset = DatasetFactory()
+        hidden_dataset = DatasetFactory(private=True)
 
         response = self.get(url_for('site.datasets_csv'))
 
@@ -138,7 +138,7 @@ class SiteViewsTest(GouvfrFrontTestCase):
             for _ in range(6)]
         datasets = [DatasetFactory(resources=[ResourceFactory()])
                     for _ in range(3)]
-        hidden_dataset = DatasetFactory()
+        hidden_dataset = DatasetFactory(private=True)
 
         response = self.get(
             url_for(
@@ -270,7 +270,7 @@ class SiteViewsTest(GouvfrFrontTestCase):
     def test_organizations_csv(self):
         self.app.config['EXPORT_CSV_MODELS'] = []
         orgs = [OrganizationFactory() for _ in range(5)]
-        hidden_org = OrganizationFactory(deleted=datetime.now())
+        hidden_org = OrganizationFactory(deleted=datetime.utcnow())
 
         response = self.get(url_for('site.organizations_csv'))
 
@@ -401,14 +401,16 @@ class SiteViewsTest(GouvfrFrontTestCase):
         self.app.config['EXPORT_CSV_MODELS'] = []
         organization = OrganizationFactory()
         harvests = [HarvestSource.objects.create(
+            backend='factory',
             name='harvest',
             url=f'https://example.com/{i}',
             organization=organization
             )
                   for i in range(5)]
         hidden_harvest = HarvestSource.objects.create(
+            backend='factory',
             url='https://example.com/deleted',
-            deleted=datetime.now()
+            deleted=datetime.utcnow()
         )
 
         response = self.get(url_for('site.harvests_csv'))

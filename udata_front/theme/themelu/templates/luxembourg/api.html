@@ -1,0 +1,76 @@
+
+{% extends theme("base.html") %}
+
+{% set meta = {
+    'title': "udata API",
+    'description': "",
+    'keywords': [
+        _('guidelines'),
+        _('publication'),
+    ],
+} %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui.css" >
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+<style>
+    html
+    {
+    box-sizing: border-box;
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+    }
+
+    *,
+    *:before,
+    *:after
+    {
+    box-sizing: inherit;
+    }
+
+    body
+    {
+    margin:0;
+    background: #fafafa;
+    }
+</style>
+
+<section class="content" style="margin-bottom:25px">
+  <div class="fr-container">
+    <div id="swagger-ui"></div>
+  </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-standalone-preset.js"> </script>
+<script>
+var swagger_api_domain = '{{swagger_api_domain}}';
+const protocol = window.location.protocol;
+
+if(swagger_api_domain === '') {
+    swagger_api_domain = document.location.host;
+}
+
+window.onload = function() {
+  // Begin Swagger UI call region
+  const ui = SwaggerUIBundle({
+    url: protocol + "//" + swagger_api_domain + "/api/1/swagger.json",
+    dom_id: '#swagger-ui',
+    deepLinking: false,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset.slice(1)
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+  // End Swagger UI call region
+
+  window.ui = ui
+}
+</script>
+{% endblock %}

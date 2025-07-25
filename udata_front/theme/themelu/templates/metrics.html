@@ -1,0 +1,21 @@
+{% extends theme("layouts/1-column.html") %}
+
+{% set meta = {
+    'title': _('Metrics'),
+    'description': _('Site metrics'),
+    'keywords': [_('metrics')],
+} %}
+
+{% block breadcrumb %}
+    <li>
+        <a class="fr-breadcrumb__link" aria-current="page">{{ _('Metrics') }}</a>
+    </li>
+{% endblock %}
+
+{% block main_content %}
+<ul>
+{% for key, metric in metrics.items() %}
+<li class="{{key}}-metric">{{metric.label}}: {{ metric.value }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

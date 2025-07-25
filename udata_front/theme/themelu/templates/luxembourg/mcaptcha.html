@@ -1,0 +1,89 @@
+
+{% if mcaptcha_url and mcaptcha_site_key %}
+
+<div class="captcha-required">
+    <p style="color:red; margin: 10px 0; display:none">{{_('Please click on the captcha to prove you are not a robot.')}}</p>
+</div>
+
+<label data-mcaptcha_url="{{mcaptcha_url}}/widget/?sitekey={{mcaptcha_site_key}}" for="mcaptcha__token"
+    id="mcaptcha__token-label">
+    mCaptcha authorization token.
+    <a href="https://mcaptcha.org/docs/user-manual/how-to-mcaptcha-without-js/">Instructions</a>.
+    <input type="text" name="mcaptcha__token" id="mcaptcha__token" />
+</label>
+<div id="mcaptcha__widget-container" style="height: 80px;"></div>
+<script src="https://unpkg.com/@mcaptcha/vanilla-glue@0.1.0-rc2/dist/index.js"></script>
+
+<script>
+
+// Find current parent form id
+function getThisScriptFormParent() {
+    var scriptElement = document.currentScript;
+
+    function findParentForm(element) {
+        while (element) {
+            if (element.tagName && element.tagName.toLowerCase() === 'form') {
+                return element;
+            }
+            element = element.parentElement;
+        }
+        return null;
+    }
+
+    var parentForm = findParentForm(scriptElement);
+    return parentForm;
+}
+
+const thisForm = getThisScriptFormParent();
+
+if(!thisForm) {
+    console.error('mCaptcha: Could not find parent form');
+}  else {
+
+    // The framework dynamically sets "required", which is incompatible with a hidden field...
+    // Because of that the form will produce an exception on submit which will prevent us from catching
+    // the event and showing an error message saying "please click on the captcha",
+    // We don't want to modify directly the framework, so we remove the "required" attribute here.
+    document.addEventListener('DOMContentLoaded', function() {
+        var mcaptchaToken = thisForm.querySelector('#mcaptcha__token');
+        if (mcaptchaToken) {
+            mcaptchaToken.removeAttribute('required');
+        }
+    });
+
+    // This will allow to hook the submission of the forms that use a captcha...
+    function hookFormSubmitToSetCaptchaError(the_form) {
+        // Hook the form submission and prevent the submission (when pressing button type submit above)
+        the_form.addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+        // find the input with  id="mcaptcha__token"
+        var mcaptchaToken = the_form.querySelector('#mcaptcha__token');
+
+        // check if the input exists and the value casts to true
+        var mcaptchaTokenExists = mcaptchaToken && mcaptchaToken.value;
+
+        // if the mcaptcha is ready, submit, otherwise log an error
+        if (mcaptchaTokenExists) {
+            the_form.querySelector('.captcha-required p').style.display = 'none';
+            the_form.submit();
+        } else {
+            the_form.querySelector('.captcha-required p').style.display = 'block';
+        }
+        });
+    }
+
+    hookFormSubmitToSetCaptchaError(thisForm)
+
+
+}
+
+
+</script>
+
+{% else %}
+<div>
+    Missing mCaptcha configuration.
+</div>
+{% endif %}

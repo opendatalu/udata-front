@@ -1,0 +1,137 @@
+{% from theme('macros/description_list.html') import dl, dd, dt, WITHOUT_ELLIPSIS %}
+{% set resource_format = resource.format|trim|lower %}
+{% set unavailable = resource.extras.get('check:available') == False %}
+{% set last_update = resource.last_modified %}
+<article>
+    <header
+        class="fr-py-2w fr-grid-row fr-grid-row--middle no-wrap wrap-md justify-between border-bottom border-default-grey"
+        id="resource-{{resource.id}}-header"
+    >
+        <div class="fr-col-auto fr-grid-row fr-grid-row--top no-wrap">
+            <div class="fr-col-auto fr-mx-3v fr-icon-svg fr-icon--sm">
+                {% include theme(resource_image(resource)) %}
+            </div>
+            <div class="fr-col-auto">
+                <h4
+                    class="fr-col-auto fr-mb-1w fr-mr-1v"
+                    id="resource-{{resource.id}}-title"
+                >
+                    {{ resource.title or _('Nameless file') }}
+                </h4>
+                <div class="fr-my-0 text-grey-380 fr-grid-row fr-grid-row--middle">
+                    {% if resource.schema %}
+                        <div class="fr-text--xs fr-m-0 dash-after">
+                            <p class="fr-tag fr-tag--sm">
+                                <strong class="fr-mr-1v">{{ _("schema:") }}</strong> {{resource.schema.name if resource.schema.name else resource.schema.url}}
+                            </p>
+                        </div>
+                    {% endif %}
+                    <p class="fr-text--xs fr-m-0 dash-after">{{_('Updated on %(date)s', date=last_update|dateformat(format='long'))}}</p>
+                    <p class="fr-text--xs fr-m-0 dash-after">
+                        {{ resource_format }}
+                        {% if resource.filesize %}
+                            ({{ resource.filesize | filesize }})
+                        {% endif %}
+                    </p>
+                    <p class="fr-text--xs fr-m-0">{{ resource.metrics.views or 0 }} {{ _('downloads') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-col-auto fr-ml-auto">
+            <ul class="fr-grid-row fr-grid-row--middle no-wrap wrap-md">
+                {% if config.LINKCHECKING_ENABLED and unavailable %}
+                <li class="text-default-warning fr-mr-5w" v-if="unavailable">
+                    {{ _('Unavailable') }}
+                </li>
+                {% endif %}
+                {% if resource.format == 'url' %}
+                    <li class="fr-col-auto">
+                        <a
+                            href="{{ resource.latest }}"
+                            title="{{ _('File link - opens a new window') }}"
+                            rel="nofollow noopener"
+                            target="_blank"
+                            class="fr-btn fr-btn--sm fr-icon-external-link-line"
+                        ></a>
+                    </li>
+                {% else %}
+                    <li class="fr-col-auto">
+                        <a
+                            href="{{ resource.latest }}"
+                            title="{{ _('Download file') }}"
+                            download
+                            class="fr-btn fr-btn--sm fr-icon-download-line matomo_download"
+                        ></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+    <section
+        class="fr-p-3w border-bottom border-default-grey"
+        aria-labelledby="resource-{{resource.id}}-title"
+        id="resource-{{resource.id}}"
+    >
+        <div class="fr-grid-row fr-grid-row--gutters">
+            {% call dl() %}
+                {% call dt() %}{{ _('URL') }}{% endcall %}
+                {% call dd() %}
+                    <a class="unstyled" href="{{resource.url}}">{{resource.url}}</a>
+                {% endcall %}
+                {% call dt() %}{{ _('Permalink') }}{% endcall %}
+                {% call dd() %}
+                    <a class="unstyled" href="{{resource.json_ld.url}}">{{resource.json_ld.url}}</a>
+                {% endcall %}
+                {% if resource.checksum %}
+                    {% call dt() %}{{resource.checksum.type}}{% endcall %}
+                    {% call dd(WITHOUT_ELLIPSIS) %}
+                        {{resource.checksum.value}}
+                    {% endcall %}
+                {% endif %}
+                {% call dt() %}{{ _('MIME Type') }}{% endcall %}
+                {% call dd() %}
+                    {{resource.mime}}
+                {% endcall %}
+            {% endcall %}
+            {% call dl() %}
+                {% call dt() %}{{ _('Created on') }}{% endcall %}
+                {% call dd() %}
+                    {{resource.created_at|dateformat(format='long')}}
+                {% endcall %}
+                {% call dt() %}{{ _('Modified on') }}{% endcall %}
+                {% call dd() %}
+                    {{resource.last_modified|dateformat(format='long')}}
+                {% endcall %}
+            {% endcall %}
+            {% call dl() %}
+                {% if resource.filesize %}
+                    {% call dt() %}{{ _('Size') }}{% endcall %}
+                    {% call dd() %}
+                        {{resource.filesize | filesize}}
+                    {% endcall %}
+                {% endif %}
+            {% endcall %}
+        </div>
+        {% if resource.description %}
+        <div class="fr-mt-0 markdown fr-text--sm text-mention-grey">
+            {{ resource.description|markdown }}
+        </div>
+        {% endif %}
+        {% if resource.schema %}
+            <h5 class="fr-h6 fr-mt-1w fr-mb-5v">{{_('Schema')}}</h5>
+            <p class="fr-tag fr-tag--sm fr-icon-checkbox-circle-line fr-tag--icon-left">
+                {{resource.schema.name if resource.schema.name else resource.schema.url}}
+            </p>
+            {% if resource.schema.name %}
+            <div>
+                <a
+                    class="fr-btn fr-btn--secondary fr-btn--secondary-grey-500 fr-mt-2w fr-btn--icon-left fr-icon-book-2-line"
+                    href="{{'{url}{name}'.format(url=config.SCHEMA_DOCUMENTATION_URL, name=resource.schema.name)}}"
+                >
+                    {{ _('See schema documentation') }}
+                </a>
+            </div>
+            {% endif %}
+        {% endif %}
+    </section>
+</article>

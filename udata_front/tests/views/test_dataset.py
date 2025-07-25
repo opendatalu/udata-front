@@ -6,7 +6,6 @@ from flask import url_for
 
 from udata.core.dataset.factories import (
     ResourceFactory, DatasetFactory, LicenseFactory, CommunityResourceFactory,
-    VisibleDatasetFactory
 )
 from udata.core.user.factories import UserFactory
 from udata.core.organization.factories import OrganizationFactory
@@ -21,7 +20,7 @@ class DatasetBlueprintTest(GouvfrFrontTestCase):
 
     def test_render_display(self):
         '''It should render the dataset page'''
-        dataset = VisibleDatasetFactory()
+        dataset = DatasetFactory()
         url = url_for('datasets.show', dataset=dataset)
         response = self.get(url)
         self.assert200(response)
@@ -73,9 +72,7 @@ class DatasetBlueprintTest(GouvfrFrontTestCase):
         self.assertEqual(json_ld_resource['dateCreated'][:16],
                          resource.created_at.isoformat()[:16])
         self.assertEqual(json_ld_resource['dateModified'][:16],
-                         resource.modified.isoformat()[:16])
-        self.assertEqual(json_ld_resource['datePublished'][:16],
-                         resource.published.isoformat()[:16])
+                         resource.last_modified.isoformat()[:16])
         self.assertEqual(json_ld_resource['encodingFormat'], 'png')
         self.assertEqual(json_ld_resource['contentSize'],
                          resource.filesize)
@@ -102,9 +99,7 @@ class DatasetBlueprintTest(GouvfrFrontTestCase):
         self.assertEqual(json_ld_resource['dateCreated'][:16],
                          community_resource.created_at.isoformat()[:16])
         self.assertEqual(json_ld_resource['dateModified'][:16],
-                         community_resource.modified.isoformat()[:16])
-        self.assertEqual(json_ld_resource['datePublished'][:16],
-                         community_resource.published.isoformat()[:16])
+                         community_resource.last_modified.isoformat()[:16])
         self.assertEqual(json_ld_resource['encodingFormat'],
                          community_resource.format)
         self.assertEqual(json_ld_resource['contentSize'],
@@ -146,20 +141,20 @@ class DatasetBlueprintTest(GouvfrFrontTestCase):
 
     def test_raise_410_if_deleted(self):
         '''It should raise a 410 if the dataset is deleted'''
-        dataset = DatasetFactory(deleted=datetime.now())
+        dataset = DatasetFactory(deleted=datetime.utcnow())
         response = self.get(url_for('datasets.show', dataset=dataset))
         self.assert410(response)
 
     def test_200_if_deleted_but_authorized(self):
         '''It should not raise a 410 if the can view it'''
         self.login()
-        dataset = DatasetFactory(deleted=datetime.now(), owner=self.user)
+        dataset = DatasetFactory(deleted=datetime.utcnow(), owner=self.user)
         response = self.get(url_for('datasets.show', dataset=dataset))
         self.assert200(response)
 
-    def test_no_index_on_empty(self):
+    def test_no_index_on_archived(self):
         '''It should prevent crawlers from indexing empty datasets'''
-        dataset = DatasetFactory()
+        dataset = DatasetFactory(archived=datetime.utcnow())
         response = self.get(url_for('datasets.show', dataset=dataset))
         self.assert200(response)
         self.assertIn(b'<meta name="robots" content="noindex, nofollow"',

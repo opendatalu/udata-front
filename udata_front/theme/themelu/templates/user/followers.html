@@ -1,0 +1,41 @@
+{% extends theme('user/base.html') %}
+
+{% set user_tab = 'followers' %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link">
+        {{ _('Users') }}
+    </a>
+</li>
+<li>
+    <a
+        class="fr-breadcrumb__link"
+        href="{{url_for('users.show', user=user)}}"
+    >
+        {{ user.fullname }}
+    </a>
+</li>
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ _('Followers') }}
+    </a>
+</li>
+{% endblock %}
+
+{% block user_content %}
+{% if followers|length > 0 %}
+    <h3>{{ ngettext('%(num)d follower', '%(num)d followers', followers|length) }}</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+            {% for follow in followers %}
+            <div class="fr-col-md-4">
+                {% include theme('follow/follower-card.html') %}
+            </div>
+            {% endfor %}
+    </div>
+{% else %}
+    <p class="text-center lead">
+    {{ _('%(user)s has no follower', user=user.fullname) }}
+    </p>
+{% endif %}
+{% endblock %}

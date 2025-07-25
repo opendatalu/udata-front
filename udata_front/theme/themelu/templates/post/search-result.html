@@ -1,0 +1,26 @@
+{% cache cache_duration, 'post-search-result', post.id|string, g.lang_code %}
+<div class="fr-card fr-card--no-icon fr-card--no-border fr-enlarge-link">
+    <div class="fr-card__body">
+        <div class="fr-card__content">
+            <h3 class="fr-card__title">
+                <a href="{{ post.display_url }}">
+                    {{ post.name }}
+                </a>
+            </h3>
+            <div class="fr-card__desc fr-my-3v">
+                <p class="fr-card__detail fr-m-0">
+                    {{ _('Published on') }}
+                    {{ post.published|dateformat(format='long') }}
+                </p>
+            </div>
+            <p class="fr-card__desc f-italic fr-m-0">{{ post.headline|mdstrip(300) }}</p>
+        </div>
+    </div>
+    <div class="fr-card__header">
+        <div class="fr-card__img">
+            {% set image = post.image|placeholder('post') %}
+            <img class="fr-responsive-img" src="{{image}}" alt="" />
+        </div>
+    </div>
+</div>
+{% endcache %}

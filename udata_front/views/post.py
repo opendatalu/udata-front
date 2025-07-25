@@ -1,5 +1,7 @@
+
 from flask import current_app, request, url_for
-from werkzeug.contrib.atom import AtomFeed
+from feedgen.feed import FeedGenerator
+from flask import make_response
 
 from udata.i18n import I18nBlueprint
 from udata.models import Post
@@ -7,9 +9,14 @@ from udata.sitemap import sitemap
 from udata.core.post.permissions import PostEditPermission
 from udata_front import theme
 from udata_front.views.base import ListView
+
 from udata.core.post.models import Post
 from udata.core.site.models import current_site
 from udata_front.theme import render as render_template
+
+import pytz
+
+# from werkzeug.contrib.atom import AtomFeed
 
 blueprint = I18nBlueprint('posts', __name__, url_prefix='/posts')
 
@@ -55,25 +62,57 @@ def show(post):
 
 @blueprint.route('/recent.atom')
 def recent_feed():
-    feed = AtomFeed('Last posts',
-                    feed_url=request.url, url=request.url_root)
+
+    fg = FeedGenerator()
+    fg.id(request.url)
+    fg.title('Last posts')
+    fg.link(href=request.url_root, rel='alternate')
+    fg.link(href=request.url, rel='self')
+    fg.language('en')
+
     posts = (Post.objects.order_by('-created_at')
                 .published().limit(current_site.feed_size))
     for post in posts:
-        author = {
-            'name': post.owner.fullname,
-            'uri': url_for('users.show',
-                            user=post.owner.id, _external=True),
-        }
-        feed.add(post.name,
-                 render_template('post/feed_item.html', post=post),
-                 content_type='html',
-                 author=author,
-                 url=url_for('posts.show',
-                             post=post, _external=True),
-                 updated=post.last_modified,
-                 published=post.created_at)
-    return feed.get_response()
+        fe = fg.add_entry()
+        fe.id(url_for('posts.show', post=post, _external=True))
+        fe.title(post.name)
+        fe.link(href=url_for('posts.show', post=post, _external=True))
+        fe.author(name=post.owner.fullname, uri=url_for('users.show', user=post.owner.id, _external=True))
+        fe.contributor(name=post.owner.fullname, uri=url_for('users.show', user=post.owner.id, _external=True))
+        fe.content(render_template('post/feed_item.html', post=post), type='CDATA')
+
+        # If we dont set the timezone then the API silently fails because of a ValueError: Datetime object has no timezone info
+        fe.updated(post.last_modified.replace(tzinfo=pytz.UTC) if post.last_modified.tzinfo is None else post.last_modified)
+        fe.published(post.created_at.replace(tzinfo=pytz.UTC) if post.created_at.tzinfo is None else post.created_at)
+
+    response = make_response(fg.atom_str(pretty=True))
+    response.headers.set('Content-Type', 'application/atom+xml')
+
+    return response
+
+
+
+# @blueprint.route('/recent.atom')
+# def recent_feed():
+#     feed = AtomFeed('Last posts',
+#                     feed_url=request.url, url=request.url_root)
+#     posts = (Post.objects.order_by('-created_at')
+#                 .published().limit(current_site.feed_size))
+#     for post in posts:
+#         author = {
+#             'name': post.owner.fullname,
+#             'uri': url_for('users.show',
+#                             user=post.owner.id, _external=True),
+#         }
+#         feed.add(post.name,
+#                  render_template('post/feed_item.html', post=post),
+#                  content_type='html',
+#                  author=author,
+#                  url=url_for('posts.show',
+#                              post=post, _external=True),
+#                  updated=post.last_modified,
+#                  published=post.created_at)
+#     return feed.get_response()
 
 
 @sitemap.register_generator

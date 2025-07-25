@@ -84,6 +84,7 @@ class ListView(Templated, BaseView):
 
     def get(self, **kwargs):
         return self.render()
+    
 
 
 class SearchView(Templated, BaseView):
@@ -95,11 +96,17 @@ class SearchView(Templated, BaseView):
     search_adapter = None
     page_size: Optional[int] = None
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         parser = self.search_adapter.as_request_parser()
         if self.page_size:
             parser.replace_argument('page_size', type=int, location='args', default=self.page_size)
-        return search.query(self.search_adapter, **not_none_dict(parser.parse_args()))
+
+        combined = {
+            **kwargs,
+            **not_none_dict(parser.parse_args())
+        }
+
+        return search.query(self.search_adapter, **combined)
 
     def get_context(self):
         context = super(SearchView, self).get_context()
@@ -108,6 +115,11 @@ class SearchView(Templated, BaseView):
 
     def get(self, **kwargs):
         return self.render()
+
+
+class YetAnotherAbstractionLayerJustForDatasets(SearchView):
+    def get_queryset(self):
+        return super(YetAnotherAbstractionLayerJustForDatasets, self).get_queryset(sort="") # -last_update
 
 
 class SingleObject(object):
@@ -218,3 +230,9 @@ class FormView(Templated, BaseView):
             return self.on_form_valid(form)
 
         return self.on_form_error(form)
+
+
+class LoginOnlyView(Templated, BaseView):
+    @auth.login_required
+    def get(self, **kwargs):
+        return self.render()

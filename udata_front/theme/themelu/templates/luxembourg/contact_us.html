@@ -1,0 +1,182 @@
+{% extends theme('base.html') %}
+
+{% set meta = {
+'title': _('Contact us'),
+'description': _("%(site)s contact", site=config['SITE_TITLE']),
+'keywords': [_('contact')],
+} %}
+
+{% set read_only_mode = config.READ_ONLY_MODE %}
+
+{% block content %}
+
+<section class="hero fr-py-3w fr-py-md-9v">
+    <div class="fr-container">
+        <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="text-align-center form-container fr-col-12 fr-col-md-6 fr-col-offset-md-3">
+
+                <form class="form" method="post" id="form-contact">
+
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                    <h1 class="fr-h4 fr-mb-2">{{ _('Contact us') }}</h1>
+
+                    {% if result %}
+                    
+                    <div style="margin-bottom: 20px"; >
+                    {% if result == 'ok' %}
+                    <div class="fr-alert fr-alert--success" role="alert">
+                        <p>{{ _('message_sent') }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if result == 'email_error' %}
+                    <div class="fr-alert fr-alert--error" role="alert">
+                        <p>Erreur envoyant le message</p>
+                    </div>
+                    {% endif %}
+
+                    {% if result == 'captcha_error' %}
+                    <div class="fr-alert fr-alert--error" role="alert">
+                        <p>Erreur avec le captcha</p>
+                    </div>
+                    {% endif %}
+
+                    
+                    {% if result == 'captcha_service_error' %}
+                    <div class="fr-alert fr-alert--error" role="alert">
+                        <p>Erreur contactant le service de captcha</p>
+                    </div>
+                    {% endif %}
+                    </div>
+
+                    {% endif %}
+
+                    <div class="fr-checkbox-group field ">
+                        
+                        <fieldset style="border:initial; padding: 0">
+                            <label class="fr-text">
+                                <legend>{{ _('Civility')}}</legend>
+                            </label>
+
+                            <div class="fr-text">
+                                <input type="radio" id="ms" name="civilite" value="monsieur">
+                                <label for="ms"  style="margin-right: 10px">{{ _('Ms.') }}</label>
+                                <input type="radio" id="mr" name="civilite" value="madame">
+                                <label for="mr">{{ _('Mr.') }}</label>
+                            </div>
+                        </fieldset>
+
+                    </div>
+
+
+                    <div class="fr-grid-row fr-grid-row--gutters">
+
+                        <div class="fr-input-group field fr-col-6">
+
+                            <label class="fr-text">
+                                {{ _('Last name') }}*
+                            </label>
+
+                            <div class="fr-text">
+                                <input type="text" id="nom" name="family_name" required>
+                            </div>
+
+                        </div>
+
+
+                        <div class="fr-input-group field fr-col-6">
+
+                            <label class="fr-text">
+                                {{ _('First name') }}*
+                            </label>
+
+                            <div class="fr-text">
+                                <input type="text" id="prenom" name="first_name" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="fr-grid-row fr-grid-row--gutters">
+
+                        <div class="fr-input-group field fr-col-6">
+
+
+                            <label class="fr-text">
+                                {{ _('Email') }}*
+                            </label>
+
+                            <div class="fr-text">
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                        </div>
+
+
+                        <div class="fr-input-group field fr-col-6">
+
+
+                            <label class="fr-text">
+                                {{ _('Phone number') }}
+                            </label>
+
+                            <div class="fr-text">
+                                <input type="text" id="telephone" name="phone">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="fr-input-group field ">
+
+
+                        <label class="fr-text">
+                            {{ _('Subject') }}*
+                        </label>
+
+                        <div class="fr-text">
+                            <select id="sujet" class="fr-input" name="subject" required style="background: #fff; box-shadow: inset 0 -1px 0 0 #999">
+                                <option value="">{{ _('Choose an option') }}</option>
+                                <option value="Prise contact">{{ _('Contact request') }}</option>
+                                <option value="Demande de réutilisation">{{ _('Request a reuse') }}</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="fr-input-group field ">
+
+                        <label class="fr-text">
+                            {{ _('Message') }}*
+                        </label>
+
+                        <div class="fr-text">
+                            <textarea class="fr-input" id="message" name="message"
+                                style="background: #fff; box-shadow: inset 0 -1px 0 0 #999" required></textarea>
+                        </div>
+                    </div>
+
+                    {% if mcaptcha_url and mcaptcha_site_key %}
+                    <div style="width: 300px; margin-bottom: 20px;">
+                        {% include theme('luxembourg/mcaptcha.html') %}
+                    </div>
+                    {% endif %}
+
+                    <div class="fr-input-group field" style="margin-bottom: 0">
+                        <div class="fr-text">
+                            <button class="fr-btn" type="submit">{{ _('Send') }}</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    {% endblock %}

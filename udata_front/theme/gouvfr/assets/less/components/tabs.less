@@ -1,0 +1,23 @@
+.fr-tabs {
+    --text-active-blue-france: @blue-400;
+    --border-active-blue-france: @blue-400;
+    --background-action-low-blue-france: @background-action-low-blue-cumulus;
+    --background-action-low-blue-france-hover: @background-action-low-blue-cumulus-hover;
+    --background-action-low-blue-france-active: @background-action-low-blue-cumulus-active;
+    z-index: 1;
+}
+
+.fr-tabs--no-border {
+    &::before {
+        margin: -1px;
+    }
+}
+
+.fr-tabs__panel--no-padding {
+    padding: 0.25rem;
+    padding-bottom: 2.5rem;
+}
+
+.fr-tabs__panel--no-padding:focus, .fr-tabs__panel--no-padding:focus-visible {
+    outline-offset: -2px;
+}

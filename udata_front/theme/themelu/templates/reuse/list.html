@@ -1,0 +1,124 @@
+{% extends theme("layouts/1-column.html") %}
+{% from theme('macros/paginator.html') import paginator with context %}
+{% from theme('macros/sort_search.html') import sort_search %}
+
+{% set meta = {
+    'title': _('Reuses'),
+    'description': _("%(site)s reuse search", site=config['SITE_TITLE']),
+    'keywords': [_('search'), _('reuses')],
+    'robots': 'noindex',
+} %}
+
+{% set bundle = 'search' %}
+
+{% block breadcrumb %}
+<li>
+    <a class="fr-breadcrumb__link" aria-current="page">
+        {{ _('Reuses') }}
+    </a>
+</li>
+{% endblock %}
+
+{# TODO : pull this from somewhere else, results.facet doesn't contain the list when you're already in a filtered mode #}
+{% set reuses_topics = (
+    ('affaires-internationales', _('International matters')),
+    ('agriculture', _('Agriculture')),
+    ('droit', _('Justice, Law and Public Order')),
+    ('entreprises', _('Entreprises')),
+    ('economie', _('Economy and Finance')),
+    ('energie', _('Energy and natural resources')),
+    ('environnement', _('Environment and Climate')),
+    ('gouvernement-et-secteur-public', _('Government and public sector')),
+    ('population-et-societe', _('Population and society')),
+    ('regions-et-developement-local', _('Regions and local development')),
+    ('sante', _('Health')),
+    ('science-et-technologie', _('Science and Technology')),
+    ('transports-charging-points', _('Transport - Charging points')),
+    ('transports-idacs', _('Transport - IDACS')),
+    ('transports', _('Transport')),
+    ('vie-quotidienne', _('Education, culture and sport')),
+    ('donnees-geospatiales', _('Geospatial data')),
+    ('observation-de-la-terre-et-environnement', _('Earth observation and environment')),
+    ('meteo', _('Meteorological data')),
+    ('statistiques', _('Statistics')),
+    ('mobilite', _('Mobility')),
+    ('others', _('Others')),
+) %}
+
+{% set sorts = [
+    {"label": _('Newest'),"value": "created", "order": "desc"},
+    {"label": _('Oldest'),"value": "created", "order": "asc"},
+    {"label": _('Followers'),"value": "followers", "order": "desc"}
+] %}
+
+{% block main_content %}
+<section class="fr-container">
+    <h1 class="fr-mb-1w">{{_('Reuses')}}</h1>
+    <div class="fr-grid-row fr-grid-row--middle justify-between">
+        <div><p>{{_('Search among %(count)s reuses on %(site)s', count=current_site.metrics['reuses']|format_number, site=current_site.title)}}</p></div>
+        <a
+            href="{{ url_for('datasets.list', q=reuses.query._query) }}"
+            class="fr-link fr-text--sm fr-m-0">
+            {{ _('Search in datasets') }}
+        </a>
+    </div>
+    <div class="fr-pt-3v">
+        <form method="GET" class="fr-grid-row">
+            <div class="fr-search-bar fr-search-bar--lg w-100 fr-mb-5v" role="search" aria-label="{{  _('Search a reuse') }}">
+                <label class="fr-label" for="search-reuses">
+                    {{ _('Search...') }}
+                </label>
+                <input
+                    name="q"
+                    class="fr-input"
+                    placeholder="{{ _('Search...') }}"
+                    type="search"
+                    id="search-reuses"
+                    value="{{reuses.query._query}}"
+                />
+                <button class="fr-btn" type="submit">
+                    {{ _('Search') }}
+                </button>
+            </div>
+            <div class="fr-grid-row fr-mb-1v fr-displayed-lg">
+                <ul class="fr-tags-group">
+                    <li>
+                        <a
+                            href="{{ url_for('reuses.list') }}"
+                            class="fr-tag"
+                            {% if  not reuses.query._filters.topic %}aria-pressed="true"{% endif %}
+                        >
+                            {{ _('All') }}
+                        </a>
+                    </li>
+                    {% for topic_id, label in reuses_topics %}
+                        <li>
+                            <a
+                                href="{{ reuses.query.to_url(url, replace=True, **{'topic': topic_id}) }}"
+                                class="fr-tag"
+                                {% if reuses.query._filters and reuses.query._filters.topic and reuses.query._filters.topic == topic_id %}aria-pressed="true"{% endif %}
+                            >
+                                {{ label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="w-100 fr-grid-row  fr-grid-row--middle justify-between">
+                <p class="fr-col-auto fr-my-0" role="status">{{ _('%(result)s results', result=reuses.total) }}</p>
+                {{sort_search(reuses, sorts)}}
+            </div>
+        </form>
+    </div>
+    {%if reuses %}
+    <ul class="search-results fr-grid-row fr-grid-row--gutters fr-mt-2w">
+        {% for reuse in reuses %}
+        <li class="fr-col-md-4 fr-col-sm-6 fr-col-12 fr-mb-3v">
+            {% include theme('reuse/card.html') %}
+        </li>
+        {% endfor %}
+    </ul>
+    {{ paginator(reuses) }}
+    {% endif %}
+</section>
+{% endblock %}

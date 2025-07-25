@@ -9,9 +9,8 @@ from flask import g, current_app
 from flask_themes2 import (
     Themes, Theme, render_theme_template, get_theme
 )
-from jinja2 import contextfunction
+from jinja2 import pass_context
 from udata import assets
-
 
 log = logging.getLogger(__name__)
 
@@ -29,9 +28,15 @@ def get_current_theme():
 current = LocalProxy(get_current_theme)
 
 
-@contextfunction
-def theme_static_with_version(ctx, filename, external=False):
-    '''Override the default theme static to add cache burst'''
+@pass_context
+def theme_static_with_version(ctx, filename, external=False, inline_burst=False,
+                              force_version=False):
+    '''
+    Override the default theme static to add cache burst, ex: [file].js?_=[burst]
+    If inline_burst is true, burst is not added as a dummy param but in filename directly:
+    Ex: [file].[burst].js
+    It is useful for generated chunks that follow this pattern
+    '''
     if current_app.theme_manager.static_folder:
         url = assets.cdn_for('_themes.static',
                              filename=current.identifier + '/' + filename,
@@ -43,10 +48,13 @@ def theme_static_with_version(ctx, filename, external=False):
                              _external=external)
     if url.endswith('/'):  # this is a directory, no need for cache burst
         return url
-    if current_app.config['DEBUG']:
+    if current_app.config['DEBUG'] and not force_version:
         burst = time()
     else:
         burst = current.entrypoint.dist.version
+    if inline_burst:
+        url_parts = url.split(".")
+        return '.'.join(url_parts[:-1] + [str(burst), url_parts[-1]])
     return '{url}?_={burst}'.format(url=url, burst=burst)
 
 
@@ -148,6 +156,7 @@ from werkzeug.routing import BaseConverter
 class ImageConverter(BaseConverter):
     regex = r'.+\.(?:png|jpg|jpeg|gif|svg)'
 
+
 def init_app(app):
     app.config.setdefault('THEME_VARIANT', 'gouvfr')
 
@@ -170,6 +179,4 @@ def init_app(app):
     def inject_current_theme():
         return {'current_theme': current}
 
-
     app.url_map.converters['gh_image'] = ImageConverter
-

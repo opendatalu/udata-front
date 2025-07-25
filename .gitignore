@@ -31,10 +31,13 @@ bower
 .DS_Store
 *.min.css
 *.min.js
+*.d.ts
+*.d.ts.map
 /instance/
 /static/
 node_modules
-/udata_front/theme/gouvfr/static/
+/udata_front/theme/*/static/
+!/**/src/*.d.ts
 
 # Installer logs
 pip-log.txt
@@ -47,6 +50,7 @@ pip-log.txt
 cover
 nosetests.xml
 /reports
+/*/coverage
 
 # Translations
 *.mo
@@ -58,8 +62,13 @@ nosetests.xml
 .noseids
 
 udata.cfg
-stylemark/
-.parcel-cache
+cypress/udata-front-e2e.cfg
 
 cypress/videos
 cypress/screenshots
+
+.lighthouseci/*.json
+.lighthouseci/*.html
+
+storybook-static/
+venv/pyvenv.cfg

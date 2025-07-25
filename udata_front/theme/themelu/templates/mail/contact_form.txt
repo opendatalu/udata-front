@@ -1,0 +1,11 @@
+{% extends theme('mail/base.txt') %}
+
+{% block body %}
+  Nom: {{ contact.civility }}, {{ contact.family_name }}, {{ contact.first_name }} 
+  Email: {{ contact.email }} 
+  Téléphone: {{ contact.phone }} 
+  Subject: {{ contact.subject }} 
+  Message: 
+ {{ contact.message }} 
+
+{% endblock %}

@@ -1,0 +1,71 @@
+image: harbor.geoportail.lu/registry/docker:23.0-git-curl
+
+variables:
+  HTTP_PROXY_URL: http://proxy.geo.etat.lu:3128
+  HTTPS_PROXY_URL: http://proxy.geo.etat.lu:3128
+
+
+stages:
+  - build
+  - deploy 
+
+.common_rules:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: never
+    - if: $CI_COMMIT_REF_NAME == "dev"
+      variables:
+        env_img_name: "dev"
+    
+
+build:
+  stage: build
+  script:
+    - export BRANCH=${CI_COMMIT_REF_NAME}
+    # For now we use always master ...
+    - export UDATA_SHA=$(git ls-remote https://HIDDEN-SECRETS@gitlab.geoportail.lu/cadastre/udata.git refs/heads/master | cut -f1)
+    # We could use $CI_COMMIT_SHA for UDATA_FRONT_SHA, but we stick to ls-remote for robustness.
+    - export UDATA_FRONT_SHA=$(git ls-remote https://HIDDEN-SECRETS@gitlab.geoportail.lu/cadastre/udata-front.git refs/heads/${BRANCH} | cut -f1) 
+    # For now we use always main ...
+    - export FLASK_STORAGE_SHA=$(git ls-remote https://HIDDEN-SECRETS@gitlab.geoportail.lu/cadastre/flask-storage.git refs/heads/main | cut -f1)
+
+    - echo "Using branch ${BRANCH}"
+    - echo "Using udata sha ${UDATA_SHA}"
+    - echo "Using udata sha ${UDATA_FRONT_SHA}"
+    - echo "Using udata sha ${FLASK_STORAGE_SHA}"
+
+    - TIMESTAMP=$(date +%Y%m%d%H%M%S)
+    - echo "Branch '${CI_COMMIT_REF_NAME}'. Image name is '${env_img_name}'"
+    - docker info
+    - echo "logging in ${registry_user} ${registry_pwd}".
+    - docker login harbor.geoportail.lu/registry -u $registry_user -p $registry_pwd
+    - echo "Invalidator Date $TIMESTAMP"
+    - echo "Branch ${CI_COMMIT_REF_NAME}"
+    - |
+        docker build \
+          --build-arg invalidator_date="$TIMESTAMP" \
+          --build-arg branch="${CI_COMMIT_REF_NAME}" \
+          --build-arg udata_sha="${UDATA_SHA}" \
+          --build-arg udata_front_sha="${UDATA_FRONT_SHA}" \
+          --build-arg flask_storage_sha="${FLASK_STORAGE_SHA}" \
+          --push \
+          -t harbor.geoportail.lu/registry/udata:${env_img_name} \
+          ./docker
+
+    - docker push harbor.geoportail.lu/registry/udata:${env_img_name}
+    - docker logout harbor.geoportail.lu/registry
+  rules:
+    - !reference [.common_rules, rules]
+
+deploy: 
+  stage: deploy
+  script:
+    - >-
+      curl -u "${CATTLE_ACCESS_KEY_PROD}:${CATTLE_SECRET_KEY_PROD}"
+      -X POST
+      -H 'Accept: application/json'
+      -H 'Content-Type: application/json'
+      'https://rancher-prod.geoportail.lu/v3/projects/c-m-4xzqfnkd:p-fl8jt/workloads/deployment:infra-od-test-external:udata-dev?action=redeploy'
+  rules:
+    - if: '$env_img_name != null'
+    - !reference [.common_rules, rules]
